@@ -15,10 +15,14 @@ public class Nivo {
 	@Column(name="naziv")
 	protected String nazivNivoa;
 	
+	public Nivo(){}
 	public Nivo(int idNivo, String nazivNivoa) {
 		super();
 		this.idNivo = idNivo;
 		this.nazivNivoa = nazivNivoa;
+	}
+	public Nivo(String string) {
+		this.nazivNivoa=string;
 	}
 	@Override
 	public String toString() {

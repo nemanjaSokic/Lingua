@@ -2,8 +2,10 @@ package com.lingua.service.impl;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lingua.model.Nivo;
@@ -13,7 +15,7 @@ import com.lingua.service.NivoService;
 @Service
 @Transactional
 public class JpaNivoService implements NivoService{
-	
+	@Autowired
 	 NivoRepository nivoRepo;
 
 	@Override
@@ -29,8 +31,7 @@ public class JpaNivoService implements NivoService{
 
 	@Override
 	public Nivo save(Nivo n) {
-		Nivo presis = nivoRepo.save(n);
-		return presis;
+		return nivoRepo.save(n);
 	}
 
 	@Override
@@ -42,6 +43,14 @@ public class JpaNivoService implements NivoService{
 		}
 		nivoRepo.delete(nivo);
 		return nivo;
+	}
+	
+	@PostConstruct
+	public void testData(){
+		save(new Nivo(11,"Begginner"));
+		save(new Nivo(21,"Intermediate"));
+		save(new Nivo(31,"Upper Intermediate"));
+		save(new Nivo(41,"Proffesionsy"));
 	}
 	
 }
