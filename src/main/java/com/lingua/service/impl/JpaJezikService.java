@@ -2,6 +2,7 @@ package com.lingua.service.impl;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,14 +39,26 @@ public class JpaJezikService implements JezikService{
 
 	@Override
 	public List<Jezik> save(List<Jezik> j) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
 	@Override
-	public Jezik delete(Jezik j) {
-		// TODO Auto-generated method stub
-		return null;
+	public Jezik delete(String id) {
+		Jezik j = jr.findOne(id);
+		if(j == null){
+			throw new IllegalArgumentException("Tried to delete"
+					+ "non-existant language");
+		}
+		jr.delete(j);
+		return j;
+	}
+
+	@PostConstruct
+	public void testMethod(){
+		save(new Jezik("English"));
+		save(new Jezik("Germany"));
+		save(new Jezik("Russian"));
 	}
 
 	

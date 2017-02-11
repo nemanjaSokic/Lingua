@@ -14,6 +14,6 @@ public interface JezikService {
 	
 	List<Jezik> save(List<Jezik> j);
 	
-	Jezik delete (Jezik j);
+	Jezik delete (String id);
 	
 }

@@ -21,6 +21,8 @@ public class ApiJezikController {
 	@Autowired
 	private JezikService jezikService;
 	
+	//-------------GET------------------
+	
 	@RequestMapping(method = RequestMethod.GET)
 	ResponseEntity<List<Jezik>> getJezici(){
 		List<Jezik> jezici;
@@ -31,6 +33,17 @@ public class ApiJezikController {
 		return new ResponseEntity<>(jezici,HttpStatus.OK);
 	}
 	
+	@RequestMapping(method = RequestMethod.GET,value = "/{id}")
+	ResponseEntity<Jezik> getOne(@PathVariable String id){
+		Jezik j = jezikService.findOne(id);
+		if(j==null){
+			return new ResponseEntity<Jezik>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<Jezik>(j,HttpStatus.OK);
+	}
+	
+	//---------------------POST-------------------------------
+	
 	@RequestMapping(method=RequestMethod.POST, consumes="application/json")
 	ResponseEntity<Jezik> add(@RequestBody Jezik newJ){
 		Jezik saved;
@@ -38,12 +51,23 @@ public class ApiJezikController {
 		return new ResponseEntity<Jezik>(saved, HttpStatus.CREATED);
 	}
 	
-	@RequestMapping(method = RequestMethod.GET,value = "/{id}")
-	ResponseEntity<Jezik> getOne(@PathVariable String id){
-		Jezik j = jezikService.findOne(id);
-		if(j==null){
-			return new ResponseEntity<Jezik>(HttpStatus.NOT_FOUND);
+	//-------------------DELETE------------------------------
+	
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	ResponseEntity<Jezik> delete(@PathVariable String id){
+		Jezik j = jezikService.delete(id);
+		return new ResponseEntity<Jezik>(j,HttpStatus.OK);
+	}
+	
+	//---------------UPDATE----------------------------
+	
+	@RequestMapping(method = RequestMethod.PUT, value = "/{id}", consumes = "application/json")
+	ResponseEntity<Jezik> edit (@PathVariable String id,@RequestBody Jezik jezik){
+		if(id.equals(jezik.getIdJezika())){
+			return new ResponseEntity<Jezik>(HttpStatus.BAD_REQUEST);
 		}
+		
+		Jezik j = jezikService.save(jezik);
 		return new ResponseEntity<Jezik>(j,HttpStatus.OK);
 	}
 }

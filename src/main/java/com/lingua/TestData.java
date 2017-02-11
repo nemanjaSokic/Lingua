@@ -12,11 +12,5 @@ public class TestData {
 	private JezikService jezikService;
 	
 	
-//	@PostConstruct
-//	public void init(){
-//		Jezik j = new Jezik();
-//		j.setIdJezika("eng");
-//		j.setNaziv("engleski");
-//		jezikService.save(j);
-//	}
+
 }
