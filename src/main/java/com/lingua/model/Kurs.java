@@ -32,6 +32,8 @@ public class Kurs {
 	@OneToMany(mappedBy="kurs",cascade=CascadeType.REMOVE)
 	protected List<Ucenik> ucenici = new ArrayList<Ucenik>();
 	
+	public Kurs(){}
+	
 	public Kurs(int idKursa, int cena, Nastavnik nastavnik, Jezik jezik, Nivo nivo) {
 		super();
 		this.idKursa = idKursa;
@@ -50,6 +52,21 @@ public class Kurs {
 		this.nivo = nivo;
 		this.ucenici = ucenici;
 	}
+	//Dodavanje ucenika na kurs. Ucenik se dodaje u listu i
+	//provera ako ucenik NE POHADJA kurs, setuje mu dati kurs automatski
+	public void addUcenik(Ucenik ucenik){
+		this.getUcenici().add(ucenik);
+		if(ucenik.getKurs()!=this){
+			ucenik.setKurs(this);
+		}
+	}
+	
+	public void removeUcenik(Ucenik ucenik){
+		ucenik.setKurs(null);
+		this.ucenici.remove(ucenik.getIndeks());
+	}
+	
+	
 	public List<Ucenik> getUcenici() {
 		return ucenici;
 	}

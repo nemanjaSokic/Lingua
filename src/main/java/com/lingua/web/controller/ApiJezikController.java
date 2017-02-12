@@ -61,9 +61,9 @@ public class ApiJezikController {
 	
 	//---------------UPDATE----------------------------
 	
-	@RequestMapping(method = RequestMethod.PUT, value = "/{id}", consumes = "application/json")
+	@RequestMapping(method = RequestMethod.PUT, value = "/{id}",consumes = "application/json")
 	ResponseEntity<Jezik> edit (@PathVariable String id,@RequestBody Jezik jezik){
-		if(id.equals(jezik.getIdJezika())){
+		if(!id.equals(jezik.getIdJezika())){
 			return new ResponseEntity<Jezik>(HttpStatus.BAD_REQUEST);
 		}
 		

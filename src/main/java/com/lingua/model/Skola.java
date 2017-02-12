@@ -25,6 +25,7 @@ public class Skola {
 	protected int pib;
 	@Column
 	protected int maticniBroj;
+	public Skola(){}
 	
 	public Skola(String naziv, String adresa, String email, String internet, String brRacuna, int telefon, int pib,
 			int maticniBroj) {

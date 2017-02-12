@@ -39,9 +39,13 @@ public class Ucenik extends Osoba {
 	public Kurs getKurs() {
 		return kurs;
 	}
-
+	//Kurs ucenika se setuje kao dati kurs i
+	//ako kurs nije null i ako dati kurs nema ucenika automatski se tom kursu dodaje ucenik
 	public void setKurs(Kurs kurs) {
 		this.kurs = kurs;
+		if(kurs != null && !kurs.getUcenici().contains(this)){
+			kurs.getUcenici().add(this);
+		}
 	}
 
 	@Override
