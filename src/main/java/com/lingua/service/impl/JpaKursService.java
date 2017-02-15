@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lingua.model.Kurs;
+import com.lingua.model.Ucenik;
 import com.lingua.repository.KursRepository;
+import com.lingua.repository.UcenikRepository;
 import com.lingua.service.KursService;
 
 @Service
@@ -17,6 +19,8 @@ public class JpaKursService implements KursService{
 	
 	@Autowired
 	KursRepository kursRepo;
+	@Autowired
+	UcenikRepository ucenikRepo;
 
 	@Override
 	public Kurs findOne(int id) {
@@ -45,4 +49,6 @@ public class JpaKursService implements KursService{
 		kursRepo.delete(id);
 		return deleted;
 	}
+	
+	
 }

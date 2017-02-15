@@ -15,6 +15,11 @@ public abstract class Osoba {
 	
 	
 	
+	public Osoba() {
+		super();
+	}
+
+
 	public Osoba(String ime, String prezime, int jmbg) {
 		super();
 		this.ime = ime;

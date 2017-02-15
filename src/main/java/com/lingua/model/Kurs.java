@@ -9,12 +9,18 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
+
 @Entity
 @Table(name="tblKursevi")
+@JsonSerialize
 public class Kurs {
 	
 	@Id
@@ -29,26 +35,25 @@ public class Kurs {
 	protected Jezik jezik;
 	@OneToOne(fetch=FetchType.LAZY)
 	protected Nivo nivo;
-	@OneToMany(mappedBy="kurs",cascade=CascadeType.REMOVE)
+	@OneToMany(/*mappedBy="kurs",*/cascade=CascadeType.ALL)
+	@JoinTable (name = "tbl_pohadjanja" , joinColumns = @JoinColumn(name = "indeks"),inverseJoinColumns=@JoinColumn(name = "idKursa"))
 	protected List<Ucenik> ucenici = new ArrayList<Ucenik>();
 	
 	public Kurs(){}
 	
-	public Kurs(int idKursa, int cena, Nastavnik nastavnik, Jezik jezik, Nivo nivo) {
+	public Kurs(int cena, Nastavnik nastavnik, Nivo nivo) {
 		super();
-		this.idKursa = idKursa;
 		this.cena = cena;
 		this.nastavnik = nastavnik;
-		this.jezik = jezik;
+		this.jezik = nastavnik.getPredaje();
 		this.nivo = nivo;
 		ucenici = new ArrayList<Ucenik>();
 	}
-	public Kurs(int idKursa, int cena, Nastavnik nastavnik, Jezik jezik, Nivo nivo, List<Ucenik> ucenici) {
+	public Kurs(int cena, Nastavnik nastavnik, Nivo nivo, List<Ucenik> ucenici) {
 		super();
-		this.idKursa = idKursa;
 		this.cena = cena;
 		this.nastavnik = nastavnik;
-		this.jezik = jezik;
+		this.jezik = nastavnik.getPredaje();
 		this.nivo = nivo;
 		this.ucenici = ucenici;
 	}

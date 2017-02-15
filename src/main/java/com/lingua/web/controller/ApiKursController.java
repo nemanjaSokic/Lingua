@@ -23,14 +23,6 @@ public class ApiKursController {
 	
 	//-----------------GET------------------------
 	
-	@RequestMapping(method=RequestMethod.GET,value="/{id}")
-	ResponseEntity<Kurs> getOne(@PathVariable int id){
-		Kurs k = kursServ.findOne(id);
-		if(k==null){
-			return new ResponseEntity<Kurs>(HttpStatus.NOT_FOUND);
-		}
-		return new ResponseEntity<Kurs>(k,HttpStatus.OK);
-	}
 	
 	@RequestMapping(method=RequestMethod.GET)
 	ResponseEntity<List<Kurs>> getAll(){
@@ -41,6 +33,14 @@ public class ApiKursController {
 		return new ResponseEntity<List<Kurs>>(kursevi,HttpStatus.OK);
 	}
 	
+	@RequestMapping(method=RequestMethod.GET,value = "/{id}")
+	ResponseEntity<Kurs> getOne(@PathVariable int id){
+		Kurs k = kursServ.findOne(id);
+		if(k==null){
+			return new ResponseEntity<Kurs>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<Kurs>(k,HttpStatus.OK);
+	}
 	//-----------------------------POST--------------------
 	
 	@RequestMapping(consumes="application/json",method=RequestMethod.POST)

@@ -1,5 +1,6 @@
 package com.lingua.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,10 +15,17 @@ public class Ucenik extends Osoba {
 	@Id
 	@Column
 	protected String indeks;
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(targetEntity=Kurs.class, fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	protected Kurs kurs;
 	
 	
+	public Ucenik() {
+		super();
+	}
+	public Ucenik(String ime, String prezime, int jmbg, String index){
+		super(ime,prezime,jmbg);
+		this.indeks = index;
+		}
 	public Ucenik(String ime, String prezime, int jmbg) {
 		super(ime, prezime, jmbg);
 	}

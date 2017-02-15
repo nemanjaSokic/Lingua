@@ -45,12 +45,4 @@ public class JpaNivoService implements NivoService{
 		return nivo;
 	}
 	
-	@PostConstruct
-	public void testData(){
-		save(new Nivo(11,"Begginner"));
-		save(new Nivo(21,"Intermediate"));
-		save(new Nivo(31,"Upper Intermediate"));
-		save(new Nivo(41,"Proffesionsy"));
-	}
-	
 }

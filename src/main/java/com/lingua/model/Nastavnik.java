@@ -23,6 +23,8 @@ public class Nastavnik extends Osoba {
 	@OneToOne(fetch=FetchType.LAZY)
 	protected Jezik predaje;
 	
+	public Nastavnik(){}
+	
 	public Nastavnik(String ime, String prezime, int jmbg) {
 		super(ime,prezime,jmbg);
 		this.ime = ime;
@@ -30,10 +32,9 @@ public class Nastavnik extends Osoba {
 		this.jmbg = jmbg;
 	}
 
-	public Nastavnik(String ime, String prezime, int jmbg, Jezik predaje, int id) {
+	public Nastavnik(String ime, String prezime, int jmbg, Jezik predaje) {
 		super(ime, prezime, jmbg);
 		this.predaje = predaje;
-		this.id = id;
 	}
 
 	public int getId() {

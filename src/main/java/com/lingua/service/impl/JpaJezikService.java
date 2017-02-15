@@ -54,12 +54,5 @@ public class JpaJezikService implements JezikService{
 		return j;
 	}
 
-	@PostConstruct
-	public void testMethod(){
-		save(new Jezik("English"));
-		save(new Jezik("Germany"));
-		save(new Jezik("Russian"));
-	}
-
 	
 }
