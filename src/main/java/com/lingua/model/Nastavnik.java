@@ -20,7 +20,7 @@ public class Nastavnik extends Osoba {
 	@GeneratedValue
 	@Column(name="id_nastavnika")
 	protected int id;
-	@OneToOne(fetch=FetchType.LAZY)
+	@OneToOne
 	protected Jezik predaje;
 	
 	public Nastavnik(){}

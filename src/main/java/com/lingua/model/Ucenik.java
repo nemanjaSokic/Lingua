@@ -15,7 +15,7 @@ public class Ucenik extends Osoba {
 	@Id
 	@Column
 	protected String indeks;
-	@ManyToOne(targetEntity=Kurs.class, fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+	@ManyToOne(targetEntity=Kurs.class, fetch=FetchType.EAGER,cascade=CascadeType.ALL)
 	protected Kurs kurs;
 	
 	

@@ -56,7 +56,7 @@ public class ApiKursController {
 		
 		Kurs deleted = kursServ.delete(id);
 		
-		return new ResponseEntity<Kurs>(deleted,HttpStatus.NO_CONTENT);
+		return new ResponseEntity<Kurs>(deleted,HttpStatus.OK);
 	}
 	
 	//-----------------UPDATE------------------------------
@@ -67,11 +67,11 @@ public class ApiKursController {
 			return new ResponseEntity<Kurs>(HttpStatus.BAD_REQUEST);
 		}
 		Kurs saved = kursServ.save(kurs);
+		if(saved==null){
+			return new ResponseEntity<Kurs>(HttpStatus.BAD_REQUEST);
+		}
 		return new ResponseEntity<Kurs>(saved,HttpStatus.OK);
 	}
-	
-	
-	
 	
 	
 }

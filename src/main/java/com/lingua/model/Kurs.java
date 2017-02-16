@@ -17,6 +17,9 @@ import javax.persistence.Table;
 
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
+
 
 @Entity
 @Table(name="tblKursevi")
@@ -29,13 +32,14 @@ public class Kurs {
 	protected int idKursa;
 	@Column(name="cena")
 	protected int cena;
-	@OneToOne(fetch=FetchType.LAZY)
+	@OneToOne
 	protected Nastavnik nastavnik;
-	@OneToOne(fetch=FetchType.LAZY)
+	@OneToOne
 	protected Jezik jezik;
-	@OneToOne(fetch=FetchType.LAZY)
+	@OneToOne
 	protected Nivo nivo;
 	@OneToMany(/*mappedBy="kurs",*/cascade=CascadeType.ALL)
+	@JsonIgnore
 	@JoinTable (name = "tbl_pohadjanja" , joinColumns = @JoinColumn(name = "indeks"),inverseJoinColumns=@JoinColumn(name = "idKursa"))
 	protected List<Ucenik> ucenici = new ArrayList<Ucenik>();
 	

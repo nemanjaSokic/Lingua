@@ -8,8 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lingua.model.Kurs;
-import com.lingua.model.Ucenik;
+import com.lingua.model.Nastavnik;
 import com.lingua.repository.KursRepository;
+import com.lingua.repository.NastavnikRepository;
 import com.lingua.repository.UcenikRepository;
 import com.lingua.service.KursService;
 
@@ -21,6 +22,8 @@ public class JpaKursService implements KursService{
 	KursRepository kursRepo;
 	@Autowired
 	UcenikRepository ucenikRepo;
+	@Autowired
+	NastavnikRepository nastavnikRepo;
 
 	@Override
 	public Kurs findOne(int id) {
@@ -36,7 +39,15 @@ public class JpaKursService implements KursService{
 
 	@Override
 	public Kurs save(Kurs newKurs) {
-		return kursRepo.save(newKurs);
+		Kurs oldKurs = kursRepo.findOne(newKurs.getIdKursa());
+		if(oldKurs!=null){
+			Nastavnik n = nastavnikRepo.findOne(oldKurs.getNastavnik().getId());
+			if(!newKurs.getNastavnik().getPredaje().getNaziv().equals(n.getPredaje().getNaziv())){
+				return null;
+			}
+		}
+		Kurs kurs = kursRepo.save(newKurs);
+		return kurs;
 	}
 
 	@Override
