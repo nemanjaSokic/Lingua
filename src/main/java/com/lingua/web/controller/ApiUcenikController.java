@@ -30,7 +30,7 @@ public class ApiUcenikController {
 	@RequestMapping(method=RequestMethod.GET)
 	ResponseEntity<List<Ucenik>> getAll(@PathVariable int courseId){
 		List<Ucenik>ucenici = ucenikServ.findByCourseId(courseId);
-		if(ucenici == null){
+		if(ucenici == null || ucenici.isEmpty()){
 			return new ResponseEntity<List<Ucenik>>(HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<List<Ucenik>>(ucenici,HttpStatus.OK);

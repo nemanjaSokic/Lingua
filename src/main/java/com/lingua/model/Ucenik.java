@@ -1,12 +1,20 @@
 package com.lingua.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="tblUcenici")
@@ -15,16 +23,21 @@ public class Ucenik extends Osoba {
 	@Id
 	@Column
 	protected String indeks;
+	@Column
+	protected Boolean status;
 	@ManyToOne(targetEntity=Kurs.class, fetch=FetchType.EAGER,cascade=CascadeType.ALL)
 	protected Kurs kurs;
+	@OneToMany(cascade=CascadeType.ALL)
+	@JsonIgnore
+	@JoinTable (name = "tbl_uplatnice" , joinColumns = @JoinColumn(name = "broj_uplatnice"),inverseJoinColumns=@JoinColumn(name = "indeks"))
+	protected List<Uplata> uplate;
 	
-	
-	public Ucenik() {
-		super();
-	}
+	public Ucenik() {}
 	public Ucenik(String ime, String prezime, int jmbg, String index){
 		super(ime,prezime,jmbg);
 		this.indeks = index;
+		this.uplate=new ArrayList<Uplata>();
+		this.status=checkStatus();
 		}
 	public Ucenik(String ime, String prezime, int jmbg) {
 		super(ime, prezime, jmbg);
@@ -35,7 +48,32 @@ public class Ucenik extends Osoba {
 		this.kurs = kurs;
 		this.indeks = index;
 	}
+	
+	public boolean checkStatus(){
+		int sum = 0;
+		for(Uplata uplata : this.uplate){
+			sum+=uplata.getUplata();
+			if(sum == this.getKurs().getCena()){
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public void addUplata(Uplata uplata){
+		this.uplate.add(uplata);
+		if(uplata.getUcenik() != this){
+			uplata.setUcenik(this);
+		}
+	}
+	
 
+	public Boolean getStatus() {
+		return status;
+	}
+	public void setStatus(Boolean status) {
+		this.status = status;
+	}
 	public String getIndeks() {
 		return indeks;
 	}
@@ -56,6 +94,12 @@ public class Ucenik extends Osoba {
 		}
 	}
 
+	public List<Uplata> getUplate() {
+		return uplate;
+	}
+	public void setUplate(List<Uplata> uplate) {
+		this.uplate = uplate;
+	}
 	@Override
 	public String ispisiImePretime() {
 		return "Ucenik " + getIme() + " " + getPrezime();

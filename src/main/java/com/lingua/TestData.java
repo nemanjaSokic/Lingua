@@ -1,5 +1,7 @@
 package com.lingua;
 
+import java.sql.Date;
+
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,12 +13,14 @@ import com.lingua.model.Nastavnik;
 import com.lingua.model.Nivo;
 import com.lingua.model.Skola;
 import com.lingua.model.Ucenik;
+import com.lingua.model.Uplata;
 import com.lingua.service.JezikService;
 import com.lingua.service.KursService;
 import com.lingua.service.NastavnikService;
 import com.lingua.service.NivoService;
 import com.lingua.service.SkolaService;
 import com.lingua.service.UcenikService;
+import com.lingua.service.UplataService;
 
 @Component
 public class TestData {
@@ -33,6 +37,8 @@ public class TestData {
 	private SkolaService skolaService;
 	@Autowired
 	private UcenikService ucenikService;
+	@Autowired
+	private UplataService uplataService;
 	
 	@PostConstruct
 	public void init(){
@@ -74,9 +80,8 @@ public class TestData {
 		k1.addUcenik(u1);
 		k1.addUcenik(u2);
 		
-		kursService.save(k1);
-		ucenikService.save(u1);
-		ucenikService.save(u2);
+		
+		
 		
 		
 		Ucenik u3 = new Ucenik("Nikola","Jokić",75166,"FG454");
@@ -88,15 +93,41 @@ public class TestData {
 		
 		
 		
-		kursService.save(k2);
 		
+		
+		
+		
+		Uplata upl1 = new Uplata(100,new Date(1467713837),u1);
+		Uplata upl2 = new Uplata(100,new Date(1467713837),u1);
+		Uplata upl3 = new Uplata(100,new Date(1467713837),u2);
+		Uplata upl4 = new Uplata(100,new Date(1467713837),u2);
+		Uplata upl5 = new Uplata(100,new Date(1467713837),u3);
+		Uplata upl6 = new Uplata(100,new Date(1467713837),u3);
+		Uplata upl7 = new Uplata(100,new Date(1467713837),u4);
+		
+		u1.addUplata(upl1);
+		u1.addUplata(upl2);
+		u2.addUplata(upl3);
+		u2.addUplata(upl4);
+		u3.addUplata(upl5);
+		u3.addUplata(upl6);
+		u4.addUplata(upl7);
+		
+		
+		
+		kursService.save(k1);
+		kursService.save(k2);
+		ucenikService.save(u1);
+		ucenikService.save(u2);
 		ucenikService.save(u3);
 		ucenikService.save(u4);
-		
-		
-		
-		
-		
+		uplataService.save(upl1);
+		uplataService.save(upl2);
+		uplataService.save(upl3);
+		uplataService.save(upl4);
+		uplataService.save(upl5);
+		uplataService.save(upl6);
+		uplataService.save(upl7);
 		
 		
 		

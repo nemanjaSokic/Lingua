@@ -2,13 +2,14 @@ package com.lingua.service.impl;
 
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.lingua.model.Kurs;
 import com.lingua.model.Nivo;
+import com.lingua.repository.KursRepository;
 import com.lingua.repository.NivoRepository;
 import com.lingua.service.NivoService;
 
@@ -17,6 +18,8 @@ import com.lingua.service.NivoService;
 public class JpaNivoService implements NivoService{
 	@Autowired
 	 NivoRepository nivoRepo;
+	@Autowired
+	KursRepository kursRepo;
 
 	@Override
 	public Nivo findOne(int id) {
@@ -40,6 +43,12 @@ public class JpaNivoService implements NivoService{
 		if(nivo == null){
 			throw new IllegalArgumentException("Tried to delete"
 					+ "non-existant activity");
+		}
+		List<Kurs> kursevi = kursRepo.findAll();
+		for(Kurs k : kursevi){
+			if(k.getNivo().getIdNivo()==id){
+				k.setNivo(null);
+			}
 		}
 		nivoRepo.delete(nivo);
 		return nivo;
