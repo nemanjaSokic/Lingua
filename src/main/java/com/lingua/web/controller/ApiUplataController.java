@@ -11,7 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.lingua.model.Ucenik;
 import com.lingua.model.Uplata;
+import com.lingua.service.KursService;
+import com.lingua.service.UcenikService;
 import com.lingua.service.UplataService;
 
 @RestController
@@ -20,6 +23,10 @@ public class ApiUplataController {
 	
 	@Autowired
 	UplataService uplataServ;
+	@Autowired
+	KursService kursServ;
+	@Autowired
+	UcenikService ucenikServ;
 
 	//--------------------------GET----------------------
 	
@@ -47,13 +54,26 @@ public class ApiUplataController {
 	//---------------------POST------------------------
 	
 	@RequestMapping(method=RequestMethod.POST,consumes="application/json")
-	ResponseEntity<Uplata> add(@RequestBody Uplata newUplata){
+	ResponseEntity<Uplata> add(@RequestBody Uplata newUplata,
+								@PathVariable(value="courseId") int courseId,
+								@PathVariable(value="index") String index){
+		Ucenik u = ucenikServ.findByIdAndCourse(index, courseId);
+		if(u==null){
+			return new ResponseEntity<Uplata>(HttpStatus.BAD_REQUEST);
+		}
+		u.addUplata(newUplata);
+		if(u.checkStatus()!=true){
+			u.setStatus(false);
+		}
 		Uplata presisted = uplataServ.save(newUplata);
 		if(presisted==null){
 			return new ResponseEntity<Uplata>(HttpStatus.BAD_REQUEST);
 		}
-		return new ResponseEntity<Uplata>(presisted,HttpStatus.OK);
+		return new ResponseEntity<Uplata>(presisted,HttpStatus.CREATED);
 	}
+	
+	//------------------DELETE------------------------
+	
 	
 	
 }

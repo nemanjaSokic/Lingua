@@ -35,6 +35,7 @@ public class Kurs {
 	@OneToOne
 	protected Nastavnik nastavnik;
 	@OneToOne
+	@JsonIgnore
 	protected Jezik jezik;
 	@OneToOne
 	protected Nivo nivo;

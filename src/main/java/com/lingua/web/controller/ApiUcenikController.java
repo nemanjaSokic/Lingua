@@ -52,6 +52,9 @@ public class ApiUcenikController {
 		Kurs k = kursServ.findOne(courseId);
 		k.addUcenik(newUcenik);
 		Ucenik presisted = ucenikServ.save(newUcenik);
+		if(presisted == null){
+			return new ResponseEntity<Ucenik>(HttpStatus.BAD_REQUEST);
+		}
 		return new ResponseEntity<Ucenik>(presisted,HttpStatus.CREATED);
 	}
 	
@@ -69,7 +72,7 @@ public class ApiUcenikController {
 	}
 	
 	
-	//-------------------UODATE-----------------------
+	//-------------------UPDATE-----------------------
 	
 	@RequestMapping(method=RequestMethod.PUT,consumes="application/json",value="/{index}")
 	ResponseEntity<Ucenik> edit(@PathVariable int courseId,@PathVariable String index,@RequestBody Ucenik ucenik){

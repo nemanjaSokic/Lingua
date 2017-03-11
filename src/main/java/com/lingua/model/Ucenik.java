@@ -26,13 +26,14 @@ public class Ucenik extends Osoba {
 	@Column
 	protected Boolean status;
 	@ManyToOne(targetEntity=Kurs.class, fetch=FetchType.EAGER,cascade=CascadeType.ALL)
+	@JsonIgnore
 	protected Kurs kurs;
 	@OneToMany(cascade=CascadeType.ALL)
 	@JsonIgnore
-	@JoinTable (name = "tbl_uplatnice" , joinColumns = @JoinColumn(name = "broj_uplatnice"),inverseJoinColumns=@JoinColumn(name = "indeks"))
+	@JoinTable (name = "tbl_uplatnice" , joinColumns = @JoinColumn(name = "indeks"),inverseJoinColumns=@JoinColumn(name = "broj_uplatnice"))
 	protected List<Uplata> uplate;
 	
-	public Ucenik() {}
+	public Ucenik() {this.uplate=new ArrayList<Uplata>();}
 	public Ucenik(String ime, String prezime, int jmbg, String index){
 		super(ime,prezime,jmbg);
 		this.indeks = index;
@@ -53,7 +54,7 @@ public class Ucenik extends Osoba {
 		int sum = 0;
 		for(Uplata uplata : this.uplate){
 			sum+=uplata.getUplata();
-			if(sum == this.getKurs().getCena()){
+			if(sum >= this.getKurs().getCena()){
 				return false;
 			}
 		}
@@ -66,7 +67,6 @@ public class Ucenik extends Osoba {
 			uplata.setUcenik(this);
 		}
 	}
-	
 
 	public Boolean getStatus() {
 		return status;

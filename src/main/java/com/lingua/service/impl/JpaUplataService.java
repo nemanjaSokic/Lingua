@@ -35,12 +35,6 @@ public class JpaUplataService implements UplataService{
 	@Override
 	public Uplata save(Uplata newUplata) {
 		//Uplata oldUplata = uplataRepo.findOne(newUplata.getUplatnicaBr());
-		Ucenik u = ucenikRepo.findOne(newUplata.getUcenik().getIndeks());
-		//u.addUplata(newUplata);
-		if(u.checkStatus()){
-			u.setStatus(true);
-		}
-		
 		return uplataRepo.save(newUplata);
 	}
 

@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="tblUplate")
 public class Uplata {
@@ -23,7 +25,7 @@ public class Uplata {
 	protected int uplata;
 	@Column
 	Date datum;
-	@ManyToOne(targetEntity=Ucenik.class, fetch=FetchType.EAGER,cascade=CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.EAGER,cascade=CascadeType.ALL)
 	Ucenik ucenik;
 	@OneToOne
 	Kurs kurs;

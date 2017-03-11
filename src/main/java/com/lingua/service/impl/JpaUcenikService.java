@@ -2,7 +2,6 @@ package com.lingua.service.impl;
 
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +33,7 @@ public class JpaUcenikService implements UcenikService{
 
 	@Override
 	public Ucenik save(Ucenik newUcenik) {
-		return ucenikRepo.save(newUcenik);
+		return ucenikRepo.saveAndFlush(newUcenik);
 	}
 
 	@Override
