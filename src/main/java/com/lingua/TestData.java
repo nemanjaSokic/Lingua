@@ -74,8 +74,8 @@ public class TestData {
 		Skola s = new Skola("Lingua d.o.o.","Branka Bajića 23, Novi Sad","lingua@office.rs","www.lingua.com","233-223111-65",381214778,123,111222333);
 		skolaService.save(s);
 		
-		Ucenik u1 = new Ucenik("Nemanja","Sokić",152499,"AB123");
-		Ucenik u2 = new Ucenik("Pero","Antić",678744,"CD586");
+		Ucenik u1 = new Ucenik("Nemanja","Sokić",152499,true);
+		Ucenik u2 = new Ucenik("Pero","Antić",678744,true);
 		Kurs k1 = new Kurs(500,nast1,n12);
 		k1.addUcenik(u1);
 		k1.addUcenik(u2);
@@ -84,8 +84,8 @@ public class TestData {
 		
 		
 		
-		Ucenik u3 = new Ucenik("Nikola","Jokić",75166,"FG454");
-		Ucenik u4 = new Ucenik("Miloš","Teodosić",17521,"KL68");
+		Ucenik u3 = new Ucenik("Nikola","Jokić",75166,true);
+		Ucenik u4 = new Ucenik("Miloš","Teodosić",17521,true);
 		Kurs k2 = new Kurs(400,nast2,n23);
 		
 		k2.addUcenik(u3);

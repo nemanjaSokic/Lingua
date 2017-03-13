@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.lingua.model.Jezik;
 import com.lingua.model.Kurs;
 import com.lingua.model.Nastavnik;
 import com.lingua.repository.KursRepository;
@@ -53,6 +54,19 @@ public class JpaNastavnikService implements NastavnikService{
 		}
 		nastavnikRepo.delete(nastavnikId);
 		return n;
+	}
+
+	@Override
+	public List<Nastavnik> findByJezik(Jezik j) {
+		return nastavnikRepo.findByPredaje(j);
+	}
+
+	@Override
+	public List<Nastavnik> delete(List<Nastavnik> nastavnici) {
+		for(Nastavnik n : nastavnici){
+			delete(n.getId());	
+		}
+		return nastavnici;
 	}
 	
 	

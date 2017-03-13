@@ -7,12 +7,15 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -22,13 +25,15 @@ public class Ucenik extends Osoba {
 	
 	@Id
 	@Column
+	@GenericGenerator(name = "id_indexgenerator", strategy = "com.lingua.support.UcenikIdGenerator")
+	@GeneratedValue(generator = "id_indexgenerator")
 	protected String indeks;
 	@Column
 	protected Boolean status;
 	@ManyToOne(targetEntity=Kurs.class, fetch=FetchType.EAGER,cascade=CascadeType.ALL)
 	@JsonIgnore
 	protected Kurs kurs;
-	@OneToMany(cascade=CascadeType.ALL)
+	@OneToMany(cascade={CascadeType.ALL,CascadeType.REMOVE})
 	@JsonIgnore
 	@JoinTable (name = "tbl_uplatnice" , joinColumns = @JoinColumn(name = "indeks"),inverseJoinColumns=@JoinColumn(name = "broj_uplatnice"))
 	protected List<Uplata> uplate;
@@ -40,8 +45,10 @@ public class Ucenik extends Osoba {
 		this.uplate=new ArrayList<Uplata>();
 		this.status=checkStatus();
 		}
-	public Ucenik(String ime, String prezime, int jmbg) {
+	public Ucenik(String ime, String prezime, int jmbg,boolean status) {
 		super(ime, prezime, jmbg);
+		this.status = status;
+		this.uplate=new ArrayList<Uplata>();
 	}
 
 	public Ucenik(String ime, String prezime, int jmbg, Kurs kurs, String index) {

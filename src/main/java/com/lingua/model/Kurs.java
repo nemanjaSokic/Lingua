@@ -18,7 +18,6 @@ import javax.persistence.Table;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonView;
 
 
 @Entity
@@ -39,9 +38,9 @@ public class Kurs {
 	protected Jezik jezik;
 	@OneToOne
 	protected Nivo nivo;
-	@OneToMany(cascade=CascadeType.ALL)
+	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 	@JsonIgnore
-	@JoinTable (name = "tbl_pohadjanja" , joinColumns = @JoinColumn(name = "indeks"), inverseJoinColumns=@JoinColumn(name = "idKursa"))
+	@JoinTable (name = "tbl_pohadjanja" , inverseJoinColumns = @JoinColumn(name = "indeks"), joinColumns=@JoinColumn(name = "idKursa"))
 	protected List<Ucenik> ucenici = new ArrayList<Ucenik>();
 	
 	public Kurs(){}

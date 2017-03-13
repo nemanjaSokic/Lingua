@@ -19,6 +19,6 @@ public interface UcenikService {
 
 	Ucenik save(Ucenik newUcenik);
 
-	void delete(String index);
+	void delete(Ucenik u);
 
 }

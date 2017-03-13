@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lingua.model.Jezik;
+import com.lingua.model.Nastavnik;
 import com.lingua.service.JezikService;
+import com.lingua.service.NastavnikService;
 
 @RestController
 @RequestMapping(value = "/api/languages")
@@ -20,6 +22,8 @@ public class ApiJezikController {
 
 	@Autowired
 	private JezikService jezikService;
+	@Autowired
+	private NastavnikService nastavnikService;
 	
 	//-------------GET------------------
 	
@@ -55,7 +59,10 @@ public class ApiJezikController {
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	ResponseEntity<Jezik> delete(@PathVariable String id){
+		Jezik jez = jezikService.findOne(id);
+		List<Nastavnik> nastavnici = nastavnikService.findByJezik(jez);
 		Jezik j = jezikService.delete(id);
+		nastavnikService.delete(nastavnici);
 		return new ResponseEntity<Jezik>(j,HttpStatus.OK);
 	}
 	

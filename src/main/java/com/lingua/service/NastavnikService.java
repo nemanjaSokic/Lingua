@@ -2,6 +2,7 @@ package com.lingua.service;
 
 import java.util.List;
 
+import com.lingua.model.Jezik;
 import com.lingua.model.Nastavnik;
 
 public interface NastavnikService {
@@ -12,6 +13,10 @@ public interface NastavnikService {
 
 	Nastavnik save(Nastavnik newNastavnik);
 
+	List<Nastavnik> delete(List<Nastavnik> nastavnici);
+
+	List<Nastavnik> findByJezik(Jezik j);
+	
 	Nastavnik delete(int id);
 
 }

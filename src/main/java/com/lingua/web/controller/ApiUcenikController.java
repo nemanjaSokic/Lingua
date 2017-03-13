@@ -66,7 +66,7 @@ public class ApiUcenikController {
 		Kurs k = kursServ.findOne(courseId);
 		Ucenik u = ucenikServ.findOne(index);
 		k.removeUcenik(u);
-		ucenikServ.delete(index);
+		ucenikServ.delete(u);
 		kursServ.save(k);
 		return new ResponseEntity<Ucenik>(HttpStatus.NO_CONTENT);
 	}
@@ -76,14 +76,15 @@ public class ApiUcenikController {
 	
 	@RequestMapping(method=RequestMethod.PUT,consumes="application/json",value="/{index}")
 	ResponseEntity<Ucenik> edit(@PathVariable int courseId,@PathVariable String index,@RequestBody Ucenik ucenik){
-		if(index.equals(null) || !index.equals(ucenik)){
+		Ucenik u = ucenikServ.findByIdAndCourse(index, courseId);
+		if(index.equals(null) || !index.equals(u.getIndeks())){
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
-		Ucenik oldUcenik = ucenikServ.findByIdAndCourse(index, courseId);
-		if(oldUcenik==null){
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		}
-		Ucenik presisted = ucenikServ.save(ucenik);
+		u.setIme(ucenik.getIme());
+		u.setPrezime(ucenik.getPrezime());
+		u.setStatus(ucenik.getStatus());
+		u.setJmbg(ucenik.getJmbg());
+		Ucenik presisted = ucenikServ.save(u);
 		
 		return new ResponseEntity<>(presisted,HttpStatus.OK);
 	}

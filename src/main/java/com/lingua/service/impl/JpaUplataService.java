@@ -7,7 +7,6 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.lingua.model.Ucenik;
 import com.lingua.model.Uplata;
 import com.lingua.repository.UcenikRepository;
 import com.lingua.repository.UplataRepository;

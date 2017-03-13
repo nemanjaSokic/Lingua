@@ -33,7 +33,7 @@ public class JpaUcenikService implements UcenikService{
 
 	@Override
 	public Ucenik save(Ucenik newUcenik) {
-		return ucenikRepo.saveAndFlush(newUcenik);
+		return ucenikRepo.save(newUcenik);
 	}
 
 	@Override
@@ -43,8 +43,8 @@ public class JpaUcenikService implements UcenikService{
 	}
 
 	@Override
-	public void delete(String index) {
-		ucenikRepo.delete(index);
+	public void delete(Ucenik i) {
+		ucenikRepo.delete(i);
 	}
 
 	@Override
