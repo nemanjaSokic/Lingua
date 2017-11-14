@@ -8,13 +8,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.lingua.model.Jezik;
+import com.lingua.model.Korisnik;
 import com.lingua.model.Kurs;
 import com.lingua.model.Nastavnik;
 import com.lingua.model.Nivo;
 import com.lingua.model.Skola;
+import com.lingua.model.TipKorisnika;
 import com.lingua.model.Ucenik;
 import com.lingua.model.Uplata;
 import com.lingua.service.JezikService;
+import com.lingua.service.KorisnikService;
 import com.lingua.service.KursService;
 import com.lingua.service.NastavnikService;
 import com.lingua.service.NivoService;
@@ -22,7 +25,7 @@ import com.lingua.service.SkolaService;
 import com.lingua.service.UcenikService;
 import com.lingua.service.UplataService;
 
-@Component
+//@Component
 public class TestData {
 
 	@Autowired
@@ -39,6 +42,9 @@ public class TestData {
 	private UcenikService ucenikService;
 	@Autowired
 	private UplataService uplataService;
+	@Autowired
+	private KorisnikService korisnikService;	
+	private TipKorisnika tip;
 	
 	@PostConstruct
 	public void init(){
@@ -70,6 +76,15 @@ public class TestData {
 		nastavnikService.save(nast1);
 		nastavnikService.save(nast2);
 		nastavnikService.save(nast3);
+		
+		Korisnik kor1 = new Korisnik(tip.UCENIK, "stud1", "123");
+		Korisnik kor2 = new Korisnik(tip.ADMIN, "admin", "admin");
+		Korisnik kor3 = new Korisnik(tip.NASTAVNIK, "nast1", "123");
+		Korisnik kor4 = new Korisnik(tip.UCENIK, "stud2", "stud2");
+		korisnikService.save(kor1);
+		korisnikService.save(kor4);
+		korisnikService.save(kor3);
+		korisnikService.save(kor2);
 		
 		Skola s = new Skola("Lingua d.o.o.","Branka Bajića 23, Novi Sad","lingua@office.rs","www.lingua.com","233-223111-65",381214778,123,111222333);
 		skolaService.save(s);

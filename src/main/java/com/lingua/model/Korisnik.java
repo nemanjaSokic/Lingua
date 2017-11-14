@@ -10,25 +10,26 @@ import javax.persistence.Table;
 public class Korisnik {
 
 	@Column(name="tip")
-	protected String tipKorisnika;
+	protected TipKorisnika tipKorisnika;
 	@Id
 	@Column(name="korisnicko_ime")
 	protected String korisnickoIme;
 	@Column(name="sifra")
 	protected String sifraKorisnika;
 
-	public Korisnik(String tipKorisnika, String korisnickoIme, String sifraKorisnika) {
+	public Korisnik(TipKorisnika tipKorisnika, String korisnickoIme, String sifraKorisnika) {
 		super();
 		this.tipKorisnika = tipKorisnika;
 		this.korisnickoIme = korisnickoIme;
 		this.sifraKorisnika = sifraKorisnika;
 	}
+	public Korisnik(){};
 
-	public String getTipKorisnika() {
+	public TipKorisnika getTipKorisnika() {
 		return tipKorisnika;
 	}
 
-	public void setTipKorisnika(String tipKorisnika) {
+	public void setTipKorisnika(TipKorisnika tipKorisnika) {
 		this.tipKorisnika = tipKorisnika;
 	}
 
@@ -50,7 +51,7 @@ public class Korisnik {
 	
 	@Override
 	public String toString() {
-		return "tip korisnika: " + tipKorisnika + "\n korisnicko ime: " + korisnickoIme;
+		return getTipKorisnika().toString();
 	}
 
 	@Override

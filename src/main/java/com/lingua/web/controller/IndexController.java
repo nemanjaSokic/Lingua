@@ -10,7 +10,7 @@ public class IndexController {
 
 	@RequestMapping(method=RequestMethod.GET)
 	public String index() {
-		return "static/app/html/index.html";
+		return "index.html";
 	}
 	
 }
