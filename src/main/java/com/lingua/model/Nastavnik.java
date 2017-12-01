@@ -4,6 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -21,19 +23,22 @@ public class Nastavnik extends Osoba {
 	protected int id;
 	@OneToOne
 	protected Jezik predaje;
+	@OneToOne
+	@JoinTable(name="tbl_nalogNastavnik", joinColumns = @JoinColumn(name= "id_nastavnika"), inverseJoinColumns=@JoinColumn(name="korisnicko_ime"))
+	protected Korisnik korisnik;
 	
 	public Nastavnik(){}
 	
-	public Nastavnik(String ime, String prezime, int jmbg) {
-		super(ime,prezime,jmbg);
+	public Nastavnik(String ime, String prezime) {
+		super(ime,prezime);
 		this.ime = ime;
 		this.prezime = prezime;
-		this.jmbg = jmbg;
 	}
 
-	public Nastavnik(String ime, String prezime, int jmbg, Jezik predaje) {
-		super(ime, prezime, jmbg);
+	public Nastavnik(String ime, String prezime, Jezik predaje, Korisnik k) {
+		super(ime, prezime);
 		this.predaje = predaje;
+		this.korisnik = k;
 	}
 
 	public int getId() {
@@ -50,6 +55,14 @@ public class Nastavnik extends Osoba {
 
 	public void setPredaje(Jezik predaje) {
 		this.predaje = predaje;
+	}
+
+	public Korisnik getKorisnik() {
+		return korisnik;
+	}
+
+	public void setKorisnik(Korisnik korisnik) {
+		this.korisnik = korisnik;
 	}
 
 	@Override

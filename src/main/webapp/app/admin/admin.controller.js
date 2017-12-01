@@ -5,12 +5,29 @@
         .module('linguaApp')
         .controller('AdminController', AdminController);
 
-    AdminController.$inject = ['$rootScope', '$scope', '$http', '$location', 'LoginService'];
+    AdminController.$inject = ['$rootScope', '$scope', 'getStudents', 'loginCheck', 'LoginService', '$location'];
 
-    function AdminController ($rootScope, $scope, $location, AdminService) {
+    function AdminController ($rootScope, $scope, getStudents,loginCheck, LoginService, $location) {
         var vm = this;
-        vm.account = $rootScope.account;
+        vm.account = loginCheck.name;
+        console.log(vm.account);
+        vm.isAuth = loginCheck.authenticated;
+        vm.students = getStudents;
+
+        $scope.error = getStudents.error;
+        $scope.errorMessage = getStudents.errorMessage;
+
+        $scope.logout = function() {
+            LoginService.logOut()
+                .then(function(result){
+                    $location.path("/login");
+                },function(error){
+                    vm.isAuth = false;
+                    console.log(error.statusText);
+                });
+        }
+
+        
+
     }
 })();
-
-  

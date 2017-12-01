@@ -13,22 +13,20 @@
         $scope.login = function() {
             LoginService.logIn($scope.credentials)
                 .then(function(response){
-                    var response = response.data;
-                    if(response !== ''){
-                        $rootScope.account = response.korisnickoIme;
-                        $rootScope.role = response.tipKorisnika;
-                        $rootScope.authenticated = true;
-                        if($rootScope.role === 'ADMIN' && $rootScope.authenticated){
+                    var res = response.data;
+                    if(res !== ''){
+                        if(res.tipKorisnika === 'ADMIN'){
                             $location.path("/admin");
-                        }else if ($rootScope.authenticated) {
+                        }else if (res.registrovan && res.tipKorisnika === 'NASTAVNIK' || res.tipKorisnika==='UCENIK') {
                             $location.path("/");
                             $scope.error = false;
                         } else {
                             $location.path("/login");
                             $scope.error = true;
+                            $scope.errorMessage = 'If you have just signed up, please, check your email and we will response to you soon!';
                         }
-                    } else {
-                        $rootScope.authenticated = false;
+                    } else {/*
+                        $rootScope.authenticated = false;*/
                         $scope.error = true;
                     }
                 },function (error) {

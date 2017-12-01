@@ -37,4 +37,19 @@ public class JpaKorisnikService implements KorisnikService{
 		List<Korisnik> korisnici = korisnikRepo.findAll();
 		return korisnici;
 	}
+
+	@Override
+	public String getUsername(String un) {
+		Korisnik k = korisnikRepo.findByKorisnickoIme(un);
+		if(k == null){
+			return null;
+		}
+		String username = k.getKorisnickoIme();
+		return username;
+	}
+
+	@Override
+	public Korisnik getOne(String username) {
+		return korisnikRepo.findOne(username);
+	}
 }

@@ -17,15 +17,16 @@ import com.lingua.support.dao.KorisnikDAO;
 @Service
 public class AuthenticationService implements UserDetailsService {
 	@Autowired
-	private KorisnikDAO korDAO;
+	private KorisnikService korisnikServ;
+	//private KorisnikDAO korDAO;
 	
 	@Override
-	public UserDetails loadUserByUsername(String username)
-			throws UsernameNotFoundException {
-		Korisnik userInfo = korDAO.getUserInfo(username);
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		Korisnik userInfo = korisnikServ.getOne(username);
+		System.out.println(userInfo);
 		GrantedAuthority authority = new SimpleGrantedAuthority(userInfo.toString());
 		UserDetails userDetails = (UserDetails)new User(userInfo.getKorisnickoIme(), 
-				userInfo.getSifraKorisnika(), Arrays.asList(authority));
+				userInfo.getSifraKorisnika(), userInfo.getRegistrovan(), true, true, true, Arrays.asList(authority));
 		return userDetails;
 	}
 } 

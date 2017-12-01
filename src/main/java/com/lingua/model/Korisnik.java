@@ -16,7 +16,24 @@ public class Korisnik {
 	protected String korisnickoIme;
 	@Column(name="sifra")
 	protected String sifraKorisnika;
+	@Column(name="telefon")
+	protected Long telefonKorisnika;
+	@Column(name="email")
+	protected String email;
+	@Column(name="reg")
+	protected Boolean registrovan;
+	@Column(name="napomena")
+	protected String napomena;
 
+	public Korisnik(TipKorisnika tipKorisnika, String korisnickoIme, String sifraKorisnika, Boolean registrovan, Long tel, String email) {
+		super();
+		this.tipKorisnika = tipKorisnika;
+		this.korisnickoIme = korisnickoIme;
+		this.sifraKorisnika = sifraKorisnika;
+		this.registrovan = registrovan;
+		this.telefonKorisnika = tel;
+		this.email = email;
+	}
 	public Korisnik(TipKorisnika tipKorisnika, String korisnickoIme, String sifraKorisnika) {
 		super();
 		this.tipKorisnika = tipKorisnika;
@@ -25,6 +42,17 @@ public class Korisnik {
 	}
 	public Korisnik(){};
 
+	public Korisnik(TipKorisnika tipKorisnika, String korisnickoIme, String sifraKorisnika, Long telefonKorisnika,
+			String email, Boolean registrovan, String napomena) {
+		super();
+		this.tipKorisnika = tipKorisnika;
+		this.korisnickoIme = korisnickoIme;
+		this.sifraKorisnika = sifraKorisnika;
+		this.telefonKorisnika = telefonKorisnika;
+		this.email = email;
+		this.registrovan = registrovan;
+		this.napomena = napomena;
+	}
 	public TipKorisnika getTipKorisnika() {
 		return tipKorisnika;
 	}
@@ -49,6 +77,30 @@ public class Korisnik {
 		this.sifraKorisnika = sifraKorisnika;
 	}
 	
+	public Boolean getRegistrovan() {
+		return registrovan;
+	}
+	public void setRegistrovan(Boolean registrovan) {
+		this.registrovan = registrovan;
+	}
+	public Long getTelefonKorisnika() {
+		return telefonKorisnika;
+	}
+	public void setTelefonKorisnika(Long telefonKorisnika) {
+		this.telefonKorisnika = telefonKorisnika;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getNapomena() {
+		return napomena;
+	}
+	public void setNapomena(String napomena) {
+		this.napomena = napomena;
+	}
 	@Override
 	public String toString() {
 		return getTipKorisnika().toString();
@@ -59,6 +111,7 @@ public class Korisnik {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((korisnickoIme == null) ? 0 : korisnickoIme.hashCode());
+		result = prime * result + ((registrovan == null) ? 0 : registrovan.hashCode());
 		result = prime * result + ((sifraKorisnika == null) ? 0 : sifraKorisnika.hashCode());
 		result = prime * result + ((tipKorisnika == null) ? 0 : tipKorisnika.hashCode());
 		return result;
@@ -78,15 +131,17 @@ public class Korisnik {
 				return false;
 		} else if (!korisnickoIme.equals(other.korisnickoIme))
 			return false;
+		if (registrovan == null) {
+			if (other.registrovan != null)
+				return false;
+		} else if (!registrovan.equals(other.registrovan))
+			return false;
 		if (sifraKorisnika == null) {
 			if (other.sifraKorisnika != null)
 				return false;
 		} else if (!sifraKorisnika.equals(other.sifraKorisnika))
 			return false;
-		if (tipKorisnika == null) {
-			if (other.tipKorisnika != null)
-				return false;
-		} else if (!tipKorisnika.equals(other.tipKorisnika))
+		if (tipKorisnika != other.tipKorisnika)
 			return false;
 		return true;
 	}

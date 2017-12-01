@@ -6,26 +6,13 @@
 <!-- library js -->
 <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
 <link href="bower_components/font-awesome/css/font-awesome.min.css">
-<link href="bower_components/rdash-ui/dist/css/rdash.min.css">
 
 
 <!-- bild css -->
-
+<link href="app/components/registration/registration.css">
+<link href="app/admin/student/admin-student.css">
 </head>
-<body ng-app="linguaApp">
-	<div class="jumbotron">
-		<div class="container text-center">
-			<h1>Lingua</h1>
-			<p>wellcome to language world</p>
-		</div>
-	</div>
-	<div>
-		<ul class="nav nav-pills" role="tablist">
-			<li ng-show="!authenticated"><a href="#/login">login</a></li>
-			
-		</ul>
-	</div>
-	
+<body ng-app="linguaApp">	
 	<div class="col-lg-12 col-md-12 col-sm-12">
         <div class="well" ng-view></div>
     </div>
@@ -38,9 +25,8 @@
 	<script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
 	<script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
 	<script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
-	<script src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
 	<script src="bower_components/angular-cookies/angular-cookies.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+	<script src="bower_components/angular-route/angular-route.js"></script>
 	
 	
 	<!-- bild js -->
@@ -51,7 +37,12 @@
 	<script type="text/javascript" src="app/components/login/login.controller.js"></script>
 	<script type="text/javascript" src="app/components/login/login.service.js"></script>
 	<script type="text/javascript" src="app/components/login/login.state.js"></script>
+	<script type="text/javascript" src="app/components/registration/registration.controller.js"></script>
+	<script type="text/javascript" src="app/components/registration/registration.service.js"></script>
+	<script type="text/javascript" src="app/components/registration/registration.state.js"></script>
 	<script type="text/javascript" src="app/admin/admin.state.js"></script>
 	<script type="text/javascript" src="app/admin/admin.controller.js"></script>
+	<script type="text/javascript" src="app/admin/student/admin-student.controller.js"></script>
+	<script type="text/javascript" src="app/entities/student/student.service.js"></script>
 </body>
 </html>

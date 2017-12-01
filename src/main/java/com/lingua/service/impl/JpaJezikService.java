@@ -26,11 +26,7 @@ public class JpaJezikService implements JezikService{
 	@Autowired
 	KursRepository kr;
 	
-	@Override
-	public Jezik findOne(String id) {
-		Jezik j = jr.findOne(id);
-		return j;
-	}
+	
 
 	@Override
 	public List<Jezik> findAll() {
@@ -71,6 +67,12 @@ public class JpaJezikService implements JezikService{
 		}
 		jr.delete(j);
 		return j;
+	}
+
+	@Override
+	public Jezik findOne(String id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	

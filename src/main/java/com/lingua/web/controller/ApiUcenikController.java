@@ -17,7 +17,7 @@ import com.lingua.service.KursService;
 import com.lingua.service.UcenikService;
 
 @RestController
-@RequestMapping(value = "/api/courses/{courseId}/students")
+@RequestMapping(value = "/api/students")
 public class ApiUcenikController {
 	
 	@Autowired
@@ -28,17 +28,27 @@ public class ApiUcenikController {
 	//----------------------GET--------------------
 	
 	@RequestMapping(method=RequestMethod.GET)
+	ResponseEntity<List<Ucenik>> getAllActive(){
+		List<Ucenik> ucenici = ucenikServ.findAll();
+		if(ucenici == null || ucenici.isEmpty()){
+			return new ResponseEntity<List<Ucenik>>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<List<Ucenik>>(ucenici,HttpStatus.OK);
+	}
+	
+	
+	/*@RequestMapping(method=RequestMethod.GET)
 	ResponseEntity<List<Ucenik>> getAll(@PathVariable int courseId){
 		List<Ucenik>ucenici = ucenikServ.findByCourseId(courseId);
 		if(ucenici == null || ucenici.isEmpty()){
 			return new ResponseEntity<List<Ucenik>>(HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<List<Ucenik>>(ucenici,HttpStatus.OK);
-	}
+	}*/
 
 	@RequestMapping(method=RequestMethod.GET,value="/{index}")
-	ResponseEntity<Ucenik> getOne(@PathVariable String index,@PathVariable int courseId){
-		Ucenik u = ucenikServ.findByIdAndCourse(index, courseId);
+	ResponseEntity<Ucenik> getOne(@PathVariable String index){
+		Ucenik u = ucenikServ.findOne(index);
 		if(u==null){
 			return new ResponseEntity<Ucenik>(HttpStatus.NOT_FOUND);
 		}
@@ -83,7 +93,6 @@ public class ApiUcenikController {
 		u.setIme(ucenik.getIme());
 		u.setPrezime(ucenik.getPrezime());
 		u.setStatus(ucenik.getStatus());
-		u.setJmbg(ucenik.getJmbg());
 		Ucenik presisted = ucenikServ.save(u);
 		
 		return new ResponseEntity<>(presisted,HttpStatus.OK);

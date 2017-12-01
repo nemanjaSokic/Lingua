@@ -48,6 +48,23 @@ public class TestData {
 	
 	@PostConstruct
 	public void init(){
+		Korisnik kor1 = new Korisnik(TipKorisnika.UCENIK, "stud1", "123", false, 381645721843L, "stud1@example.com");
+		Korisnik kor2 = new Korisnik(TipKorisnika.ADMIN, "admin", "admin", true, 381641228766L, "hutu.power@gmail.com");
+		Korisnik kor3 = new Korisnik(TipKorisnika.NASTAVNIK, "nast1", "123", true, 381605305599L, "nast1@example.com");
+		Korisnik kor4 = new Korisnik(TipKorisnika.UCENIK, "stud2", "123", true, 381644894972L, "stud2@example.com");
+		Korisnik kor5 = new Korisnik(TipKorisnika.NASTAVNIK, "nast2", "123", true, 381644894979L, "nast2@example.com");
+		Korisnik kor6 = new Korisnik(TipKorisnika.NASTAVNIK, "nast3", "123", true, 381644894974L, "nast3@example.com");
+		Korisnik kor7 = new Korisnik(TipKorisnika.UCENIK, "stud3", "123", true, 381644894977L, "stud3@example.com");
+		Korisnik kor8 = new Korisnik(TipKorisnika.UCENIK, "stud4", "123", true, 381644894973L, "stud4@example.com");
+		korisnikService.save(kor1);
+		korisnikService.save(kor4);
+		korisnikService.save(kor3);
+		korisnikService.save(kor2);
+		korisnikService.save(kor5);
+		korisnikService.save(kor6);
+		korisnikService.save(kor7);
+		korisnikService.save(kor8);
+		
 		Jezik jEng = new Jezik("english");
 		Jezik jNor = new Jezik("norwegian");
 		Jezik jIta = new Jezik("italian");
@@ -70,27 +87,20 @@ public class TestData {
 		nivoService.save(n23);
 		nivoService.save(n24);
 		
-		Nastavnik nast1 = new Nastavnik("Milos","Crnjanski",111222,jEng);
-		Nastavnik nast2 = new Nastavnik("Dositej","Obradovic",222333,jIta);
-		Nastavnik nast3 = new Nastavnik("Rastko","Nemanjic",333444,jNor);
+		Nastavnik nast1 = new Nastavnik("Milos","Crnjanski",jEng,kor3);
+		Nastavnik nast2 = new Nastavnik("Dositej","Obradovic",jIta,kor5);
+		Nastavnik nast3 = new Nastavnik("Rastko","Nemanjic",jNor,kor6);
 		nastavnikService.save(nast1);
 		nastavnikService.save(nast2);
 		nastavnikService.save(nast3);
 		
-		Korisnik kor1 = new Korisnik(tip.UCENIK, "stud1", "123");
-		Korisnik kor2 = new Korisnik(tip.ADMIN, "admin", "admin");
-		Korisnik kor3 = new Korisnik(tip.NASTAVNIK, "nast1", "123");
-		Korisnik kor4 = new Korisnik(tip.UCENIK, "stud2", "stud2");
-		korisnikService.save(kor1);
-		korisnikService.save(kor4);
-		korisnikService.save(kor3);
-		korisnikService.save(kor2);
+		
 		
 		Skola s = new Skola("Lingua d.o.o.","Branka Bajića 23, Novi Sad","lingua@office.rs","www.lingua.com","233-223111-65",381214778,123,111222333);
 		skolaService.save(s);
 		
-		Ucenik u1 = new Ucenik("Nemanja","Sokić",152499,true);
-		Ucenik u2 = new Ucenik("Pero","Antić",678744,true);
+		Ucenik u1 = new Ucenik("Nemanja","Sokić",true,kor1);
+		Ucenik u2 = new Ucenik("Pero","Antić",true,kor4);
 		Kurs k1 = new Kurs(500,nast1,n12);
 		k1.addUcenik(u1);
 		k1.addUcenik(u2);
@@ -99,8 +109,8 @@ public class TestData {
 		
 		
 		
-		Ucenik u3 = new Ucenik("Nikola","Jokić",75166,true);
-		Ucenik u4 = new Ucenik("Miloš","Teodosić",17521,true);
+		Ucenik u3 = new Ucenik("Nikola","Jokić",true,kor7);
+		Ucenik u4 = new Ucenik("Miloš","Teodosić",true,kor8);
 		Kurs k2 = new Kurs(400,nast2,n23);
 		
 		k2.addUcenik(u3);

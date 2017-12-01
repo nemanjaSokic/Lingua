@@ -14,23 +14,48 @@
                     controller : 'AdminController',
                     controllerAs: 'vm',
                     resolve: {
-                        "check":function(LoginService, $rootScope, $location){
-                            LoginService.check()
-                                .then(function(result){
-                                    var result = result.data;
-                                    if(result !== '' && result.name === 'admin'){
-                                        $rootScope.account = result.name;
-                                        $rootScope.role = result.authorities[0].authority;
-                                        $rootScope.authenticated = result.authenticated;
-                                    }else{
-                                        $location.path('/');
-                                    }
-                                },function(error){
-                                    $rootScope.authenticated = false;
-                                    console.log(error.statusText);
-                                });
-                        }
+                        loginCheck: loginCheck,
+                        getStudents: getStudents
                     }
                 })
+                .when("/admin/student/:index", {
+                    templateUrl : 'app/admin/student/admin-student.html',
+                    controller : 'AdminStudentController',
+                    controllerAs: 'vm',
+                    resolve: {
+                        loginCheck: loginCheck,
+                        accountService: accountService
+                    }
+                });
+        }
+
+        function accountService(StudentService){
+            return StudentService.getOne()
+        }
+
+        function getStudents(StudentService){
+            return StudentService.getAll().
+                then(function(result){
+                    return result.data;
+                },function(error){
+                    return {error: true,
+                            errorMessage: error.data.message
+                            }
+                });
+        }
+        function loginCheck(LoginService, $location){
+            return LoginService.check()
+                .then(function(result){
+                    console.log(result);
+                    var res = result.data;
+                    if(res !== '' && res.authenticated == true && res.name === 'admin'){
+                        return res;
+                    }else{
+                        $location.path("/login");
+                    }
+                },function(error){
+                    console.log(error.statusText);
+                }
+            );
         }
 })();

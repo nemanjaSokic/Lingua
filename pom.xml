@@ -7,7 +7,7 @@
 		<version>1.3.0.RELEASE</version>
 	</parent>
   <groupId>com.lingua</groupId>
-  <artifactId>Lingua</artifactId>
+  <artifactId>lingua</artifactId>
   <packaging>war</packaging>
   <version>0.0.1-SNAPSHOT</version>
   <name>Lingua Webapp</name>
@@ -16,7 +16,7 @@
   <properties>
 		<main.basedir>${basedir}/../..</main.basedir>
 		<m2eclipse.wtp.contextRoot>/</m2eclipse.wtp.contextRoot>
-		<java.version>1.7</java.version>
+		<java.version>1.8</java.version>
 		<tomcat.version>7.0.59</tomcat.version>
 	</properties>
 	
@@ -69,7 +69,11 @@
 	<dependency>
     	<groupId>commons-dbcp</groupId>
     	<artifactId>commons-dbcp</artifactId>
-    	</dependency>
+    </dependency>
+    <dependency>
+    	<groupId>org.springframework.boot</groupId>
+    	<artifactId>spring-boot-starter-mail</artifactId>
+    </dependency>
     <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-devtools</artifactId>

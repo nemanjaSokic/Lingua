@@ -11,10 +11,12 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,8 +27,17 @@ import org.springframework.web.bind.annotation.RestController;
 import com.lingua.exception.UserException;
 import com.lingua.model.ErrorResponse;
 import com.lingua.model.Korisnik;
+import com.lingua.model.Kurs;
+import com.lingua.model.Nastavnik;
+import com.lingua.model.TipKorisnika;
+import com.lingua.model.Ucenik;
+import com.lingua.model.UserWrapper;
 import com.lingua.service.AuthenticationService;
 import com.lingua.service.KorisnikService;
+import com.lingua.service.KursService;
+import com.lingua.service.NastavnikService;
+import com.lingua.service.UcenikService;
+import com.lingua.service.impl.EmailService;
 
 @RestController
 @RequestMapping(value = "/api/users")
@@ -36,12 +47,22 @@ public class ApiKorisnikController {
 	KorisnikService korisnikServ;
 	@Autowired
 	AuthenticationService authService;
+	@Autowired
+	UcenikService ucenikServ;
+	@Autowired
+	NastavnikService nastavnikServ;
+	@Autowired
+	KursService kursServ;
+	@Autowired
+	EmailService email;
+	@Autowired
+	public SimpleMailMessage template;
 	
 	//------------------------GET---------------------------
-	
+
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<List<Korisnik>>  listUser(){
+	public ResponseEntity<List<Korisnik>>  getAll(){
 		//need to implement only to admin pass
 		UserDetails userDetails =
 				 (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -53,7 +74,7 @@ public class ApiKorisnikController {
 	}
 	
 	@RequestMapping(value="/u/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Korisnik>  listUser(@PathVariable(value = "id") String id) throws UserException{
+	public ResponseEntity<Korisnik>  login(@PathVariable(value = "id") String id) throws UserException{
 		Korisnik k = korisnikServ.getUsers().stream().filter(korisnik -> korisnik.getKorisnickoIme().equals(id)).findFirst().orElse(null);
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		if (!(auth instanceof AnonymousAuthenticationToken)) { //Firstly, check is the user Anonymus
@@ -72,6 +93,23 @@ public class ApiKorisnikController {
 		
 	}
 	
+	@RequestMapping("/u")
+	public Principal isUserLogin(Principal user) {
+		System.out.println(user);
+		return user;
+	}
+	
+	@RequestMapping(value="/{username}", method=RequestMethod.GET)
+	public ResponseEntity<Boolean> isUsernameExist(@PathVariable(value="username") String un){
+		boolean is = false;
+		String username = korisnikServ.getUsername(un);
+		if(username != null){
+			is = true;
+			return new ResponseEntity<Boolean>(is,HttpStatus.OK);
+		}
+		return new ResponseEntity<Boolean>(is,HttpStatus.OK);
+	}
+	
 	//-----------------------EXCEPTION-----------------------
 	
 	@ExceptionHandler(UserException.class)
@@ -83,16 +121,26 @@ public class ApiKorisnikController {
 	}
 	
 	//------------------------POST---------------------------
-	
-	@RequestMapping(value="/user", method = RequestMethod.POST)
-	public ResponseEntity<Korisnik>  listUser(@RequestBody Korisnik user){
+	@Transactional
+	@RequestMapping(value="/user", method = RequestMethod.POST, consumes = {"application/json"})
+	public ResponseEntity<Korisnik>  save(@RequestBody UserWrapper reg){
+		Korisnik k = reg.getKorisnik();
+		korisnikServ.save(k);
+		if(k.getTipKorisnika() == TipKorisnika.NASTAVNIK){
+			Nastavnik n = reg.getNastavnik();
+			n.setKorisnik(k);
+			nastavnikServ.save(n);
+			email.sendSimpleMessage(n.getKorisnik().getEmail(), template.getSubject(),"Dear " + n.getIme() +","+ template.getText());
+		}else if(k.getTipKorisnika()==TipKorisnika.UCENIK){
+			Ucenik u = reg.getUcenik();
+			u.setKorisnik(k);
+			Kurs kurs = kursServ.findOne(u.getKurs().getIdKursa());
+			kurs.addUcenik(u);
+			kursServ.save(kurs);
+			email.sendSimpleMessage(u.getKorisnik().getEmail(), template.getSubject(), "Dear " + u.getIme() +","+ template.getText());
+		}
 		return new ResponseEntity<Korisnik> (HttpStatus.OK);
 	}
-	
-	@RequestMapping("/u")
-	  public Principal user(Principal user) {
-	    return user;
-	  }
 	
 	@RequestMapping(value="/logout", method=RequestMethod.POST)
 	public ResponseEntity<Korisnik> logoutDo(HttpServletRequest request,HttpServletResponse response){

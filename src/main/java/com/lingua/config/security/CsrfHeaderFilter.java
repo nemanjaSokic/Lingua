@@ -1,4 +1,4 @@
-package com.lingua.config;
+package com.lingua.config.security;
 
 import java.io.IOException;
 

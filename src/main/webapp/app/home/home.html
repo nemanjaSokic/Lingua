@@ -1,10 +1,19 @@
-<h1>Greeting</h1>
-<ul><li ng-show="authenticated"><a href="" ng-click="logout()">logout</a></li></ul>
-<div ng-show="authenticated">
-	<p>The ID is {{account}}</p>
-	<p>The content is {{authenticated}}</p>
+<div>
+	<ul class="nav nav-pills" role="tablist">
+		<li ng-show="!vm.isAuth"><a href="#/login">login</a></li>
+	</ul>
 </div>
-<div  ng-show="!authenticated">
+<h1>Greeting</h1>
+<div ng-show="vm.isAuth">
+	<ul>
+		<li><a href="" ng-click="logout()">logout</a></li>
+	</ul>
+	<div>
+		<p>The ID is {{vm.account}}</p>
+		<p>The content is {{vm.isAuth}}</p>
+	</div>
+</div>
+<div  ng-show="!vm.isAuth">
 	<p>Login to see your greeting</p>
 </div>
 <h1>Welcome, Java Hipster!</h1>

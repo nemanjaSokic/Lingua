@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -31,28 +32,31 @@ public class Ucenik extends Osoba {
 	@Column
 	protected Boolean status;
 	@ManyToOne(targetEntity=Kurs.class, fetch=FetchType.EAGER,cascade=CascadeType.ALL)
-	@JsonIgnore
 	protected Kurs kurs;
 	@OneToMany(cascade={CascadeType.ALL,CascadeType.REMOVE})
 	@JsonIgnore
 	@JoinTable (name = "tbl_uplatnice" , joinColumns = @JoinColumn(name = "indeks"),inverseJoinColumns=@JoinColumn(name = "broj_uplatnice"))
 	protected List<Uplata> uplate;
+	@OneToOne
+	@JoinTable(name="tbl_nalogUcenika", joinColumns = @JoinColumn(name= "indeks"), inverseJoinColumns=@JoinColumn(name="korisnicko_ime"))
+	protected Korisnik korisnik;
 	
 	public Ucenik() {this.uplate=new ArrayList<Uplata>();}
-	public Ucenik(String ime, String prezime, int jmbg, String index){
-		super(ime,prezime,jmbg);
+	public Ucenik(String ime, String prezime, String index){
+		super(ime,prezime);
 		this.indeks = index;
 		this.uplate=new ArrayList<Uplata>();
 		this.status=checkStatus();
 		}
-	public Ucenik(String ime, String prezime, int jmbg,boolean status) {
-		super(ime, prezime, jmbg);
+	public Ucenik(String ime, String prezime,boolean status, Korisnik k) {
+		super(ime, prezime);
 		this.status = status;
+		this.korisnik = k;
 		this.uplate=new ArrayList<Uplata>();
 	}
 
-	public Ucenik(String ime, String prezime, int jmbg, Kurs kurs, String index) {
-		super(ime, prezime, jmbg);
+	public Ucenik(String ime, String prezime, Kurs kurs, String index) {
+		super(ime, prezime);
 		this.kurs = kurs;
 		this.indeks = index;
 	}
@@ -106,6 +110,12 @@ public class Ucenik extends Osoba {
 	}
 	public void setUplate(List<Uplata> uplate) {
 		this.uplate = uplate;
+	}
+	public Korisnik getKorisnik() {
+		return korisnik;
+	}
+	public void setKorisnik(Korisnik korisnik) {
+		this.korisnik = korisnik;
 	}
 	@Override
 	public String ispisiImePretime() {

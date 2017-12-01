@@ -1,0 +1,28 @@
+<div ng-include="'/app/layouts/navbar/admin/navbar.html'"></div>
+</br></br>
+<table class="table table-hover">
+  <thead>
+    <tr><th>Active students</th></tr>
+    <tr>
+      <th scope="col">Index</th>
+      <th scope="col">First Name</th>
+      <th scope="col">Last Name</th>
+      <th scope="col">Course</th>
+      <th scope="col">Registrated</th>
+      <th scope="col">status</th>
+      <th scope="col">payments</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="stud in vm.students">
+      <th scope="row"><a ng-href="#/admin/student/{{stud.indeks}}">{{stud.indeks}}</a></th>
+      <td>{{stud.ime}}</td>
+      <td>{{stud.prezime}}</td>
+      <td><a ng-href="/#/admin/courses/{{stud.kurs.idKursa}}" tooltip-placement="top" uib-tooltip="nastavnik: {{stud.kurs.nastavnik.ime}} {{stud.kurs.nastavnik.prezime}}" type="button" class="btn btn-info">{{stud.kurs.nastavnik.predaje.naziv}} : {{stud.kurs.nivo.nazivNivoa}} : {{stud.kurs.idKursa}}</a></td>
+      <td>{{stud.korisnik.registrovan}}</td>
+      <td>{{stud.status}}</td>
+      <td><a ng-click=showPayments()>Show Payments</a></td>
+    </tr>
+  </tbody>
+</table>
+<div ng-show="error" class="alert alert-danger fade in"><strong>{{errorMessage}}!</strong></div>

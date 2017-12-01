@@ -15,7 +15,7 @@ public class UcenikIdGenerator implements IdentifierGenerator {
 	public Serializable generate(SessionImplementor arg0, Object obj)
 			throws HibernateException {
 		Random num = new Random();
-		int jmbg = ((Ucenik)obj).getJmbg();
+		int jmbg = num.hashCode();
 		String temp = Integer.toString(jmbg);
 		int len = temp.length();
 		String last3 = temp.substring(len-3);

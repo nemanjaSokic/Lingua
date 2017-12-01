@@ -20,6 +20,9 @@
             },
             check : function(){
                 return $http.get('/api/users/u');
+            },
+            getAll : function(){
+                return $http.get('/api/users');
             }
         }
     }

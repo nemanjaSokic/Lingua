@@ -8,4 +8,6 @@ public interface KorisnikRepository extends JpaRepository<Korisnik, String> {
 
 	Korisnik findByKorisnickoImeAndSifraKorisnika(String username, String password);
 
+	Korisnik findByKorisnickoIme(String un);
+
 }

@@ -1,0 +1,18 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">LinguaApp</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#/admin">Home</a></li>
+      <li><a href="#/admin/courses">Courses</a></li>
+      <li><a href="#/students">Students</a></li>
+      <li><a href="#/professors">Professors</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="#"><span class="glyphicon glyphicon-user"></span> {{vm.account}}</a></li>
+      <li><a href="#/login"><span class="glyphicon glyphicon-log-in"></span> Change account</a></li>
+      <li><a href="" ng-click="logout()" ng-show="vm.isAuth"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+    </ul>
+  </div>
+</nav>
