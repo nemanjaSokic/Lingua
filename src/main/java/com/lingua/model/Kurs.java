@@ -34,13 +34,12 @@ public class Kurs {
 	@OneToOne
 	protected Nastavnik nastavnik;
 	@OneToOne
-	@JsonIgnore
 	protected Jezik jezik;
 	@OneToOne
 	protected Nivo nivo;
 	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 	@JsonIgnore
-	@JoinTable (name = "tbl_pohadjanja" , inverseJoinColumns = @JoinColumn(name = "indeks"), joinColumns=@JoinColumn(name = "idKursa"))
+	@JoinTable (name = "tbl_pohadjanja" , inverseJoinColumns = @JoinColumn(name = "korisnicko_ime"), joinColumns=@JoinColumn(name = "idKursa"))
 	protected List<Ucenik> ucenici = new ArrayList<Ucenik>();
 	
 	public Kurs(){}
@@ -72,7 +71,7 @@ public class Kurs {
 	
 	public void removeUcenik(Ucenik ucenik){
 		ucenik.setKurs(null);
-		this.ucenici.remove(ucenik.getIndeks());
+		this.ucenici.remove(ucenik);
 	}
 	
 	

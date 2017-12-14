@@ -5,6 +5,8 @@
         .module('linguaApp', [
             'ngCookies',
             'ui.bootstrap',
-            'ngRoute'
+            'ngRoute',
+            'ngSanitize',
+            'mwl.confirm'
         ])
 })();

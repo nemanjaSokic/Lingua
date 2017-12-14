@@ -15,4 +15,6 @@ public interface UcenikRepository extends JpaRepository<Ucenik, String> {
 
 	List<Ucenik> findByKurs(Kurs kurs);
 
+	Ucenik findByIndeks(String index);
+
 }

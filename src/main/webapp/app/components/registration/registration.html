@@ -6,43 +6,43 @@
 
             <div class="form-group">
             <label for="phonenumber"><span class="req">* </span> Phone Number: </label>
-                    <input required type="text" name="phonenumber" id="phone" class="form-control phone" maxlength="28" ng-model="vm.userInfo.user.telefonKorisnika" placeholder="not used for marketing"/> 
+                    <input required type="text" name="phonenumber" id="phone" class="form-control phone" maxlength="28" ng-model="vm.user.telefonKorisnika" placeholder="not used for marketing"/> 
             </div>
 
             <div class="form-group"> 	 
                 <label for="firstname"><span class="req">* </span> First name: </label>
-                    <input class="form-control" type="text" name="firstname" id = "txt" ng-model="vm.userInfo.person.ime" required /> 
+                    <input class="form-control" type="text" name="firstname" id = "firstname" ng-model="vm.user.ime" required /> 
                         <div id="errFirst"></div>    
             </div>
             <div class="form-group">
                 <label for="lastname"><span class="req">* </span> Last name: </label> 
-                    <input class="form-control" type="text" name="lastname" id = "txt" ng-model="vm.userInfo.person.prezime" required />  
+                    <input class="form-control" type="text" name="lastname" id = "lastname" ng-model="vm.user.prezime" required />  
                         <div id="errLast"></div>
             </div>
             <div class="form-group">
                 <label for="role"><span class="req">* </span> Your role?: </label>
                 <div class="radio">
-                    <label><input type="radio" name="optradio" value="UCENIK" ng-model="vm.userInfo.user.tipKorisnika">Student</label>
+                    <label><input type="radio" name="optradio" value="UCENIK" ng-model="vm.user.tipKorisnika">Student</label>
                 </div>
                 <div class="radio">
-                    <label><input type="radio" name="optradio" value="NASTAVNIK" ng-model="vm.userInfo.user.tipKorisnika">Professor</label>
+                    <label><input type="radio" name="optradio" value="NASTAVNIK" ng-model="vm.user.tipKorisnika">Professor</label>
                 </div>
             </div>
             <div class="form-group">
                 <label for="email"><span class="req">* </span> Email Address: </label> 
-                    <input class="form-control" required type="text" name="email" id = "email" ng-keyup="emailTrim(vm.userInfo.user.email)" ng-model="vm.userInfo.user.email" />   
+                    <input class="form-control" required type="text" name="email" id = "email" ng-keyup="emailTrim(vm.user.email)" ng-model="vm.user.email" />   
                         <div class="status" id="status"></div>
             </div>
 
             <div class="form-group">
                 <label for="username"><span class="req">* </span> User name:  <small>This will be your login user name</small> </label> 
-                    <input class="form-control" type="text" name="username" id = "txt" ng-change = "checkUser()"ng-model="vm.userInfo.user.korisnickoIme" placeholder="will be generated but you can change" required />  
+                    <input class="form-control" type="text" name="username" id = "username" ng-change = "checkUser()"ng-model="vm.user.korisnickoIme" placeholder="will be generated but you can change" required />  
                         <div ng-show = "userError" class="label label-danger" id="errLast">The username is used!</div>
             </div>
 
             <div class="form-group">
                 <label for="password"><span class="req">* </span> Password: </label>
-                    <input required name="password" type="password" class="form-control inputpass" ng-model="vm.userInfo.user.sifraKorisnika" minlength="4" maxlength="16"  id="pass1" /> </p>
+                    <input required name="password" type="password" class="form-control inputpass" ng-model="vm.user.sifraKorisnika" minlength="4" maxlength="16"  id="pass1" /> </p>
 
                 <label for="password"><span class="req">* </span> Password Confirm: </label>
                     <input required name="password" type="password" class="form-control inputpass" minlength="4" ng-model="confPass" maxlength="16" placeholder="Enter again to validate"  id="pass2" ng-change="checkPass();";/>
@@ -54,7 +54,7 @@
                     <option ng-option value={{x}} ng-repeat="x in vm.courses">{{x.nastavnik.predaje.naziv}} - {{x.nivo.nazivNivoa}} level</option>
                     <option ng-option value="0">Choose another one</option>
                 </select>
-                <div class="col-xs-12" id="cash" ng-if="vm.course == '0'" ng-model="vm.userInfo.user.napomena">
+                <div class="col-xs-12" id="cash" ng-if="vm.course == '0'" ng-model="vm.user.napomena">
                     <input required class="form-control" type="text" placeholder="If you want to create new one, let us know.">
                 </div>
             </div>

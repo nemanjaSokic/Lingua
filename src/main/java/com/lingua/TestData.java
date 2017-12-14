@@ -25,7 +25,7 @@ import com.lingua.service.SkolaService;
 import com.lingua.service.UcenikService;
 import com.lingua.service.UplataService;
 
-//@Component
+@Component
 public class TestData {
 
 	@Autowired
@@ -48,29 +48,9 @@ public class TestData {
 	
 	@PostConstruct
 	public void init(){
-		Korisnik kor1 = new Korisnik(TipKorisnika.UCENIK, "stud1", "123", false, 381645721843L, "stud1@example.com");
-		Korisnik kor2 = new Korisnik(TipKorisnika.ADMIN, "admin", "admin", true, 381641228766L, "hutu.power@gmail.com");
-		Korisnik kor3 = new Korisnik(TipKorisnika.NASTAVNIK, "nast1", "123", true, 381605305599L, "nast1@example.com");
-		Korisnik kor4 = new Korisnik(TipKorisnika.UCENIK, "stud2", "123", true, 381644894972L, "stud2@example.com");
-		Korisnik kor5 = new Korisnik(TipKorisnika.NASTAVNIK, "nast2", "123", true, 381644894979L, "nast2@example.com");
-		Korisnik kor6 = new Korisnik(TipKorisnika.NASTAVNIK, "nast3", "123", true, 381644894974L, "nast3@example.com");
-		Korisnik kor7 = new Korisnik(TipKorisnika.UCENIK, "stud3", "123", true, 381644894977L, "stud3@example.com");
-		Korisnik kor8 = new Korisnik(TipKorisnika.UCENIK, "stud4", "123", true, 381644894973L, "stud4@example.com");
-		korisnikService.save(kor1);
-		korisnikService.save(kor4);
-		korisnikService.save(kor3);
-		korisnikService.save(kor2);
-		korisnikService.save(kor5);
-		korisnikService.save(kor6);
-		korisnikService.save(kor7);
-		korisnikService.save(kor8);
-		
 		Jezik jEng = new Jezik("english");
 		Jezik jNor = new Jezik("norwegian");
 		Jezik jIta = new Jezik("italian");
-		jezikService.save(jEng);
-		jezikService.save(jIta);
-		jezikService.save(jNor);
 		
 		Nivo n11 = new Nivo("beginner");
 		Nivo n12 = new Nivo("A1");
@@ -79,49 +59,30 @@ public class TestData {
 		Nivo n22 = new Nivo("B21");
 		Nivo n23 = new Nivo("B22");
 		Nivo n24 = new Nivo("B3");
-		nivoService.save(n11);
-		nivoService.save(n12);
-		nivoService.save(n13);
-		nivoService.save(n21);
-		nivoService.save(n22);
-		nivoService.save(n23);
-		nivoService.save(n24);
 		
-		Nastavnik nast1 = new Nastavnik("Milos","Crnjanski",jEng,kor3);
-		Nastavnik nast2 = new Nastavnik("Dositej","Obradovic",jIta,kor5);
-		Nastavnik nast3 = new Nastavnik("Rastko","Nemanjic",jNor,kor6);
-		nastavnikService.save(nast1);
-		nastavnikService.save(nast2);
-		nastavnikService.save(nast3);
+		Korisnik admin = new Korisnik(TipKorisnika.ADMIN, "admin", "admin");
+		admin.setRegistrovan(true);
 		
+		Nastavnik nast1 = new Nastavnik("Milos","Crnjanski", TipKorisnika.NASTAVNIK,"nast1","123",164572183L,"sasas@dfdfd.com",true,"napomena", jEng);
+		Nastavnik nast2 = new Nastavnik("Dositej","Obradovic",TipKorisnika.NASTAVNIK, "nast2", "123", 381644894979L, "nast2@example.com",true, "", jIta);
+		Nastavnik nast3 = new Nastavnik("Rastko","Nemanjic", TipKorisnika.NASTAVNIK, "nast3", "123", 381644894974L, "nast3@example.com",true,"ludak", jNor);
 		
-		
-		Skola s = new Skola("Lingua d.o.o.","Branka Bajića 23, Novi Sad","lingua@office.rs","www.lingua.com","233-223111-65",381214778,123,111222333);
-		skolaService.save(s);
-		
-		Ucenik u1 = new Ucenik("Nemanja","Sokić",true,kor1);
-		Ucenik u2 = new Ucenik("Pero","Antić",true,kor4);
 		Kurs k1 = new Kurs(500,nast1,n12);
-		k1.addUcenik(u1);
-		k1.addUcenik(u2);
-		
-		
-		
-		
-		
-		Ucenik u3 = new Ucenik("Nikola","Jokić",true,kor7);
-		Ucenik u4 = new Ucenik("Miloš","Teodosić",true,kor8);
 		Kurs k2 = new Kurs(400,nast2,n23);
 		
+		Ucenik u1 = new Ucenik("Nemanja", "Sokic",TipKorisnika.UCENIK, "stud1", "123",164572183L,"nemskc@gmail.com",false,"napomena",true,k1);
+		Ucenik u2 = new Ucenik("Pero","Antić", TipKorisnika.UCENIK, "stud2", "123", 381644894972L, "stud2@example.com", true, "", false, k1);
+		Ucenik u3 = new Ucenik("Nikola","Jokić",TipKorisnika.UCENIK, "stud3", "123", 381644894977L, "stud3@example.com", true, "", true, k2);
+		Ucenik u4 = new Ucenik("Miloš","Teodosić", TipKorisnika.UCENIK, "stud4", "123", 381644894973L, "stud4@example.com", true, "", true, k2);
+		
+		k1.addUcenik(u1);
+		k1.addUcenik(u2);
 		k2.addUcenik(u3);
 		k2.addUcenik(u4);
 		
-		
-		
-		
-		
-		
-		
+		Skola s = new Skola("Lingua d.o.o.","Branka Bajića 23, Novi Sad","lingua@office.rs","www.lingua.com","233-223111-65",381214778,123,111222333);
+		skolaService.save(s);
+
 		Uplata upl1 = new Uplata(100,new Date(1467713837),u1);
 		Uplata upl2 = new Uplata(100,new Date(1467713837),u1);
 		Uplata upl3 = new Uplata(100,new Date(1467713837),u2);
@@ -137,15 +98,33 @@ public class TestData {
 		u3.addUplata(upl5);
 		u3.addUplata(upl6);
 		u4.addUplata(upl7);
+				
+		nivoService.save(n11);
+		nivoService.save(n12);
+		nivoService.save(n13);
+		nivoService.save(n21);
+		nivoService.save(n22);
+		nivoService.save(n23);
+		nivoService.save(n24);
+
 		
+		jezikService.save(jEng);
+		jezikService.save(jIta);
+		jezikService.save(jNor);
 		
+		korisnikService.save(admin);
+		nastavnikService.save(nast1);
+		nastavnikService.save(nast2);
+		nastavnikService.save(nast3);
 		
 		kursService.save(k1);
 		kursService.save(k2);
-		ucenikService.save(u1);
-		ucenikService.save(u2);
-		ucenikService.save(u3);
-		ucenikService.save(u4);
+		
+		korisnikService.save(u1);
+		korisnikService.save(u2);
+		korisnikService.save(u3);
+		korisnikService.save(u4);
+		
 		uplataService.save(upl1);
 		uplataService.save(upl2);
 		uplataService.save(upl3);

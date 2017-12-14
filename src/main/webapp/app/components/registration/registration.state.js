@@ -18,9 +18,7 @@
                     }
                 })
                 .when("/signup/success", {
-                    templateUrl : 'app/components/registration/success.html',
-                    controller : 'RegistrationController',
-                    controllerAs: 'vm'
+                    templateUrl : 'app/components/registration/success.html'
                 });
         }
         function coursePrepService(RegistrationService){

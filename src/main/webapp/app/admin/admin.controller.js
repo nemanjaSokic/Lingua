@@ -10,10 +10,9 @@
     function AdminController ($rootScope, $scope, getStudents,loginCheck, LoginService, $location) {
         var vm = this;
         vm.account = loginCheck.name;
-        console.log(vm.account);
         vm.isAuth = loginCheck.authenticated;
         vm.students = getStudents;
-
+        
         $scope.error = getStudents.error;
         $scope.errorMessage = getStudents.errorMessage;
 

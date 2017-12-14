@@ -7,60 +7,48 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.lingua.support.UcenikIdGenerator;
 
 @Entity
 @Table(name="tblUcenici")
-public class Ucenik extends Osoba {
+public class Ucenik extends Korisnik {
 	
-	@Id
+	//@Id
 	@Column
-	@GenericGenerator(name = "id_indexgenerator", strategy = "com.lingua.support.UcenikIdGenerator")
-	@GeneratedValue(generator = "id_indexgenerator")
+//	@GenericGenerator(name = "id_indexgenerator", strategy = "com.lingua.support.UcenikIdGenerator")
+//	@GeneratedValue(generator = "id_indexgenerator")
 	protected String indeks;
 	@Column
 	protected Boolean status;
-	@ManyToOne(targetEntity=Kurs.class, fetch=FetchType.EAGER,cascade=CascadeType.ALL)
+	@ManyToOne(targetEntity=Kurs.class, fetch=FetchType.EAGER,cascade=CascadeType.REMOVE)
 	protected Kurs kurs;
 	@OneToMany(cascade={CascadeType.ALL,CascadeType.REMOVE})
 	@JsonIgnore
 	@JoinTable (name = "tbl_uplatnice" , joinColumns = @JoinColumn(name = "indeks"),inverseJoinColumns=@JoinColumn(name = "broj_uplatnice"))
 	protected List<Uplata> uplate;
-	@OneToOne
-	@JoinTable(name="tbl_nalogUcenika", joinColumns = @JoinColumn(name= "indeks"), inverseJoinColumns=@JoinColumn(name="korisnicko_ime"))
-	protected Korisnik korisnik;
 	
-	public Ucenik() {this.uplate=new ArrayList<Uplata>();}
-	public Ucenik(String ime, String prezime, String index){
-		super(ime,prezime);
-		this.indeks = index;
+	public Ucenik() {
 		this.uplate=new ArrayList<Uplata>();
-		this.status=checkStatus();
-		}
-	public Ucenik(String ime, String prezime,boolean status, Korisnik k) {
-		super(ime, prezime);
+	}
+	
+	public Ucenik(String ime, String prezime, TipKorisnika tipKorisnika, String korisnickoIme, String sifraKorisnika,
+			Long telefonKorisnika, String email, Boolean registrovan, String napomena, Boolean status,
+			Kurs kurs) {
+		super(ime, prezime, tipKorisnika, korisnickoIme, sifraKorisnika, telefonKorisnika, email, registrovan,
+				napomena);
 		this.status = status;
-		this.korisnik = k;
-		this.uplate=new ArrayList<Uplata>();
+		this.kurs = kurs;
+		this.uplate = new ArrayList<>();
+		this.indeks = UcenikIdGenerator.generate(ime, prezime);
 	}
 
-	public Ucenik(String ime, String prezime, Kurs kurs, String index) {
-		super(ime, prezime);
-		this.kurs = kurs;
-		this.indeks = index;
-	}
-	
 	public boolean checkStatus(){
 		int sum = 0;
 		for(Uplata uplata : this.uplate){
@@ -111,12 +99,7 @@ public class Ucenik extends Osoba {
 	public void setUplate(List<Uplata> uplate) {
 		this.uplate = uplate;
 	}
-	public Korisnik getKorisnik() {
-		return korisnik;
-	}
-	public void setKorisnik(Korisnik korisnik) {
-		this.korisnik = korisnik;
-	}
+
 	@Override
 	public String ispisiImePretime() {
 		return "Ucenik " + getIme() + " " + getPrezime();

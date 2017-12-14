@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.lingua.model.ErrorResponse;
 
-@ControllerAdvice
+//@ControllerAdvice
 public class ExceptionControllerAdvice {
 	
-	@ExceptionHandler(Exception.class)
+	//@ExceptionHandler(Exception.class)
 	public ResponseEntity<ErrorResponse> exceptionHandler(Exception ex) {
 		ErrorResponse error = new ErrorResponse();
 		error.setErrorCode(HttpStatus.INTERNAL_SERVER_ERROR.value());

@@ -9,21 +9,20 @@
 
     function RegistrationController ($rootScope, $scope, coursePrepService, RegistrationService, $location) {
         var vm = this;
-        vm.userInfo = {
-            user:{},
-            person:{}
-        };
-        vm.userInfo.user.telefonKorisnika = 381;
+        vm.user = {};
+        vm.professor = {};
+        vm.student = {};
+        vm.user.telefonKorisnika = 381;
         vm.courses = coursePrepService;
 
         $scope.emailTrim = function(u){
-            if(vm.userInfo.user.email && vm.userInfo.user.email.indexOf("@") != -1){
-                vm.userInfo.user.korisnickoIme = u.substring(0,vm.userInfo.user.email.indexOf("@"));
+            if(vm.user.email && vm.user.email.indexOf("@") != -1){
+                vm.user.korisnickoIme = u.substring(0,vm.user.email.indexOf("@"));
                 $scope.checkUser();
             }
         }
         $scope.checkPass = function(){
-            if($scope.confPass === vm.userInfo.user.sifraKorisnika && vm.userInfo.user.sifraKorisnika){
+            if($scope.confPass === vm.user.sifraKorisnika && vm.user.sifraKorisnika){
                 $scope.confirmMessage = "Good type!";
                 return true;
             }else{
@@ -31,32 +30,33 @@
             }
         }
         $scope.checkUser = function(){
-            RegistrationService.isUsernameExisted(vm.userInfo.user.korisnickoIme).then(function(res){
+            RegistrationService.isUsernameExisted(vm.user.korisnickoIme).then(function(res){
                 var result = res.data;
                 $scope.userError = result;
                 return result;
             });
         }
         $scope.register = function(){
-            vm.userInfo.user.registrovan = false;
+            vm.user.registrovan = false;
             var course = JSON.parse(vm.course);
-            if(vm.userInfo.user.tipKorisnika === 'NASTAVNIK'){
-                vm.userInfo.person.predaje = course.nastavnik.predaje;
-                vm.professor = vm.userInfo.person;
-                vm.student = {};
-            }else if(vm.userInfo.user.tipKorisnika === 'UCENIK'){
-                vm.userInfo.person.kurs = course;
-                vm.userInfo.person.status = false;
-                vm.student = vm.userInfo.person;
-                vm.professor = {};
+            if(vm.user.tipKorisnika === 'NASTAVNIK'){
+                vm.professor = vm.user;
+                vm.user.predaje = course.nastavnik.predaje;
+                var user = vm.user;
+                RegistrationService.professorRegister(user).then(function(result){
+                    var res = result.data;
+                    $location.path("/signup/success");
+                });
+            }else if(vm.user.tipKorisnika === 'UCENIK'){
+                vm.student = vm.user;
+                vm.user.kurs = course;
+                vm.user.status = false;
+                var user = vm.user;
+                RegistrationService.studentRegister(user).then(function(result){
+                    var res = result.data;
+                    $location.path("/signup/success");
+                });
             }
-            var user = vm.userInfo.user;
-            var student = vm.student;
-            var professor = vm.professor;
-            RegistrationService.register({"korisnik":user,"nastavnik":professor,"ucenik":student}).then(function(result){
-                var res = result.data;
-                $location.path("/signup/success");
-            });
         }
     }
 })();

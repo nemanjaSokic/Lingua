@@ -25,7 +25,7 @@ public class JpaKorisnikService implements KorisnikService{
 	}
 	
 	public Korisnik save(Korisnik newKor){
-		Korisnik presistentKor = korisnikRepo.save(newKor);
+		Korisnik presistentKor = korisnikRepo.saveAndFlush(newKor);
 		if(presistentKor == null){
 			return null;
 		}
@@ -51,5 +51,10 @@ public class JpaKorisnikService implements KorisnikService{
 	@Override
 	public Korisnik getOne(String username) {
 		return korisnikRepo.findOne(username);
+	}
+
+	@Override
+	public void delete(Korisnik korisnik) {
+		korisnikRepo.delete(korisnik);
 	}
 }

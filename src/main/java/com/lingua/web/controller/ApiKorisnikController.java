@@ -1,5 +1,6 @@
 package com.lingua.web.controller;
 
+import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
 
@@ -38,6 +39,7 @@ import com.lingua.service.KursService;
 import com.lingua.service.NastavnikService;
 import com.lingua.service.UcenikService;
 import com.lingua.service.impl.EmailService;
+import com.lingua.support.UcenikIdGenerator;
 
 @RestController
 @RequestMapping(value = "/api/users")
@@ -122,22 +124,29 @@ public class ApiKorisnikController {
 	
 	//------------------------POST---------------------------
 	@Transactional
-	@RequestMapping(value="/user", method = RequestMethod.POST, consumes = {"application/json"})
-	public ResponseEntity<Korisnik>  save(@RequestBody UserWrapper reg){
-		Korisnik k = reg.getKorisnik();
-		korisnikServ.save(k);
-		if(k.getTipKorisnika() == TipKorisnika.NASTAVNIK){
-			Nastavnik n = reg.getNastavnik();
-			n.setKorisnik(k);
-			nastavnikServ.save(n);
-			email.sendSimpleMessage(n.getKorisnik().getEmail(), template.getSubject(),"Dear " + n.getIme() +","+ template.getText());
-		}else if(k.getTipKorisnika()==TipKorisnika.UCENIK){
-			Ucenik u = reg.getUcenik();
-			u.setKorisnik(k);
-			Kurs kurs = kursServ.findOne(u.getKurs().getIdKursa());
-			kurs.addUcenik(u);
+	@RequestMapping(value="/prof", method = RequestMethod.POST, consumes = {"application/json"})
+	public ResponseEntity<Korisnik>  save(@RequestBody Nastavnik nastavnik) throws Exception{
+		if(nastavnik != null){
+			korisnikServ.save(nastavnik);
+			email.sendSimpleMessage(nastavnik.getEmail(), template.getSubject(),"Dear Professor " + nastavnik.getIme() +","+ template.getText());
+		}else{
+			return new ResponseEntity<Korisnik>(HttpStatus.BAD_REQUEST);
+		}
+		return new ResponseEntity<Korisnik> (HttpStatus.OK);
+	}
+	
+	@Transactional
+	@RequestMapping(value="/stud", method = RequestMethod.POST, consumes = {"application/json"})
+	public ResponseEntity<Korisnik>  save(@RequestBody Ucenik ucenik) throws Exception{
+		if(ucenik != null){
+			ucenik.setIndeks(UcenikIdGenerator.generate(ucenik.getIme(), ucenik.getPrezime()));
+			Kurs kurs = kursServ.findOne(ucenik.getKurs().getIdKursa());
+			kurs.addUcenik(ucenik);
 			kursServ.save(kurs);
-			email.sendSimpleMessage(u.getKorisnik().getEmail(), template.getSubject(), "Dear " + u.getIme() +","+ template.getText());
+			korisnikServ.save(ucenik);
+			email.sendSimpleMessage(ucenik.getEmail(), template.getSubject(), "Dear " + ucenik.getIme() +","+ template.getText());
+		}else{
+			return new ResponseEntity<Korisnik>(HttpStatus.BAD_REQUEST);
 		}
 		return new ResponseEntity<Korisnik> (HttpStatus.OK);
 	}

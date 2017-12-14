@@ -2,54 +2,98 @@
 </br></br>
 <div class="container">
 	<div class="row">
-		<div class="col-sm-4 col-md-4 user-details">
+		<div class="col-md-8 user-details">
             <div class="user-image">
-                <img src="/img/avatar.png" alt="Karan Singh Sisodia" title="Karan Singh Sisodia" class="img-circle">
+                <img src="/img/avatar.png" class="img-circle">
+                <span class="glyphicon glyphicon-heart" ng-show="vm.student.status"></span>
+                <span class="glyphicon glyphicon-heart-empty" ng-hide="vm.student.status"></span>
             </div>
             <div class="user-info-block">
                 <div class="user-heading">
-                    <h3>Karan Singh Sisodia</h3>
-                    <span class="help-block">Chandigarh, IN</span>
+                    <h3>{{vm.student.ime}} {{vm.student.prezime}}</h3>
+                    <span class="help-block"> {{vm.student.indeks}} </span>
                 </div>
-                <ul class="navigation">
-                    <li class="active">
-                        <a data-toggle="tab" href="#information">
-                            <span class="glyphicon glyphicon-user"></span>
-                        </a>
-                    </li>
-                    <li>
-                        <a data-toggle="tab" href="#settings">
-                            <span class="glyphicon glyphicon-cog"></span>
-                        </a>
-                    </li>
-                    <li>
-                        <a data-toggle="tab" href="#email">
-                            <span class="glyphicon glyphicon-envelope"></span>
-                        </a>
-                    </li>
-                    <li>
-                        <a data-toggle="tab" href="#events">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                        </a>
-                    </li>
-                </ul>
                 <div class="user-body">
-                    <div class="tab-content">
+                    <div class="tab-content col-md-6">
                         <div id="information" class="tab-pane active">
                             <h4>Account Information</h4>
                         </div>
-                        <div id="settings" class="tab-pane">
-                            <h4>Settings</h4>
+                        <ul class="navigation">
+                            <li class="active">
+                                <div data-toggle="tab">
+                                    <span class="glyphicon glyphicon-user"> {{vm.student.korisnickoIme}} </span>
+                                </div>
+                            </li>
+                            <li>
+                                <div data-toggle="tab">
+                                    <span class="glyphicon glyphicon-equalizer"> {{vm.student.sifraKorisnika}} </span>
+                                </div>
+                            </li>
+                            <li>
+                                <div data-toggle="tab">
+                                    <span class="glyphicon glyphicon-envelope"> {{vm.student.email}} </span>
+                                </div>
+                            </li>
+                            <li>
+                                <div data-toggle="tab">
+                                    <span class="glyphicon glyphicon-phone"> {{vm.student.telefonKorisnika}} </span>
+                                </div>
+                            </li>
+                            <li>
+                                <div data-toggle="tab">
+                                    <span class="glyphicon glyphicon-registration-mark"> {{vm.student.registrovan_temp}} </span>
+                                </div>
+                            </li>
+                            <li>
+                                <div data-toggle="tab">
+                                    <span class="glyphicon glyphicon-tasks"> {{vm.student.napomena}} </span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tab-content col-md-6">
+                        <div id="course_information" class="tab-pane active">
+                            <h4>Course</h4>
                         </div>
-                        <div id="email" class="tab-pane">
-                            <h4>Send Message</h4>
+                        <div data-toggle="tab">
+                            <span class="glyphicon glyphicon-tasks"> {{vm.student.kurs.jezik.naziv}} {{vm.student.kurs.nivo.nazivNivoa}}</span>
                         </div>
-                        <div id="events" class="tab-pane">
-                            <h4>Events</h4>
+                        <div data-toggle="tab">
+                            <span class="glyphicon glyphicon-euro"> {{vm.student.kurs.cena}}</span>
+                        </div>
+                        <div data-toggle="tab">
+                            <span class="glyphicon glyphicon-euro"> {{vm.student.kurs.nastavnik.ime}} {{vm.student.kurs.nastavnik.prezime}}</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="col-md-4 user-edit">
+            <div class="btn-group btn-group-lg" role="group" aria-label="...">
+                <button type="button" class="btn btn-primary" ng-click="vm.student.registrovan_temp = !vm.student.registrovan_temp" ng-hide="vm.student.registrovan_temp">Regiser user</button>
+                <button type="button" class="btn btn-default" ng-click="vm.student.registrovan_temp = !vm.student.registrovan_temp; vm.cancelClicked = true;" ng-show="vm.student.registrovan_temp" ng-if="!vm.student.registrovan">Cancel</button>
+                <button type="button" class="btn btn-success" ng-click="vm.student.status = !vm.student.status" ng-hide="vm.student.status">Activate user</button>
+                <button type="button" class="btn btn-success" ng-click="vm.student.status = !vm.student.status" ng-show="vm.student.status">Deactivate user</button>
+                <button type="button" class="btn btn-info" ng-click="vm.confirmChanges()">Confirm changes</button>
+                <button
+                    class="btn btn-danger"
+                    mwl-confirm
+                    title="Delete this user"
+                    message="Are you sure?"
+                    confirm-text="Of course"
+                    cancel-text="Nooooooo"
+                    placement="bottom"
+                    on-confirm="vm.delete()"
+                    on-cancel="vm.cancelClicked = true"
+                    confirm-button-type="danger"
+                    cancel-button-type="info">
+                    Delete user
+                </button>
+            </div>
+        </div>
 	</div>
+    <div ng-show = vm.error.show>
+        {{vm.error.message}}
+    </div>
+    <div class="alert alert-info" ng-show="vm.cancelClicked">You cancelled!</div>
 </div>

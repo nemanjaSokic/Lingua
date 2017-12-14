@@ -38,15 +38,8 @@ public class JpaKursService implements KursService{
 	}
 
 	@Override
-	public Kurs save(Kurs newKurs) {
-		Kurs oldKurs = kursRepo.findOne(newKurs.getIdKursa());
-		if(oldKurs!=null){
-			Nastavnik n = nastavnikRepo.findOne(oldKurs.getNastavnik().getId());
-			if(!newKurs.getNastavnik().getPredaje().getNaziv().equals(n.getPredaje().getNaziv())){
-				return null;
-			}
-		}
-		Kurs kurs = kursRepo.save(newKurs);
+	public Kurs save(Kurs newKurs) {		
+		Kurs kurs = kursRepo.saveAndFlush(newKurs);
 		return kurs;
 	}
 

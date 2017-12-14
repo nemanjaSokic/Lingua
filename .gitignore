@@ -72,4 +72,6 @@ local.properties
 ######################
 !.mvn/wrapper/maven-wrapper.jar
 
-/src/main/webapp/bower_components/
+/src/main/webapp/bower_components
+/src/main/resources/META-INF
+.idea

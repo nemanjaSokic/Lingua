@@ -8,7 +8,7 @@
 	</parent>
   <groupId>com.lingua</groupId>
   <artifactId>lingua</artifactId>
-  <packaging>war</packaging>
+  <packaging>jar</packaging>
   <version>0.0.1-SNAPSHOT</version>
   <name>Lingua Webapp</name>
   <url>http://maven.apache.org</url>
@@ -84,6 +84,21 @@
 
   <build>
     <finalName>Lingua</finalName>
+    <resources>
+		<resource>
+			<directory>${basedir}/src/main/webapp</directory>
+ 			<targetPath>${basedir}/src/main/resources/META-INF/resources</targetPath>
+			<includes>
+				<include>**/**</include>
+			</includes>
+		</resource>
+		<resource>
+			<directory>${basedir}/src/main/resources</directory>
+ 			<includes>
+				<include>**/**</include>
+			</includes>
+		</resource>
+	</resources>
     <plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

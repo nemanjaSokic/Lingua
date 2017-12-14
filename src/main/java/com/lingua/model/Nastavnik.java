@@ -3,9 +3,8 @@ package com.lingua.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -15,31 +14,37 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="tblNastavnici")
-public class Nastavnik extends Osoba {
+public class Nastavnik extends Korisnik {
 	
-	@Id
-	@GeneratedValue
+	//@Id
+	//@GeneratedValue
 	@Column(name="id_nastavnika")
 	protected int id;
 	@OneToOne
 	protected Jezik predaje;
-	@OneToOne
-	@JoinTable(name="tbl_nalogNastavnik", joinColumns = @JoinColumn(name= "id_nastavnika"), inverseJoinColumns=@JoinColumn(name="korisnicko_ime"))
-	protected Korisnik korisnik;
+	protected static int count = 0;
 	
 	public Nastavnik(){}
 	
-	public Nastavnik(String ime, String prezime) {
-		super(ime,prezime);
+
+
+	public Nastavnik(String ime, String prezime, TipKorisnika tipKorisnika, String korisnickoIme, String sifraKorisnika,
+		Long telefonKorisnika, String email, Boolean registrovan, String napomena, Jezik predaje) {
+	super(ime, prezime, tipKorisnika, korisnickoIme, sifraKorisnika, telefonKorisnika, email, registrovan, napomena);
+	this.id = count++;
+	this.predaje = predaje;
+}
+
+
+
+	public Nastavnik(String ime, String prezime, Jezik jezik, String korisnickoIme) {
+		super(korisnickoIme);
 		this.ime = ime;
 		this.prezime = prezime;
+		this.predaje = jezik;
 	}
 
-	public Nastavnik(String ime, String prezime, Jezik predaje, Korisnik k) {
-		super(ime, prezime);
-		this.predaje = predaje;
-		this.korisnik = k;
-	}
+
 
 	public int getId() {
 		return id;
@@ -55,14 +60,6 @@ public class Nastavnik extends Osoba {
 
 	public void setPredaje(Jezik predaje) {
 		this.predaje = predaje;
-	}
-
-	public Korisnik getKorisnik() {
-		return korisnik;
-	}
-
-	public void setKorisnik(Korisnik korisnik) {
-		this.korisnik = korisnik;
 	}
 
 	@Override

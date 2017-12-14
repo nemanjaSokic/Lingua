@@ -11,4 +11,5 @@ public interface KorisnikService {
 	List<Korisnik> getUsers();
 	String getUsername(String un);
 	Korisnik getOne(String username);
+	void delete(Korisnik korisnik);
 }

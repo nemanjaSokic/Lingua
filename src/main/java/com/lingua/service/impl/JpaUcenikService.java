@@ -33,13 +33,13 @@ public class JpaUcenikService implements UcenikService{
 
 	@Override
 	public Ucenik save(Ucenik newUcenik) {
-		return ucenikRepo.save(newUcenik);
+		return ucenikRepo.saveAndFlush(newUcenik);
 	}
 
 	@Override
 	public Ucenik findOne(String index) {
 		
-		return ucenikRepo.findOne(index);
+		return ucenikRepo.findByIndeks(index);
 	}
 
 	@Override
@@ -55,6 +55,11 @@ public class JpaUcenikService implements UcenikService{
 	@Override
 	public List<Ucenik> findByCourse(Kurs kurs) {
 		return ucenikRepo.findByKurs(kurs);
+	}
+
+	@Override
+	public Ucenik findByIndeks(String index) {
+		return ucenikRepo.findByIndeks(index);
 	}
 	
 	

@@ -29,8 +29,16 @@
                 });
         }
 
-        function accountService(StudentService){
-            return StudentService.getOne()
+        function accountService(StudentService, $route){
+            return StudentService.getOne($route.current.params.index).
+                then(function(res){
+                    return res.data;
+                },function(error){
+                    return {
+                        error: true,
+                        errorMessage: error.data.message
+                    }
+                });
         }
 
         function getStudents(StudentService){
@@ -46,7 +54,6 @@
         function loginCheck(LoginService, $location){
             return LoginService.check()
                 .then(function(result){
-                    console.log(result);
                     var res = result.data;
                     if(res !== '' && res.authenticated == true && res.name === 'admin'){
                         return res;

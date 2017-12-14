@@ -1,11 +1,14 @@
 package com.lingua.model;
 
 import javax.persistence.Column;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.MappedSuperclass;
 
 
-@MappedSuperclass 
-public abstract class Osoba {
+@MappedSuperclass
+@Inheritance(strategy = InheritanceType.JOINED)
+public abstract class Osoba{
 	@Column
 	protected String ime;
 	@Column
@@ -23,8 +26,7 @@ public abstract class Osoba {
 		this.ime = ime;
 		this.prezime = prezime;
 	}
-	
-	
+
 	public String getIme() {
 		return ime;
 	}

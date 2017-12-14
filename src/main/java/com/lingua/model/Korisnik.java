@@ -3,11 +3,14 @@ package com.lingua.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="tblKorisnici")
-public class Korisnik {
+@Inheritance(strategy = InheritanceType.JOINED)
+public class Korisnik extends Osoba{
 
 	@Column(name="tip")
 	protected TipKorisnika tipKorisnika;
@@ -24,7 +27,18 @@ public class Korisnik {
 	protected Boolean registrovan;
 	@Column(name="napomena")
 	protected String napomena;
-
+	
+	public Korisnik(String ime, String prezime, TipKorisnika tipKorisnika, String korisnickoIme, String sifraKorisnika,
+			Long telefonKorisnika, String email, Boolean registrovan, String napomena) {
+		super(ime, prezime);
+		this.tipKorisnika = tipKorisnika;
+		this.korisnickoIme = korisnickoIme;
+		this.sifraKorisnika = sifraKorisnika;
+		this.telefonKorisnika = telefonKorisnika;
+		this.email = email;
+		this.registrovan = registrovan;
+		this.napomena = napomena;
+	}
 	public Korisnik(TipKorisnika tipKorisnika, String korisnickoIme, String sifraKorisnika, Boolean registrovan, Long tel, String email) {
 		super();
 		this.tipKorisnika = tipKorisnika;
@@ -52,6 +66,9 @@ public class Korisnik {
 		this.email = email;
 		this.registrovan = registrovan;
 		this.napomena = napomena;
+	}
+	public Korisnik(String korisnickoIme2) {
+		this.korisnickoIme = korisnickoIme2;
 	}
 	public TipKorisnika getTipKorisnika() {
 		return tipKorisnika;
@@ -144,6 +161,11 @@ public class Korisnik {
 		if (tipKorisnika != other.tipKorisnika)
 			return false;
 		return true;
+	}
+	@Override
+	public String ispisiImePretime() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

@@ -15,8 +15,11 @@
             getAllCourse : function(){
                 return $http.get('/api/courses');
             },
-            register: function(user,prof, stud){
-                return $http.post('/api/users/user', user);
+            professorRegister: function(prof){
+                return $http.post('/api/users/prof', prof);
+            },
+            studentRegister: function(stud){
+                return $http.post('/api/users/stud', stud);
             }
         }
     }
