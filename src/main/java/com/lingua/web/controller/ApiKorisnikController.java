@@ -1,6 +1,5 @@
 package com.lingua.web.controller;
 
-import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
 
@@ -30,9 +29,7 @@ import com.lingua.model.ErrorResponse;
 import com.lingua.model.Korisnik;
 import com.lingua.model.Kurs;
 import com.lingua.model.Nastavnik;
-import com.lingua.model.TipKorisnika;
 import com.lingua.model.Ucenik;
-import com.lingua.model.UserWrapper;
 import com.lingua.service.AuthenticationService;
 import com.lingua.service.KorisnikService;
 import com.lingua.service.KursService;
@@ -128,6 +125,7 @@ public class ApiKorisnikController {
 	public ResponseEntity<Korisnik>  save(@RequestBody Nastavnik nastavnik) throws Exception{
 		if(nastavnik != null){
 			korisnikServ.save(nastavnik);
+			email.sendNotifyToAdmin();
 			email.sendSimpleMessage(nastavnik.getEmail(), template.getSubject(),"Dear Professor " + nastavnik.getIme() +","+ template.getText());
 		}else{
 			return new ResponseEntity<Korisnik>(HttpStatus.BAD_REQUEST);
@@ -140,10 +138,8 @@ public class ApiKorisnikController {
 	public ResponseEntity<Korisnik>  save(@RequestBody Ucenik ucenik) throws Exception{
 		if(ucenik != null){
 			ucenik.setIndeks(UcenikIdGenerator.generate(ucenik.getIme(), ucenik.getPrezime()));
-			Kurs kurs = kursServ.findOne(ucenik.getKurs().getIdKursa());
-			kurs.addUcenik(ucenik);
-			kursServ.save(kurs);
 			korisnikServ.save(ucenik);
+			email.sendNotifyToAdmin();
 			email.sendSimpleMessage(ucenik.getEmail(), template.getSubject(), "Dear " + ucenik.getIme() +","+ template.getText());
 		}else{
 			return new ResponseEntity<Korisnik>(HttpStatus.BAD_REQUEST);

@@ -32,11 +32,6 @@ public class Jezik {
 		//this.idJezika = idGenerator(naziv);
 	}
 
-	/*private String idGenerator(String naziv2) {
-		String id = naziv2.substring(0, 3);
-		return id;
-	}*/
-
 	@Override
 	public String toString() {
 		return "Jezik [naziv=" + naziv + "]";

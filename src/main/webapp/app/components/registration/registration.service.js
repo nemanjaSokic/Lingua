@@ -12,8 +12,8 @@
             isUsernameExisted : function(username){
                 return $http.get('/api/users/'+username);
             },
-            getAllCourse : function(){
-                return $http.get('/api/courses');
+            getAllCourseTypes : function(){
+                return $http.get('/api/courseTypes');
             },
             professorRegister: function(prof){
                 return $http.post('/api/users/prof', prof);

@@ -63,7 +63,7 @@ public class ApiKursController {
 	
 	@RequestMapping(method=RequestMethod.PUT,value="/{id}",consumes="application/json")
 	ResponseEntity<Kurs> edit(@PathVariable int id, @RequestBody Kurs kurs){
-		if(id!=kurs.getIdKursa()){
+		if(id!=kurs.getId()){
 			return new ResponseEntity<Kurs>(HttpStatus.BAD_REQUEST);
 		}
 		Kurs saved = kursServ.save(kurs);

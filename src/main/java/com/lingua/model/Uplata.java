@@ -60,11 +60,6 @@ public class Uplata {
 		this.ucenik = ucenik;
 		this.kurs = ucenik.getKurs();
 	}
-
-	@Override
-	public String toString() {
-		return "Uplata " + uplata + "\tdatum " + datum + " " + ucenik.getKurs().getJezik().getNaziv() + ucenik.getKurs().nivo.nazivNivoa + uplatnicaBr +"\n";
-	}
 	public Kurs getKurs() {
 		return kurs;
 	}

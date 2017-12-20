@@ -51,19 +51,22 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="tab-content col-md-6">
+                    <div class="tab-content col-md-6" ng-show="vm.student.kurs">
                         <div id="course_information" class="tab-pane active">
                             <h4>Course</h4>
                         </div>
                         <div data-toggle="tab">
-                            <span class="glyphicon glyphicon-tasks"> {{vm.student.kurs.jezik.naziv}} {{vm.student.kurs.nivo.nazivNivoa}}</span>
+                            <span class="glyphicon glyphicon-tasks"> {{vm.student.kurs.tipKursa.jezik.naziv}} {{vm.student.kurs.nivo.nazivNivoa}}</span>
                         </div>
                         <div data-toggle="tab">
-                            <span class="glyphicon glyphicon-euro"> {{vm.student.kurs.cena}}</span>
+                            <span class="glyphicon glyphicon-euro"> {{vm.student.kurs.tipKursa.cena}}</span>
                         </div>
                         <div data-toggle="tab">
                             <span class="glyphicon glyphicon-euro"> {{vm.student.kurs.nastavnik.ime}} {{vm.student.kurs.nastavnik.prezime}}</span>
                         </div>
+                    </div>
+                    <div class="tab-content col-md-6" ng-hide="vm.student.kurs">
+                        <h2>The course is not assigned</h2>
                     </div>
                 </div>
             </div>
@@ -90,6 +93,9 @@
                     Delete user
                 </button>
             </div>
+            <div>
+                <button type="button" class="btn btn-primary" ng-click="vm.open()" ng-hide="vm.student.kurs">Assign course</button>
+            </div>
         </div>
 	</div>
     <div ng-show = vm.error.show>
@@ -97,3 +103,26 @@
     </div>
     <div class="alert alert-info" ng-show="vm.cancelClicked">You cancelled!</div>
 </div>
+<script type="text/ng-template" id="assign_course-dialg.html">
+        <div class="modal-header">
+            <h3 class="modal-title" id="modal-title">Please, assign the course to the student!</h3>
+        </div>
+        <div class="modal-body" id="modal-body">
+            <div>Active courses
+                <select required class="form-control" ng-model = "vm.activeCourse">
+                    <option ng-option value={{course}} ng-repeat="course in vm.allCourses">{{course.tipKursa.jezik.naziv}} - {{course.tipKursa.nivo.nazivNivoa}} : {{course.nastavnik.ime}} {{course.nastavnik.prezime}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="modal-footer"><button class="btn btn-primary" type="button" ng-click="vm.addToCourse(vm.activeCourse)">Add student</button>
+            <button class="btn btn-warning" type="button" ng-click="vm.cancel()">Cancel</button>
+        </div>
+    </script>
+    <script type="text/ng-template" id="stackedModal.html">
+        <div class="modal-header">
+            <h3 class="modal-title" id="modal-title-{{name}}">The {{name}} modal!</h3>
+        </div>
+        <div class="modal-body" id="modal-body-{{name}}">
+            Having multiple modals open at once is probably bad UX but it's technically possible.
+        </div>
+</script>

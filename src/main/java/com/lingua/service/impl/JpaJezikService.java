@@ -61,8 +61,8 @@ public class JpaJezikService implements JezikService{
 			}
 		}
 		for(Kurs k : kursevi){
-			if(k.getJezik().getIdJezika().equals(id)){
-				k.setJezik(null);
+			if(k.getTipKursa().getJezik().getIdJezika().equals(id)){
+				k.getTipKursa().setJezik(null);
 			}
 		}
 		jr.delete(j);

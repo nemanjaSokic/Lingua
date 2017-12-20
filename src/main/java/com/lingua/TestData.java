@@ -14,6 +14,7 @@ import com.lingua.model.Nastavnik;
 import com.lingua.model.Nivo;
 import com.lingua.model.Skola;
 import com.lingua.model.TipKorisnika;
+import com.lingua.model.TipKursa;
 import com.lingua.model.Ucenik;
 import com.lingua.model.Uplata;
 import com.lingua.service.JezikService;
@@ -22,6 +23,7 @@ import com.lingua.service.KursService;
 import com.lingua.service.NastavnikService;
 import com.lingua.service.NivoService;
 import com.lingua.service.SkolaService;
+import com.lingua.service.TipKursaService;
 import com.lingua.service.UcenikService;
 import com.lingua.service.UplataService;
 
@@ -45,6 +47,8 @@ public class TestData {
 	@Autowired
 	private KorisnikService korisnikService;	
 	private TipKorisnika tip;
+	@Autowired
+	private TipKursaService tipKursaService;
 	
 	@PostConstruct
 	public void init(){
@@ -67,8 +71,13 @@ public class TestData {
 		Nastavnik nast2 = new Nastavnik("Dositej","Obradovic",TipKorisnika.NASTAVNIK, "nast2", "123", 381644894979L, "nast2@example.com",true, "", jIta);
 		Nastavnik nast3 = new Nastavnik("Rastko","Nemanjic", TipKorisnika.NASTAVNIK, "nast3", "123", 381644894974L, "nast3@example.com",true,"ludak", jNor);
 		
-		Kurs k1 = new Kurs(500,nast1,n12);
-		Kurs k2 = new Kurs(400,nast2,n23);
+		TipKursa tip1 = new TipKursa(200,jEng,n12);
+		TipKursa tip2 = new TipKursa(200,jNor,n24);
+		TipKursa tip3 = new TipKursa(200,jIta,n23);
+		TipKursa tip4 = new TipKursa(200,jEng,n13);
+		
+		Kurs k1 = new Kurs(nast1,tip1);
+		Kurs k2 = new Kurs(nast2,tip3);
 		
 		Ucenik u1 = new Ucenik("Nemanja", "Sokic",TipKorisnika.UCENIK, "stud1", "123",164572183L,"nemskc@gmail.com",false,"napomena",true,k1);
 		Ucenik u2 = new Ucenik("Pero","Antić", TipKorisnika.UCENIK, "stud2", "123", 381644894972L, "stud2@example.com", true, "", false, k1);
@@ -116,6 +125,11 @@ public class TestData {
 		nastavnikService.save(nast1);
 		nastavnikService.save(nast2);
 		nastavnikService.save(nast3);
+		
+		tipKursaService.save(tip1);
+		tipKursaService.save(tip2);
+		tipKursaService.save(tip3);
+		tipKursaService.save(tip4);
 		
 		kursService.save(k1);
 		kursService.save(k2);

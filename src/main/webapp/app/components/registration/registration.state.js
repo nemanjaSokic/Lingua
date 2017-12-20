@@ -14,16 +14,22 @@
                     controller : 'RegistrationController',
                     controllerAs: 'vm',
                     resolve: {
-                        coursePrepService: coursePrepService
+                        courseTypePrepService: courseTypePrepService,
+                        langPrepService: langPrepService
                     }
                 })
                 .when("/signup/success", {
                     templateUrl : 'app/components/registration/success.html'
                 });
         }
-        function coursePrepService(RegistrationService){
-            return RegistrationService.getAllCourse().then(function(res){
+        function courseTypePrepService(RegistrationService){
+            return RegistrationService.getAllCourseTypes().then(function(res){
                 return res.data;
             });
-        }
+        };
+        function langPrepService(LanguageService){
+            return LanguageService.getAll().then(function(response){
+                return response.data;
+            });
+        };
 })();

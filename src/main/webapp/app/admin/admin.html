@@ -18,7 +18,9 @@
       <th scope="row"><a ng-href="#/admin/student/{{stud.indeks}}">{{stud.indeks}}</a></th>
       <td>{{stud.ime}}</td>
       <td>{{stud.prezime}}</td>
-      <td><a ng-href="/#/admin/courses/{{stud.kurs.idKursa}}" tooltip-placement="top" uib-tooltip="nastavnik: {{stud.kurs.nastavnik.ime}} {{stud.kurs.nastavnik.prezime}}" type="button" class="btn btn-info">{{stud.kurs.nastavnik.predaje.naziv}} : {{stud.kurs.nivo.nazivNivoa}} : {{stud.kurs.idKursa}}</a></td>
+      <td>
+        <label ng-hide="stud.kurs">Assign course</label>
+        <a ng-show = "stud.kurs" ng-href="/#/admin/courses/{{stud.kurs.id}}" tooltip-placement="top" uib-tooltip="nastavnik: {{stud.kurs.nastavnik.ime}} {{stud.kurs.nastavnik.prezime}}" type="button" class="btn btn-info">{{stud.kurs.nastavnik.predaje.naziv}} : {{stud.kurs.tipKursa.nivo.nazivNivoa}} : {{stud.kurs.id}}</a></td>
       <td>{{stud.registrovan}}</td>
       <td>{{stud.status}}</td>
       <td><a ng-click=showPayments()>Show Payments</a></td>

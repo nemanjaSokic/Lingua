@@ -83,10 +83,11 @@ public class ApiUcenikController {
 		if(u == null){
 			return new ResponseEntity<Ucenik>(HttpStatus.NOT_FOUND);
 		}
-		Kurs k = kursServ.findOne(u.getKurs().getIdKursa());
-		k.removeUcenik(u);
-		
-		kursServ.save(k);
+		if(u.getKurs() != null){
+			Kurs k = kursServ.findOne(u.getKurs().getId());
+			k.removeUcenik(u);
+			kursServ.save(k);
+		}
 		Korisnik kor = (Korisnik)u;
 		korisnikServ.delete(kor);
 		
@@ -106,10 +107,12 @@ public class ApiUcenikController {
 		u.setPrezime(ucenik.getPrezime());
 		u.setStatus(ucenik.getStatus());
 		u.setRegistrovan(ucenik.getRegistrovan());
-		
+		if(u.getKurs() == null && ucenik.getKurs() != null){
+			Kurs k = kursServ.findOne(ucenik.getKurs().getId());
+			k.addUcenik(u);
+			kursServ.save(u.getKurs());
+		}
 		Ucenik presisted = ucenikServ.save(u);
-		//korisnikServ.save(u.getKorisnik());
-		
 		return new ResponseEntity<>(presisted,HttpStatus.OK);
 	}
 	

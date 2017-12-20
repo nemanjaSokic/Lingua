@@ -53,7 +53,7 @@ public class Ucenik extends Korisnik {
 		int sum = 0;
 		for(Uplata uplata : this.uplate){
 			sum+=uplata.getUplata();
-			if(sum >= this.getKurs().getCena()){
+			if(sum >= this.getKurs().getTipKursa().getCena()){
 				return false;
 			}
 		}

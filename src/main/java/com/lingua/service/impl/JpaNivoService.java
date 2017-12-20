@@ -46,8 +46,8 @@ public class JpaNivoService implements NivoService{
 		}
 		List<Kurs> kursevi = kursRepo.findAll();
 		for(Kurs k : kursevi){
-			if(k.getNivo().getIdNivo()==id){
-				k.setNivo(null);
+			if(k.getTipKursa().getNivo().getIdNivo()==id){
+				k.getTipKursa().setNivo(null);
 			}
 		}
 		nivoRepo.delete(nivo);

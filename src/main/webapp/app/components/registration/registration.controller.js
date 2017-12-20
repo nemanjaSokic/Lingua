@@ -5,15 +5,14 @@
         .module('linguaApp')
         .controller('RegistrationController', RegistrationController);
 
-    RegistrationController.$inject = ['$rootScope', '$scope', 'coursePrepService' ,'RegistrationService', '$location'];
+    RegistrationController.$inject = ['$rootScope', '$scope', 'langPrepService', 'courseTypePrepService' ,'RegistrationService', '$location'];
 
-    function RegistrationController ($rootScope, $scope, coursePrepService, RegistrationService, $location) {
+    function RegistrationController ($rootScope, $scope, langPrepService, courseTypePrepService, RegistrationService, $location) {
         var vm = this;
         vm.user = {};
-        vm.professor = {};
-        vm.student = {};
         vm.user.telefonKorisnika = 381;
-        vm.courses = coursePrepService;
+        vm.courseTypes = courseTypePrepService;
+        vm.languages = langPrepService;
 
         $scope.emailTrim = function(u){
             if(vm.user.email && vm.user.email.indexOf("@") != -1){
@@ -38,21 +37,25 @@
         }
         $scope.register = function(){
             vm.user.registrovan = false;
-            var course = JSON.parse(vm.course);
             if(vm.user.tipKorisnika === 'NASTAVNIK'){
-                vm.professor = vm.user;
-                vm.user.predaje = course.nastavnik.predaje;
+                if(vm.profLang != 0){
+                    var lang = JSON.parse(vm.profLang);
+                    vm.user.predaje = lang;
+                    vm.user.napomena = 'My language is ' + lang.naziv + '.';
+                }
                 var user = vm.user;
                 RegistrationService.professorRegister(user).then(function(result){
                     var res = result.data;
                     $location.path("/signup/success");
                 });
             }else if(vm.user.tipKorisnika === 'UCENIK'){
-                vm.student = vm.user;
-                vm.user.kurs = course;
                 vm.user.status = false;
+                if(vm.desiredCourse != 0){
+                    var desire = JSON.parse(vm.desiredCourse);
+                    vm.user.napomena = 'My desire course is ' + desire.jezik.naziv + ' ' + desire.nivo.nazivNivoa + ' level.';
+                }
                 var user = vm.user;
-                RegistrationService.studentRegister(user).then(function(result){
+               RegistrationService.studentRegister(user).then(function(result){
                     var res = result.data;
                     $location.path("/signup/success");
                 });

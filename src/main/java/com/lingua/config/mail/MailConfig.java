@@ -26,8 +26,8 @@ public class MailConfig {
 	        mailSender.setJavaMailProperties(mailProperties);
 	        mailSender.setHost("smtp.gmail.com");
 	        mailSender.setPort(587);
-	        mailSender.setUsername("hutu.power@gmail.com");
-	        mailSender.setPassword("glutamin89GEN");
+	        mailSender.setUsername("lingua.webapp@gmail.com");
+	        mailSender.setPassword("linguawebapp");
         return mailSender;
     }
 	
@@ -45,7 +45,7 @@ public class MailConfig {
 	      		+ "\n"
 	      		+ "\n"
 	      		+ "Nemanja\n"
-	      		+ "hutu.power@gmail.com");
+	      		+ "lingua.webapp@gmail.com");
 	    return message;
 	}
 

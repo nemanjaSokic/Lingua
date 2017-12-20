@@ -16,8 +16,6 @@ import javax.persistence.Table;
 @Table(name="tblNastavnici")
 public class Nastavnik extends Korisnik {
 	
-	//@Id
-	//@GeneratedValue
 	@Column(name="id_nastavnika")
 	protected int id;
 	@OneToOne

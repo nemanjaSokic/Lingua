@@ -20,15 +20,6 @@
                         <div id="errLast"></div>
             </div>
             <div class="form-group">
-                <label for="role"><span class="req">* </span> Your role?: </label>
-                <div class="radio">
-                    <label><input type="radio" name="optradio" value="UCENIK" ng-model="vm.user.tipKorisnika">Student</label>
-                </div>
-                <div class="radio">
-                    <label><input type="radio" name="optradio" value="NASTAVNIK" ng-model="vm.user.tipKorisnika">Professor</label>
-                </div>
-            </div>
-            <div class="form-group">
                 <label for="email"><span class="req">* </span> Email Address: </label> 
                     <input class="form-control" required type="text" name="email" id = "email" ng-keyup="emailTrim(vm.user.email)" ng-model="vm.user.email" />   
                         <div class="status" id="status"></div>
@@ -42,22 +33,41 @@
 
             <div class="form-group">
                 <label for="password"><span class="req">* </span> Password: </label>
-                    <input required name="password" type="password" class="form-control inputpass" ng-model="vm.user.sifraKorisnika" minlength="4" maxlength="16"  id="pass1" /> </p>
+                    <input required name="password" type="password" class="form-control inputpass" placeholder="Minimum 6 characters" ng-model="vm.user.sifraKorisnika" minlength="4" maxlength="16"  id="pass1" /> </p>
 
                 <label for="password"><span class="req">* </span> Password Confirm: </label>
                     <input required name="password" type="password" class="form-control inputpass" minlength="4" ng-model="confPass" maxlength="16" placeholder="Enter again to validate"  id="pass2" ng-change="checkPass();";/>
                         <span id="confirmMessage" ng-show = "checkPass()" class="label label-success">Good type!</span>
             </div>
             <div class="form-group">
-                <label for="role"><span class="req">* </span> Select your course: </label>
-               <select required class="form-control" ng-model="vm.course">
-                    <option ng-option value={{x}} ng-repeat="x in vm.courses">{{x.nastavnik.predaje.naziv}} - {{x.nivo.nazivNivoa}} level</option>
-                    <option ng-option value="0">Choose another one</option>
-                </select>
-                <div class="col-xs-12" id="cash" ng-if="vm.course == '0'" ng-model="vm.user.napomena">
-                    <input required class="form-control" type="text" placeholder="If you want to create new one, let us know.">
+                <label for="role"><span class="req">* </span> Your role?: </label>
+                <div class="radio">
+                    <label><input type="radio" name="optradio" value="UCENIK" ng-model="vm.user.tipKorisnika">Student</label>
+                </div>
+                <div class="radio">
+                    <label><input type="radio" name="optradio" value="NASTAVNIK" ng-model="vm.user.tipKorisnika">Professor</label>
                 </div>
             </div>
+            <div class="form-group" ng-show="vm.user.tipKorisnika == 'NASTAVNIK'"><!--Here you should add component for professor-->
+                <label for="role"><span class="req">* </span> Select your language: </label>
+               <select required class="form-control" ng-model="vm.profLang">
+                    <option ng-option value={{x}} ng-repeat="x in vm.languages">{{x.naziv}}</option>
+                    <option ng-option value="0">Choose another one</option>
+                </select>
+                <div class="col-xs-12" id="cash" ng-if="vm.desiredCourse == '0'">
+                    <input required class="form-control" type="text" ng-model="vm.user.napomena" placeholder="If you want to create new one, let us know.">
+                </div>
+            </div>
+            <div class="form-group" ng-show="vm.user.tipKorisnika == 'UCENIK'"><!--Here you should add component for professor-->
+                <label for="role"><span class="req">* </span> Select your course: </label>
+               <select required class="form-control" ng-model="vm.desiredCourse">
+                    <option ng-option value={{x}} ng-repeat="x in vm.courseTypes">{{x.jezik.naziv}} - {{x.nivo.nazivNivoa}} level</option>
+                    <option ng-option value="0">Choose another one</option>
+                </select>
+                <div class="col-xs-12" id="cash" ng-if="vm.desiredCourse == '0'">
+                    <input required class="form-control" type="text" ng-model="vm.user.napomena" placeholder="If you want to create new one, let us know.">
+                </div>
+            </div><!--End students courses-->
             <div class="form-group">
                 <input class="btn-lg btn-success" type="submit" name="submit_reg" value="Register">
             </div><h4><span class="label label-info">

@@ -26,17 +26,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Kurs {
 	
 	@Id
-	@Column(name="id_kursa")
+	@Column(name="idKursa")
 	@GeneratedValue
 	protected int idKursa;
-	@Column(name="cena")
-	protected int cena;
 	@OneToOne
 	protected Nastavnik nastavnik;
 	@OneToOne
-	protected Jezik jezik;
-	@OneToOne
-	protected Nivo nivo;
+	protected TipKursa tipKursa;
 	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 	@JsonIgnore
 	@JoinTable (name = "tbl_pohadjanja" , inverseJoinColumns = @JoinColumn(name = "korisnicko_ime"), joinColumns=@JoinColumn(name = "idKursa"))
@@ -44,20 +40,14 @@ public class Kurs {
 	
 	public Kurs(){}
 	
-	public Kurs(int cena, Nastavnik nastavnik, Nivo nivo) {
-		super();
-		this.cena = cena;
+	public Kurs(Nastavnik nastavnik, TipKursa tip) {
+		this.tipKursa = tip;
 		this.nastavnik = nastavnik;
-		this.jezik = nastavnik.getPredaje();
-		this.nivo = nivo;
 		ucenici = new ArrayList<Ucenik>();
 	}
-	public Kurs(int cena, Nastavnik nastavnik, Nivo nivo, List<Ucenik> ucenici) {
-		super();
-		this.cena = cena;
+	public Kurs(Nastavnik nastavnik, TipKursa tip,List<Ucenik> ucenici) {
+		this.tipKursa = tip;
 		this.nastavnik = nastavnik;
-		this.jezik = nastavnik.getPredaje();
-		this.nivo = nivo;
 		this.ucenici = ucenici;
 	}
 	//Dodavanje ucenika na kurs. Ucenik se dodaje u listu i
@@ -75,28 +65,19 @@ public class Kurs {
 	}
 	
 	
+	public int getId() {
+		return idKursa;
+	}
+
+	public void setId(int id) {
+		this.idKursa = id;
+	}
+
 	public List<Ucenik> getUcenici() {
 		return ucenici;
 	}
 	public void setUcenici(List<Ucenik> ucenici) {
 		this.ucenici = ucenici;
-	}
-	@Override
-	public String toString() {
-		return "Kurs " + cena + ", jezik " + jezik.getNaziv() + nivo.nazivNivoa +  ", "
-				+ nivo + "nivo." + "\n";
-	}
-	public int getIdKursa() {
-		return idKursa;
-	}
-	public void setIdKursa(int idKursa) {
-		this.idKursa = idKursa;
-	}
-	public int getCena() {
-		return cena;
-	}
-	public void setCena(int cena) {
-		this.cena = cena;
 	}
 	public Nastavnik getNastavnik() {
 		return nastavnik;
@@ -104,17 +85,13 @@ public class Kurs {
 	public void setNastavnik(Nastavnik nastavnik) {
 		this.nastavnik = nastavnik;
 	}
-	public Jezik getJezik() {
-		return jezik;
+
+	public TipKursa getTipKursa() {
+		return tipKursa;
 	}
-	public void setJezik(Jezik jezik) {
-		this.jezik = jezik;
-	}
-	public Nivo getNivo() {
-		return nivo;
-	}
-	public void setNivo(Nivo nivo) {
-		this.nivo = nivo;
+
+	public void setTipKursa(TipKursa tipKursa) {
+		this.tipKursa = tipKursa;
 	}
 	
 	
