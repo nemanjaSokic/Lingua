@@ -23,4 +23,5 @@ public interface UcenikService {
 
 	Ucenik findByIndeks(String index);
 
+
 }

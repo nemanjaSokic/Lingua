@@ -12,4 +12,5 @@ public interface KorisnikService {
 	String getUsername(String un);
 	Korisnik getOne(String username);
 	void delete(Korisnik korisnik);
+	List<Korisnik> getUnregistratedUsers();
 }

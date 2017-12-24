@@ -22,6 +22,7 @@ public class MailConfig {
 	        mailProperties.put("mail.smtp.auth", "true");
 	        mailProperties.put("mail.smtp.starttls.enable", "true");
 	        mailProperties.put("mail.debug", "true");
+	        mailProperties.put("mail.smtp.ssl.trust", "smtp.gmail.com");
 	        
 	        mailSender.setJavaMailProperties(mailProperties);
 	        mailSender.setHost("smtp.gmail.com");

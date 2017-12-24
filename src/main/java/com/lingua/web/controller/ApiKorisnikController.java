@@ -1,6 +1,7 @@
 package com.lingua.web.controller;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lingua.exception.UserException;
@@ -61,12 +63,18 @@ public class ApiKorisnikController {
 
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<List<Korisnik>>  getAll(){
+	public ResponseEntity<List<Korisnik>>  getAll(@RequestParam(value = "register", required = false) Boolean reg){
 		//need to implement only to admin pass
 		UserDetails userDetails =
 				 (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		if(userDetails.getUsername().equals("admin")){
-			return new ResponseEntity<List<Korisnik>> (korisnikServ.getUsers(), HttpStatus.OK);
+			List<Korisnik> korisnici = new ArrayList<>();
+			if(reg == false){
+				korisnici = korisnikServ.getUnregistratedUsers();
+				return new ResponseEntity<List<Korisnik>>(korisnici, HttpStatus.OK);
+			}else{
+				return new ResponseEntity<List<Korisnik>> (korisnikServ.getUsers(), HttpStatus.OK);
+			}
 		}else{
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 		}	

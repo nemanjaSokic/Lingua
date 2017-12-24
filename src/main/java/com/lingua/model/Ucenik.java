@@ -20,10 +20,7 @@ import com.lingua.support.UcenikIdGenerator;
 @Table(name="tblUcenici")
 public class Ucenik extends Korisnik {
 	
-	//@Id
 	@Column
-//	@GenericGenerator(name = "id_indexgenerator", strategy = "com.lingua.support.UcenikIdGenerator")
-//	@GeneratedValue(generator = "id_indexgenerator")
 	protected String indeks;
 	@Column
 	protected Boolean status;

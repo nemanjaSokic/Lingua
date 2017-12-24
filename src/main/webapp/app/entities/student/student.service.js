@@ -9,8 +9,8 @@
 
     function StudentService($http) {
         return {
-            getAll : function () {
-                return $http.get('/api/students/');
+            getAll : function (registrated) {
+                return $http.get('/api/students/', {params: {'register':registrated}});
             },
             getOne: function(index){
                 return $http.get('/api/students/'+index);

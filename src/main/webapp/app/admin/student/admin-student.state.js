@@ -9,25 +9,45 @@
 
         function stateConfig($routeProvider){
             $routeProvider
-                .when("/admin", {
-                    templateUrl : 'app/admin/admin.html',
-                    controller : 'AdminController',
+                .when("/admin/student/dashbord", {
+                    templateUrl : 'app/admin/student/student-dashbord.html',
+                    controller : 'AdminStudentController',
                     controllerAs: 'vm',
                     resolve: {
                         loginCheck: loginCheck,
-                        getUsers: getUnregistratedUsers
+                        accountService: getStudents
                     }
                 })
+                .when("/admin/student/:index", {
+                    templateUrl : 'app/admin/student/admin-student.html',
+                    controller : 'AdminStudentController',
+                    controllerAs: 'vm',
+                    resolve: {
+                        loginCheck: loginCheck,
+                        accountService: accountService
+                    }
+                });
         }
-
-        function getUnregistratedUsers(UserService){
-            return UserService.getAll(false).
+        function getStudents(StudentService){
+            return StudentService.getAll().
                 then(function(result){
                     return result.data;
                 },function(error){
                     return {error: true,
                             errorMessage: error.data.message
                             }
+                });
+        }
+
+        function accountService(StudentService, $route){
+            return StudentService.getOne($route.current.params.index).
+                then(function(res){
+                    return res.data;
+                },function(error){
+                    return {
+                        error: true,
+                        errorMessage: error.data.message
+                    }
                 });
         }
         function loginCheck(LoginService, $location){

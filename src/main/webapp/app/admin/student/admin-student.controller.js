@@ -12,6 +12,7 @@
         vm.account = loginCheck.name;
         vm.isAuth = loginCheck.authenticated;
         vm.student = accountService;
+
         vm.student.registrovan_temp = vm.student.registrovan;
         
         vm.error = {
@@ -21,7 +22,7 @@
         vm.confirmChanges= function () {
             vm.student.registrovan = vm.student.registrovan_temp;
             return StudentService.edit(vm.student).then(function(result){
-                $location.path("/admin");
+                $location.path("/admin/student/dashbord");
             }, function(error){
                 vm.error.message = 'There is some problem';
                 vm.error.show = true;
@@ -29,7 +30,7 @@
         }
         vm.delete = function(){
             return StudentService.delete(vm.student.indeks).then(function(result){
-                $location.path("/admin");
+                $location.path("/admin/student/dashbord");
             },function(error){
                 vm.error.message = 'There is some problem';
                 vm.error.show = true;
@@ -75,7 +76,6 @@
             vm.student.kurs = courseObj;
             return StudentService.edit(vm.student).then(function(result){
                 vm.cancel();
-                //$location.path("/admin");
             });
         };
 

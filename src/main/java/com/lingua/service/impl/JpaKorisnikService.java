@@ -57,4 +57,9 @@ public class JpaKorisnikService implements KorisnikService{
 	public void delete(Korisnik korisnik) {
 		korisnikRepo.delete(korisnik);
 	}
+
+	@Override
+	public List<Korisnik> getUnregistratedUsers() {
+		return korisnikRepo.findByRegistrovanFalse();
+	}
 }

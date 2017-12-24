@@ -61,6 +61,8 @@ public class JpaUcenikService implements UcenikService{
 	public Ucenik findByIndeks(String index) {
 		return ucenikRepo.findByIndeks(index);
 	}
+
+	
 	
 	
 	
