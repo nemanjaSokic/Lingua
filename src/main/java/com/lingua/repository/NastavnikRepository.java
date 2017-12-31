@@ -11,4 +11,6 @@ public interface NastavnikRepository extends JpaRepository<Nastavnik, Integer> {
 
 	List<Nastavnik> findByPredaje(Jezik j);
 
+	Nastavnik findById(int id);
+
 }

@@ -9,8 +9,8 @@
 
         function stateConfig($routeProvider){
             $routeProvider
-                .when("/professor/dashbord", {
-                    templateUrl : 'app/entities/professor/dashbord.html',
+                .when("/professor/dashboard", {
+                    templateUrl : 'app/entities/professor/dashboard.html',
                     controller : 'ProfessorController',
                     controllerAs: 'vm'
                 })

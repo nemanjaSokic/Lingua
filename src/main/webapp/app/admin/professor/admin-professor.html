@@ -1,0 +1,98 @@
+<div ng-include="'/app/layouts/navbar/admin/navbar.html'"></div>
+</br></br>
+<div class="container">
+	<div class="row">
+		<div class="col-md-8 user-details">
+            <div class="user-image">
+                <img src="/img/avatar.png" class="img-circle">
+            </div>
+            <div class="user-info-block">
+                <div class="user-heading">
+                    <h3>{{vm.prof.ime}} {{vm.prof.prezime}}</h3>
+                    <span class="help-block">Id: {{vm.prof.id}} </span>
+                </div>
+                <div class="user-body">
+                    <div class="tab-content col-md-6">
+                        <div id="information" class="tab-pane active">
+                            <h4>Account Information</h4>
+                        </div>
+                        <ul class="navigation">
+                            <li class="active">
+                                <div data-toggle="tab">
+                                    <span class="glyphicon glyphicon-user"> {{vm.prof.korisnickoIme}} </span>
+                                </div>
+                            </li>
+                            <li>
+                                <div data-toggle="tab">
+                                    <span class="glyphicon glyphicon-equalizer"> {{vm.prof.sifraKorisnika}} </span>
+                                </div>
+                            </li>
+                            <li>
+                                <div data-toggle="tab">
+                                    <span class="glyphicon glyphicon-envelope"> {{vm.prof.email}} </span>
+                                </div>
+                            </li>
+                            <li>
+                                <div data-toggle="tab">
+                                    <span class="glyphicon glyphicon-phone"> {{vm.prof.telefonKorisnika}} </span>
+                                </div>
+                            </li>
+                            <li>
+                                <div data-toggle="tab">
+                                    <span class="glyphicon glyphicon-registration-mark"> {{vm.prof.registrovan_temp}} </span>
+                                </div>
+                            </li>
+                            <li>
+                                <div data-toggle="tab">
+                                    <span class="glyphicon glyphicon-tasks"> {{vm.prof.napomena}} </span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <!--<div class="tab-content col-md-6" ng-show="vm.prof.kurs">
+                        <div id="course_information" class="tab-pane active">
+                            <h4>Course</h4>
+                        </div>
+                        <div data-toggle="tab">
+                            <span class="glyphicon glyphicon-tasks"> {{vm.prof.kurs.tipKursa.jezik.naziv}} {{vm.prof.kurs.nivo.nazivNivoa}}</span>
+                        </div>
+                        <div data-toggle="tab">
+                            <span class="glyphicon glyphicon-euro"> {{vm.prof.kurs.tipKursa.cena}}</span>
+                        </div>
+                        <div data-toggle="tab">
+                            <span class="glyphicon glyphicon-euro"> {{vm.prof.kurs.nastavnik.ime}} {{vm.prof.kurs.nastavnik.prezime}}</span>
+                        </div>
+                    </div>
+                    <div class="tab-content col-md-6" ng-hide="vm.prof.kurs">
+                        <h2>The course is not assigned</h2>
+                    </div>-->
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 user-edit">
+            <div class="btn-group btn-group-lg" role="group" aria-label="...">
+                <button type="button" class="btn btn-primary" ng-click="vm.prof.registrovan_temp = !vm.prof.registrovan_temp" ng-hide="vm.prof.registrovan_temp">Regiser user</button>
+                <button type="button" class="btn btn-default" ng-click="vm.prof.registrovan_temp = !vm.prof.registrovan_temp; vm.cancelClicked = true;" ng-show="vm.prof.registrovan_temp" ng-if="!vm.prof.registrovan">Cancel</button>
+                <button type="button" class="btn btn-info" ng-click="vm.confirmChanges()">Confirm changes</button>
+                <button
+                    class="btn btn-danger"
+                    mwl-confirm
+                    title="Delete this user"
+                    message="Are you sure?"
+                    confirm-text="Of course"
+                    cancel-text="Nooooooo"
+                    placement="bottom"
+                    on-confirm="vm.delete()"
+                    on-cancel="vm.cancelClicked = true"
+                    confirm-button-type="danger"
+                    cancel-button-type="info">
+                    Delete user
+                </button>
+            </div>
+        </div>
+	</div>
+    <div ng-show = vm.error.show>
+        {{vm.error.message}}
+    </div>
+    <div class="alert alert-info" ng-show="vm.cancelClicked">You cancelled!</div>
+</div>

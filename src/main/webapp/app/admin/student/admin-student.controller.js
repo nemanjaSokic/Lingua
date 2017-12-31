@@ -5,13 +5,13 @@
         .module('linguaApp')
         .controller('AdminStudentController', AdminStudentController);
 
-    AdminStudentController.$inject = ['$rootScope', '$scope', '$uibModal', 'accountService', 'loginCheck', 'StudentService', '$log', '$location'];
+    AdminStudentController.$inject = ['$rootScope', '$scope', '$uibModal', 'studentService', 'loginCheck', 'StudentService', '$log', '$location'];
 
-    function AdminStudentController ($rootScope, $scope, $uibModal, accountService, loginCheck, StudentService, $log, $location) {
+    function AdminStudentController ($rootScope, $scope, $uibModal, studentService, loginCheck, StudentService, $log, $location) {
         var vm = this;
         vm.account = loginCheck.name;
         vm.isAuth = loginCheck.authenticated;
-        vm.student = accountService;
+        vm.student = studentService;
 
         vm.student.registrovan_temp = vm.student.registrovan;
         
@@ -22,7 +22,7 @@
         vm.confirmChanges= function () {
             vm.student.registrovan = vm.student.registrovan_temp;
             return StudentService.edit(vm.student).then(function(result){
-                $location.path("/admin/student/dashbord");
+                $location.path("/admin/student/dashboard");
             }, function(error){
                 vm.error.message = 'There is some problem';
                 vm.error.show = true;
@@ -30,7 +30,7 @@
         }
         vm.delete = function(){
             return StudentService.delete(vm.student.indeks).then(function(result){
-                $location.path("/admin/student/dashbord");
+                $location.path("/admin/student/dashboard");
             },function(error){
                 vm.error.message = 'There is some problem';
                 vm.error.show = true;

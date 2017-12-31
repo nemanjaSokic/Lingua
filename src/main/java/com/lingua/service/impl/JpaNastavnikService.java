@@ -30,7 +30,7 @@ public class JpaNastavnikService implements NastavnikService{
 
 	@Override
 	public Nastavnik findOne(int id) {
-		return nastavnikRepo.findOne(id);
+		return nastavnikRepo.findById(id);
 	}
 
 	@Override

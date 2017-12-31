@@ -9,27 +9,27 @@
 
         function stateConfig($routeProvider){
             $routeProvider
-                .when("/admin/student/dashboard", {
-                    templateUrl : 'app/admin/student/student-dashboard.html',
-                    controller : 'AdminStudentController',
+                .when("/admin/professor/dashboard", {
+                    templateUrl : 'app/admin/professor/professor-dashboard.html',
+                    controller : 'AdminProfessorController',
                     controllerAs: 'vm',
                     resolve: {
                         loginCheck: loginCheck,
-                        studentService: getStudents
+                        profService: getProfessors
                     }
                 })
-                .when("/admin/student/:index", {
-                    templateUrl : 'app/admin/student/admin-student.html',
-                    controller : 'AdminStudentController',
+                .when("/admin/professor/:id", {
+                    templateUrl : 'app/admin/professor/admin-professor.html',
+                    controller : 'AdminProfessorController',
                     controllerAs: 'vm',
                     resolve: {
                         loginCheck: loginCheck,
-                        studentService: getAccount
+                        profService: getAccount
                     }
                 });
         }
-        function getStudents(StudentService){
-            return StudentService.getAll().
+        function getProfessors(ProfessorService){
+            return ProfessorService.getAllProfessor().
                 then(function(result){
                     return result.data;
                 },function(error){
@@ -39,8 +39,8 @@
                 });
         }
 
-        function getAccount(StudentService, $route){
-            return StudentService.getOne($route.current.params.index).
+        function getAccount(ProfessorService, $route){
+            return ProfessorService.getOne($route.current.params.id).
                 then(function(res){
                     return res.data;
                 },function(error){

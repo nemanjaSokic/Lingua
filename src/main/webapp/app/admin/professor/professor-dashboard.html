@@ -1,0 +1,24 @@
+<div ng-include="'/app/layouts/navbar/admin/navbar.html'"></div>
+</br></br>
+<table class="table table-hover">
+  <thead>
+    <tr><th>Active professors</th></tr>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">First Name</th>
+      <th scope="col">Last Name</th>
+      <th scope="col">Language</th>
+      <th scope="col">Registrated</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="p in vm.prof">
+      <th scope="row"><a ng-href="#/admin/professor/{{p.id}}">{{p.id}}</a></th>
+      <td>{{p.ime}}</td>
+      <td>{{p.prezime}}</td>
+      <td>{{p.predaje.naziv}}</td>
+      <td>{{p.registrovan}}</td>
+    </tr>
+  </tbody>
+</table>
+<div ng-show="error" class="alert alert-danger fade in"><strong>{{errorMessage}}!</strong></div>
