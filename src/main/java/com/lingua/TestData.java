@@ -12,7 +12,9 @@ import com.lingua.model.Korisnik;
 import com.lingua.model.Kurs;
 import com.lingua.model.Nastavnik;
 import com.lingua.model.Nivo;
+import com.lingua.model.Ocena;
 import com.lingua.model.Skola;
+import com.lingua.model.Test;
 import com.lingua.model.TipKorisnika;
 import com.lingua.model.TipKursa;
 import com.lingua.model.Ucenik;
@@ -22,7 +24,9 @@ import com.lingua.service.KorisnikService;
 import com.lingua.service.KursService;
 import com.lingua.service.NastavnikService;
 import com.lingua.service.NivoService;
+import com.lingua.service.OcenaService;
 import com.lingua.service.SkolaService;
+import com.lingua.service.TestService;
 import com.lingua.service.TipKursaService;
 import com.lingua.service.UcenikService;
 import com.lingua.service.UplataService;
@@ -49,6 +53,10 @@ public class TestData {
 	private TipKorisnika tip;
 	@Autowired
 	private TipKursaService tipKursaService;
+	@Autowired
+	private TestService testService;
+	@Autowired
+	private OcenaService ocenaService;
 	
 	@PostConstruct
 	public void init(){
@@ -67,6 +75,13 @@ public class TestData {
 		Korisnik admin = new Korisnik(TipKorisnika.ADMIN, "admin", "admin");
 		admin.setRegistrovan(true);
 		
+		Test test1 = new Test("First chapter", "link1");
+		Test test2 = new Test("Secont chapter", "link1");
+		Test test3 = new Test("First chapter", "link2");
+		Test test4 = new Test("Second chapter", "link2");
+		
+		
+		
 		Nastavnik nast1 = new Nastavnik("Milos","Crnjanski", TipKorisnika.NASTAVNIK,"nast1","123",164572183L,"sasas@dfdfd.com",true,"napomena", jEng);
 		Nastavnik nast2 = new Nastavnik("Dositej","Obradovic",TipKorisnika.NASTAVNIK, "nast2", "123", 381644894979L, "nast2@example.com",true, "", jIta);
 		Nastavnik nast3 = new Nastavnik("Rastko","Nemanjic", TipKorisnika.NASTAVNIK, "nast3", "123", 381644894974L, "nast3@example.com",true,"ludak", jNor);
@@ -79,15 +94,38 @@ public class TestData {
 		Kurs k1 = new Kurs(nast1,tip1);
 		Kurs k2 = new Kurs(nast2,tip3);
 		
-		Ucenik u1 = new Ucenik("Nemanja", "Sokic",TipKorisnika.UCENIK, "stud1", "123",164572183L,"nemskc@gmail.com",false,"napomena",true,k1);
+		Ucenik u1 = new Ucenik("Nemanja", "Sokic",TipKorisnika.UCENIK, "stud1", "123",164572183L,"nemskc@gmail.com",false,"napomena",false,k1);
 		Ucenik u2 = new Ucenik("Pero","Antić", TipKorisnika.UCENIK, "stud2", "123", 381644894972L, "stud2@example.com", true, "", false, k1);
 		Ucenik u3 = new Ucenik("Nikola","Jokić",TipKorisnika.UCENIK, "stud3", "123", 381644894977L, "stud3@example.com", true, "", true, k2);
 		Ucenik u4 = new Ucenik("Miloš","Teodosić", TipKorisnika.UCENIK, "stud4", "123", 381644894973L, "stud4@example.com", true, "", true, k2);
+		
+		Ocena o11 = new Ocena(6,test1,u1,"kom");
+		Ocena o12 = new Ocena(7,test2,u1,"kom");
+		Ocena o13 = new Ocena(7,test1,u2,"kom");
+		Ocena o14 = new Ocena(8,test2,u2,"kom");
+		Ocena o21 = new Ocena(8,test3,u3,"kom");
+		Ocena o22 = new Ocena(9,test4,u3,"kom");
+		Ocena o23 = new Ocena(9,test3,u4,"kom");
+		Ocena o24 = new Ocena(10,test4,u4,"kom");
+		
+		u1.addOcena(o11);
+		u1.addOcena(o12);
+		u2.addOcena(o13);
+		u2.addOcena(o14);
+		u3.addOcena(o21);
+		u3.addOcena(o22);
+		u4.addOcena(o23);
+		u4.addOcena(o24);
 		
 		k1.addUcenik(u1);
 		k1.addUcenik(u2);
 		k2.addUcenik(u3);
 		k2.addUcenik(u4);
+		
+		k1.getTestovi().add(test1);
+		k1.getTestovi().add(test2);
+		k2.getTestovi().add(test3);
+		k2.getTestovi().add(test4);
 		
 		Skola s = new Skola("Lingua d.o.o.","Branka Bajića 23, Novi Sad","lingua@office.rs","www.lingua.com","233-223111-65",381214778,123,111222333);
 		skolaService.save(s);
@@ -121,6 +159,7 @@ public class TestData {
 		jezikService.save(jIta);
 		jezikService.save(jNor);
 		
+		
 		korisnikService.save(admin);
 		nastavnikService.save(nast1);
 		nastavnikService.save(nast2);
@@ -134,10 +173,30 @@ public class TestData {
 		kursService.save(k1);
 		kursService.save(k2);
 		
+		testService.save(test1);
+		testService.save(test2);
+		testService.save(test3);
+		testService.save(test4);
+		
+		ocenaService.save(o11);
+		ocenaService.save(o12);
+		ocenaService.save(o13);
+		ocenaService.save(o14);
+		ocenaService.save(o21);
+		ocenaService.save(o22);
+		ocenaService.save(o23);
+		ocenaService.save(o24);
+		
 		korisnikService.save(u1);
 		korisnikService.save(u2);
 		korisnikService.save(u3);
 		korisnikService.save(u4);
+		
+		
+		
+		
+		
+		
 		
 		uplataService.save(upl1);
 		uplataService.save(upl2);

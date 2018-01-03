@@ -1,5 +1,6 @@
 package com.lingua.web.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,14 @@ public class ApiKursController {
 		}
 		return new ResponseEntity<Kurs>(k,HttpStatus.OK);
 	}
+	
+	@RequestMapping(method=RequestMethod.GET, value="/professors/{id}")
+	ResponseEntity<List<Kurs>> getCoursesByProfessor(@PathVariable int id){
+		List<Kurs> lista = new ArrayList<Kurs>();
+		lista = kursServ.getAllByProfessor(id);
+		return new ResponseEntity<List<Kurs>>(lista,HttpStatus.OK);
+	}
+	
 	//-----------------------------POST--------------------
 	
 	@RequestMapping(consumes="application/json",method=RequestMethod.POST)

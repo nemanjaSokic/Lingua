@@ -7,10 +7,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.lingua.model.Jezik;
 import com.lingua.model.Nastavnik;
 
-public interface NastavnikRepository extends JpaRepository<Nastavnik, Integer> {
+public interface NastavnikRepository extends JpaRepository<Nastavnik, String> {
 
 	List<Nastavnik> findByPredaje(Jezik j);
 
 	Nastavnik findById(int id);
+	Nastavnik deleteNastavnikById(int id);
 
 }

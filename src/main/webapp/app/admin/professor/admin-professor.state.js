@@ -15,7 +15,8 @@
                     controllerAs: 'vm',
                     resolve: {
                         loginCheck: loginCheck,
-                        profService: getProfessors
+                        profService: getProfessors,
+                        courses: allProfCourses
                     }
                 })
                 .when("/admin/professor/:id", {
@@ -24,9 +25,23 @@
                     controllerAs: 'vm',
                     resolve: {
                         loginCheck: loginCheck,
-                        profService: getAccount
+                        profService: getAccount,
+                        courses: profesorsCourse
                     }
                 });
+        }
+        function allProfCourses(ProfessorService, CourseService){
+            return CourseService.getAllCourse().
+                then(function(res){
+                    return res.data;
+                })
+        }
+
+        function profesorsCourse(CourseService, $route){
+            return CourseService.getAllCoursesByProfessor($route.current.params.id).
+                then(function(result){
+                    return result.data;
+                })
         }
         function getProfessors(ProfessorService){
             return ProfessorService.getAllProfessor().

@@ -53,6 +53,11 @@ public class JpaKursService implements KursService{
 		kursRepo.delete(id);
 		return deleted;
 	}
+
+	@Override
+	public List<Kurs> getAllByProfessor(int id) {
+		return kursRepo.findByNastavnikId(id);
+	}
 	
 	
 }

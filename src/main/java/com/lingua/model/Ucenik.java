@@ -30,9 +30,14 @@ public class Ucenik extends Korisnik {
 	@JsonIgnore
 	@JoinTable (name = "tbl_uplatnice" , joinColumns = @JoinColumn(name = "indeks"),inverseJoinColumns=@JoinColumn(name = "broj_uplatnice"))
 	protected List<Uplata> uplate;
+	@OneToMany(cascade={CascadeType.ALL,CascadeType.REMOVE})
+	@JoinTable (name = "tbl_dnevnik" , inverseJoinColumns = @JoinColumn(name = "idOcene"), joinColumns=@JoinColumn(name = "broj_uplatnice"))
+	protected List<Ocena> ocene;
+	
 	
 	public Ucenik() {
 		this.uplate=new ArrayList<Uplata>();
+		this.ocene = new ArrayList<>();
 	}
 	
 	public Ucenik(String ime, String prezime, TipKorisnika tipKorisnika, String korisnickoIme, String sifraKorisnika,
@@ -43,6 +48,7 @@ public class Ucenik extends Korisnik {
 		this.status = status;
 		this.kurs = kurs;
 		this.uplate = new ArrayList<>();
+		this.ocene = new ArrayList<>();
 		this.indeks = UcenikIdGenerator.generate(ime, prezime);
 	}
 
@@ -62,6 +68,21 @@ public class Ucenik extends Korisnik {
 		if(uplata.getUcenik() != this){
 			uplata.setUcenik(this);
 		}
+	}
+	
+	public void addOcena(Ocena ocena){
+		this.ocene.add(ocena);
+		if(ocena.getUcenik() != this){
+			ocena.setUcenik(this);
+		}
+	}
+
+	public List<Ocena> getOcene() {
+		return ocene;
+	}
+
+	public void setOcene(List<Ocena> ocene) {
+		this.ocene = ocene;
 	}
 
 	public Boolean getStatus() {

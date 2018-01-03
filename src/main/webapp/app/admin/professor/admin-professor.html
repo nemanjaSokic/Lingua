@@ -9,7 +9,7 @@
             <div class="user-info-block">
                 <div class="user-heading">
                     <h3>{{vm.prof.ime}} {{vm.prof.prezime}}</h3>
-                    <span class="help-block">Id: {{vm.prof.id}} </span>
+                    <span class="help-block">Proffessor id: {{vm.prof.id}} </span>
                 </div>
                 <div class="user-body">
                     <div class="tab-content col-md-6">
@@ -49,23 +49,27 @@
                             </li>
                         </ul>
                     </div>
-                    <!--<div class="tab-content col-md-6" ng-show="vm.prof.kurs">
-                        <div id="course_information" class="tab-pane active">
+                    <div id="course_information" class="tab-pane active">
                             <h4>Course</h4>
-                        </div>
-                        <div data-toggle="tab">
-                            <span class="glyphicon glyphicon-tasks"> {{vm.prof.kurs.tipKursa.jezik.naziv}} {{vm.prof.kurs.nivo.nazivNivoa}}</span>
-                        </div>
-                        <div data-toggle="tab">
-                            <span class="glyphicon glyphicon-euro"> {{vm.prof.kurs.tipKursa.cena}}</span>
-                        </div>
-                        <div data-toggle="tab">
-                            <span class="glyphicon glyphicon-euro"> {{vm.prof.kurs.nastavnik.ime}} {{vm.prof.kurs.nastavnik.prezime}}</span>
-                        </div>
                     </div>
-                    <div class="tab-content col-md-6" ng-hide="vm.prof.kurs">
+                    <div class="tab-content col-md-6" ng-show="vm.prof.courses" ng-repeat="course in vm.prof.courses">
+                        <div data-toggle="tab">
+                            <span class="glyphicon glyphicon-tasks"> {{course.tipKursa.jezik.naziv}} {{course.nivo.nazivNivoa}}</span>
+                        </div>
+                        <div data-toggle="tab">
+                            <span class="glyphicon glyphicon-euro"> {{course.tipKursa.cena}}</span>
+                        </div>
+                        <div data-toggle="tab">
+                            <span class="glyphicon glyphicon-tag"> Course id: {{course.id}}</span>
+                        </div>
+                        <div data-toggle="tab">
+                            <span class="glyphicon glyphicon-link"><a ng-href="/#/admin/course/{{course.id}}">Go to course</a></span>
+                        </div>
+                        <hr style="border: 1px solid black">
+                    </div>
+                    <div class="tab-content col-md-6" ng-hide="vm.prof.courses.length != 0">
                         <h2>The course is not assigned</h2>
-                    </div>-->
+                    </div>
                 </div>
             </div>
         </div>

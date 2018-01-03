@@ -71,7 +71,6 @@ public class JpaJezikService implements JezikService{
 
 	@Override
 	public Jezik findOne(String id) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

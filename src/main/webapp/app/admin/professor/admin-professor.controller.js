@@ -5,14 +5,14 @@
         .module('linguaApp')
         .controller('AdminProfessorController', AdminProfessorController);
 
-    AdminProfessorController.$inject = ['$rootScope', '$scope', '$uibModal', 'profService', 'loginCheck', 'ProfessorService', '$log', '$location'];
+    AdminProfessorController.$inject = ['$rootScope', '$scope', '$uibModal', 'courses', 'profService', 'loginCheck', 'ProfessorService', '$log', '$location'];
 
-    function AdminProfessorController ($rootScope, $scope, $uibModal, profService, loginCheck, ProfessorService, $log, $location) {
+    function AdminProfessorController ($rootScope, $scope, $uibModal, courses, profService, loginCheck, ProfessorService, $log, $location) {
         var vm = this;
         vm.account = loginCheck.name;
         vm.isAuth = loginCheck.authenticated;
         vm.prof = profService;
-
+        vm.prof.courses = courses;
         vm.prof.registrovan_temp = vm.prof.registrovan;
         
         vm.error = {

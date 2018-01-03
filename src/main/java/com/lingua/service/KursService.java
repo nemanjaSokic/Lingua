@@ -14,4 +14,6 @@ public interface KursService {
 
 	Kurs delete(int id);
 
+	List<Kurs> getAllByProfessor(int id);
+
 }

@@ -37,18 +37,23 @@ public class Kurs {
 	@JsonIgnore
 	@JoinTable (name = "tbl_pohadjanja" , inverseJoinColumns = @JoinColumn(name = "korisnicko_ime"), joinColumns=@JoinColumn(name = "idKursa"))
 	protected List<Ucenik> ucenici = new ArrayList<Ucenik>();
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinTable (name = "tbl_testiranje" , inverseJoinColumns = @JoinColumn(name = "testId"), joinColumns=@JoinColumn(name = "idKursa"))
+	protected List<Test>testovi = new ArrayList<>();
 	
 	public Kurs(){}
 	
 	public Kurs(Nastavnik nastavnik, TipKursa tip) {
 		this.tipKursa = tip;
 		this.nastavnik = nastavnik;
-		ucenici = new ArrayList<Ucenik>();
+		this.ucenici = new ArrayList<Ucenik>();
+		this.testovi = new ArrayList<>();
 	}
-	public Kurs(Nastavnik nastavnik, TipKursa tip,List<Ucenik> ucenici) {
+	public Kurs(Nastavnik nastavnik, TipKursa tip,List<Ucenik> ucenici, List<Test> testovi) {
 		this.tipKursa = tip;
 		this.nastavnik = nastavnik;
 		this.ucenici = ucenici;
+		this.testovi = testovi;
 	}
 	//Dodavanje ucenika na kurs. Ucenik se dodaje u listu i
 	//provera ako ucenik NE POHADJA kurs, setuje mu dati kurs automatski
@@ -65,6 +70,22 @@ public class Kurs {
 	}
 	
 	
+	public int getIdKursa() {
+		return idKursa;
+	}
+
+	public void setIdKursa(int idKursa) {
+		this.idKursa = idKursa;
+	}
+
+	public List<Test> getTestovi() {
+		return testovi;
+	}
+
+	public void setTestovi(List<Test> testovi) {
+		this.testovi = testovi;
+	}
+
 	public int getId() {
 		return idKursa;
 	}

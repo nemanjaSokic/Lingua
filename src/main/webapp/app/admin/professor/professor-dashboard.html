@@ -9,15 +9,17 @@
       <th scope="col">Last Name</th>
       <th scope="col">Language</th>
       <th scope="col">Registrated</th>
+      <th scope="col">Courses</th>
     </tr>
   </thead>
   <tbody>
     <tr ng-repeat="p in vm.prof">
-      <th scope="row"><a ng-href="#/admin/professor/{{p.id}}">{{p.id}}</a></th>
+      <th scope="row"><a ng-href="#/admin/professor/{{p.id}}">View profile</a></th>
       <td>{{p.ime}}</td>
       <td>{{p.prezime}}</td>
       <td>{{p.predaje.naziv}}</td>
       <td>{{p.registrovan}}</td>
+      <td ng-repeat="c in vm.prof.courses" ng-if="c.nastavnik.id == p.id">{{c.id}}</td>
     </tr>
   </tbody>
 </table>

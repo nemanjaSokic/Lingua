@@ -54,7 +54,7 @@
                     <option ng-option value={{x}} ng-repeat="x in vm.languages">{{x.naziv}}</option>
                     <option ng-option value="0">Choose another one</option>
                 </select>
-                <div class="col-xs-12" id="cash" ng-if="vm.desiredCourse == '0'">
+                <div class="col-xs-12" id="cash" ng-if="vm.profLang == '0'">
                     <input required class="form-control" type="text" ng-model="vm.user.napomena" placeholder="If you want to create new one, let us know.">
                 </div>
             </div>

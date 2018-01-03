@@ -164,7 +164,6 @@ public class Korisnik extends Osoba{
 	}
 	@Override
 	public String ispisiImePretime() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	

@@ -52,7 +52,7 @@ public class JpaNastavnikService implements NastavnikService{
 		if(n==null){
 			return null;
 		}
-		nastavnikRepo.delete(nastavnikId);
+		nastavnikRepo.delete(n.getKorisnickoIme());
 		return n;
 	}
 

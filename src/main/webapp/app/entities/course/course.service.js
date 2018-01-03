@@ -5,12 +5,15 @@
             .module('linguaApp')
             .factory('CourseService', CourseService);
 
-    CourseService.$inject = ['$http'];
+    CourseService.$inject = ['$http', '$routeParams'];
 
-    function CourseService($http) {
+    function CourseService($http, $routeParams) {
         return {
             getAllCourse : function(){
                 return $http.get('/api/courses');
+            },
+            getAllCoursesByProfessor: function(id){
+                return $http.get('/api/courses/professors/' + id);
             }
         }
     }
