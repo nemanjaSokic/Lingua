@@ -98,15 +98,15 @@ public class TestData {
 		Ucenik u2 = new Ucenik("Pero","Antić", TipKorisnika.UCENIK, "stud2", "123", 381644894972L, "stud2@example.com", true, "", false, k1);
 		Ucenik u3 = new Ucenik("Nikola","Jokić",TipKorisnika.UCENIK, "stud3", "123", 381644894977L, "stud3@example.com", true, "", true, k2);
 		Ucenik u4 = new Ucenik("Miloš","Teodosić", TipKorisnika.UCENIK, "stud4", "123", 381644894973L, "stud4@example.com", true, "", true, k2);
-		
-		Ocena o11 = new Ocena(6,test1,u1,"kom");
-		Ocena o12 = new Ocena(7,test2,u1,"kom");
-		Ocena o13 = new Ocena(7,test1,u2,"kom");
-		Ocena o14 = new Ocena(8,test2,u2,"kom");
-		Ocena o21 = new Ocena(8,test3,u3,"kom");
-		Ocena o22 = new Ocena(9,test4,u3,"kom");
-		Ocena o23 = new Ocena(9,test3,u4,"kom");
-		Ocena o24 = new Ocena(10,test4,u4,"kom");
+
+		Ocena o11 = new Ocena(6,test1,"kom");
+		Ocena o12 = new Ocena(7,test2,"kom");
+		Ocena o13 = new Ocena(7,test1,"kom");
+		Ocena o14 = new Ocena(8,test2,"kom");
+		Ocena o21 = new Ocena(8,test3,"kom");
+		Ocena o22 = new Ocena(9,test4,"kom");
+		Ocena o23 = new Ocena(9,test3,"kom");
+		Ocena o24 = new Ocena(10,test4,"kom");
 		
 		u1.addOcena(o11);
 		u1.addOcena(o12);

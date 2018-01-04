@@ -22,16 +22,13 @@ public class Ocena {
 	protected Integer vrednost;
 	@OneToOne
 	protected Test test;
-	@OneToOne
-	protected Ucenik ucenik;
 	@Column(name="komnetar")
 	protected String komentar;
 	
-	public Ocena(Integer vrednost, Test test, Ucenik ucenik, String komentar) {
+	public Ocena(Integer vrednost, Test test, String komentar) {
 		super();
 		this.vrednost = vrednost;
 		this.test = test;
-		this.ucenik = ucenik;
 		this.komentar = komentar;
 	}
 
@@ -45,17 +42,6 @@ public class Ocena {
 
 	public void setIdOcene(Long idOcene) {
 		this.idOcene = idOcene;
-	}
-
-	public Ucenik getUcenik() {
-		return ucenik;
-	}
-
-	public void setUcenik(Ucenik ucenik) {
-		this.ucenik = ucenik;
-		if(ucenik != null && !ucenik.getUplate().contains(this)){
-			ucenik.getOcene().add(this);
-		}
 	}
 
 	public Long getId() {

@@ -72,9 +72,6 @@ public class Ucenik extends Korisnik {
 	
 	public void addOcena(Ocena ocena){
 		this.ocene.add(ocena);
-		if(ocena.getUcenik() != this){
-			ocena.setUcenik(this);
-		}
 	}
 
 	public List<Ocena> getOcene() {
