@@ -1,74 +1,76 @@
-
 <!DOCTYPE html>
 <html>
+
 <head>
-<title>Lingua School</title>
-<!-- library js -->
-<link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
-<link href="bower_components/font-awesome/css/font-awesome.min.css">
+    <title>Lingua School</title>
+    <!-- library js -->
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="bower_components/font-awesome/css/font-awesome.min.css">
 
 
-<!-- bild css -->
-<link href="app/components/registration/registration.css">
-<link href="app/admin/student/admin-student.css">
-<link href="app/admin/student/admin-professor.css">
+    <!-- bild css -->
+    <link href="assets/css/registration.css">
+    <link href="assets/css/admin-student.css">
+    <link href="assets/css/admin-professor.css">
 </head>
-<body ng-app="linguaApp">	
-	<div class="col-lg-12 col-md-12 col-sm-12">
+
+<body ng-app="linguaApp">
+    <div class="col-lg-12 col-md-12 col-sm-12">
         <div class="well" ng-view></div>
     </div>
-	
-	<hr>
-	<footer>
-        	<p>&copy; 2018 Classified ads, Inc.</p>
-    	</footer>
-	<!-- library js -->
-	<script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
-	<script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
-	<script type="text/javascript" src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-	<script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
-	<script src="bower_components/angular-cookies/angular-cookies.js"></script>
-	<script src="bower_components/angular-route/angular-route.js"></script>
-	<script src="bower_components/angular-bootstrap-confirm/dist/angular-bootstrap-confirm.js"></script>
-	
-	
-	<!-- bild js -->
-	<script src="app/app.module.js"></script>
-	<script src="app/app.state.js"></script>
-	<script type="text/javascript" src="app/home/home.controller.js"></script>
-	<script type="text/javascript" src="app/home/home.state.js"></script>
 
-	<script type="text/javascript" src="app/components/login/login.controller.js"></script>
-	<script type="text/javascript" src="app/components/login/login.service.js"></script>
-	<script type="text/javascript" src="app/components/login/login.state.js"></script>
+    <hr>
+    <footer>
+        <p>&copy; 2018 Classified ads, Inc.</p>
+    </footer>
+    <!-- library js -->
+    <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
+    <script type="text/javascript" src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-bootstrap-confirm/dist/angular-bootstrap-confirm.js"></script>
 
-	<script type="text/javascript" src="app/components/registration/registration.controller.js"></script>
-	<script type="text/javascript" src="app/components/registration/registration.service.js"></script>
-	<script type="text/javascript" src="app/components/registration/registration.state.js"></script>
 
-	<script type="text/javascript" src="app/admin/admin.state.js"></script>
-	<script type="text/javascript" src="app/admin/admin.controller.js"></script>
+    <!-- bild js -->
+    <script src="app/app.module.js"></script>
+    <script src="app/app.state.js"></script>
+    <script type="text/javascript" src="app/home/home.controller.js"></script>
+    <script type="text/javascript" src="app/home/home.state.js"></script>
 
-	<script type="text/javascript" src="app/admin/student/admin-student.controller.js"></script>
-	<script type="text/javascript" src="app/admin/student/admin-student.state.js"></script>
+    <script type="text/javascript" src="app/components/login/login.controller.js"></script>
+    <script type="text/javascript" src="app/components/login/login.service.js"></script>
+    <script type="text/javascript" src="app/components/login/login.state.js"></script>
 
-	<script type="text/javascript" src="app/admin/professor/admin-professor.controller.js"></script>
-	<script type="text/javascript" src="app/admin/professor/admin-professor.state.js"></script>
+    <script type="text/javascript" src="app/components/registration/registration.controller.js"></script>
+    <script type="text/javascript" src="app/components/registration/registration.service.js"></script>
+    <script type="text/javascript" src="app/components/registration/registration.state.js"></script>
 
-	<script type="text/javascript" src="app/entities/student/student.controller.js"></script>
-	<script type="text/javascript" src="app/entities/student/student.state.js"></script>
-	<script type="text/javascript" src="app/entities/student/student.service.js"></script>
+    <script type="text/javascript" src="app/admin/admin.state.js"></script>
+    <script type="text/javascript" src="app/admin/admin.controller.js"></script>
 
-	<script type="text/javascript" src="app/entities/professor/professor.controller.js"></script>
-	<script type="text/javascript" src="app/entities/professor/professor.state.js"></script>
-	<script type="text/javascript" src="app/entities/professor/professor.service.js"></script>
+    <script type="text/javascript" src="app/admin/student/admin-student.controller.js"></script>
+    <script type="text/javascript" src="app/admin/student/admin-student.state.js"></script>
 
-	<script type="text/javascript" src="app/entities/courseType/courseType.service.js"></script>
+    <script type="text/javascript" src="app/admin/professor/admin-professor.controller.js"></script>
+    <script type="text/javascript" src="app/admin/professor/admin-professor.state.js"></script>
 
-	<script type="text/javascript" src="app/entities/course/course.service.js"></script>
+    <script type="text/javascript" src="app/entities/student/student.controller.js"></script>
+    <script type="text/javascript" src="app/entities/student/student.state.js"></script>
+    <script type="text/javascript" src="app/entities/student/student.service.js"></script>
 
-	<script type="text/javascript" src="app/entities/language/language.service.js"></script>
+    <script type="text/javascript" src="app/entities/professor/professor.controller.js"></script>
+    <script type="text/javascript" src="app/entities/professor/professor.state.js"></script>
+    <script type="text/javascript" src="app/entities/professor/professor.service.js"></script>
 
-	<script type="text/javascript" src="app/entities/user/user.service.js"></script>
+    <script type="text/javascript" src="app/entities/courseType/courseType.service.js"></script>
+
+    <script type="text/javascript" src="app/entities/course/course.service.js"></script>
+
+    <script type="text/javascript" src="app/entities/language/language.service.js"></script>
+
+    <script type="text/javascript" src="app/entities/user/user.service.js"></script>
 </body>
+
 </html>
