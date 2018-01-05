@@ -1,0 +1,38 @@
+.FirstLogedIn {
+  padding-top: 9%; }
+  .FirstLogedIn .mainNav {
+    display: inline; }
+    .FirstLogedIn .mainNav ul {
+      display: flex;
+      margin-left: 5%; }
+      .FirstLogedIn .mainNav ul li {
+        padding-left: 11%;
+        text-transform: uppercase;
+        font-weight: bold;
+        list-style-type: none; }
+        .FirstLogedIn .mainNav ul li a {
+          text-decoration: none;
+          font-size: 1.2em;
+          color: black; }
+
+.buttonLogIn {
+  display: flex;
+  flex-direction: column-reverse;
+  text-align: center;
+  padding: 31px;
+  font-size: 2em;
+  list-style-type: none; }
+  .buttonLogIn .ButtonBorder {
+    border: 2.5px solid rgba(0, 0, 0, 0.3);
+    background-color: #b8ccb3;
+    width: 70%;
+    margin: 0 auto; }
+  .buttonLogIn a {
+    font-size: 1.5em;
+    text-decoration: none;
+    text-transform: uppercase;
+    -webkit-text-stroke: 0.5px black;
+    color: white;
+    text-shadow: 3px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000; }
+
+/*# sourceMappingURL=home.css.map */

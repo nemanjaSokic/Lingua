@@ -1,0 +1,21 @@
+// nav bar Main
+@mixin mainNav {
+    .mainNav {
+        display: inline;
+        ul {
+            display: flex;
+            margin-left: 5%;
+            li {
+                padding-left: 11%;
+                text-transform: uppercase;
+                font-weight: bold;
+                list-style-type: none;
+                a {
+                    text-decoration: none;
+                    font-size: 1.2em;
+                    color: rgb(0, 0, 0);
+                }
+            }
+        }
+    }
+}

@@ -1,20 +1,32 @@
 <div>
-	<ul class="nav nav-pills" role="tablist">
-		<li ng-show="!vm.isAuth"><a href="#/login">login</a></li>
-	</ul>
+    <!-- When user isn't logged in -->
+    <div class="FirstLogedIn" ng-show="!vm.isAuth">
+        <nav class="mainNav">
+            <ul>
+                <li><a href="#">about us</a></li>
+                <li><a href="#">about teachers</a></li>
+                <li><a href="#">gallery</a></li>
+                <li><a href="#">contact us</a></li>
+            </ul>
+        </nav>
+        <div class="buttonLogIn">
+            <div class="ButtonBorder">
+                <a ng-show="!vm.isAuth" href="#/login">log in</a>
+            </div>
+        </div>
+        <div class="buttonLogIn">
+            <div class="ButtonBorder">
+                <a ng-show="!vm.isAuth" href="#/signup">sign up</a>
+            </div>
+        </div>
+
+        <!-- When user is  logged in -->
+        <div ng-show="vm.isAuth">
+            <button class="buttonLogOut"><a href="" ng-click="logout()">logout</a></button>
+            <div>
+                <p>The ID is {{vm.account}}</p>
+                <p>The content is {{vm.isAuth}}</p>
+            </div>
+        </div>
+    </div>
 </div>
-<h1>Greeting</h1>
-<div ng-show="vm.isAuth">
-	<ul>
-		<li><a href="" ng-click="logout()">logout</a></li>
-	</ul>
-	<div>
-		<p>The ID is {{vm.account}}</p>
-		<p>The content is {{vm.isAuth}}</p>
-	</div>
-</div>
-<div  ng-show="!vm.isAuth">
-	<p>Login to see your greeting</p>
-</div>
-<h1>Welcome, Java Hipster!</h1>
-<p>This is your homepage</p>

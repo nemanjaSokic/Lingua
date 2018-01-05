@@ -3,25 +3,33 @@
 
 <head>
     <title>Lingua School</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- library js -->
     <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="bower_components/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+
 
 
     <!-- bild css -->
-    <link href="assets/css/registration.css">
-    <link href="assets/css/admin-student.css">
-    <link href="assets/css/admin-professor.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/registration.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/admin-student.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/admin-professor.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/index.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/home.css">
+
+    <!-- Link for google fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Libre+Franklin" rel="stylesheet">
 </head>
 
 <body ng-app="linguaApp">
-    <div class="col-lg-12 col-md-12 col-sm-12">
-        <div class="well" ng-view></div>
+    <div class="opacityDiv">
+        <div>
+            <div ng-view></div>
+        </div>
     </div>
 
-    <hr>
     <footer>
-        <p>&copy; 2018 Classified ads, Inc.</p>
+
     </footer>
     <!-- library js -->
     <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
