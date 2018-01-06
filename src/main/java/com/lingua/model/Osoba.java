@@ -5,9 +5,12 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.MappedSuperclass;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 
 @MappedSuperclass
 @Inheritance(strategy = InheritanceType.JOINED)
+@JsonSerialize
 public abstract class Osoba{
 	@Column
 	protected String ime;

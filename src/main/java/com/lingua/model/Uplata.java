@@ -2,7 +2,6 @@ package com.lingua.model;
 
 import java.sql.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,8 +11,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+
+
+
 @Entity
 @Table(name="tblUplate")
+@JsonSerialize
 public class Uplata {
 	@Id
 	@Column(name="broj_uplatnice")
@@ -23,10 +29,10 @@ public class Uplata {
 	protected int uplata;
 	@Column
 	Date datum;
-	@ManyToOne(fetch=FetchType.EAGER,cascade=CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.EAGER)
+	//@JsonBackReference
 	Ucenik ucenik;
-	@OneToOne
-	Kurs kurs;
+	
 	
 	public Uplata(){}
 	
@@ -37,38 +43,19 @@ public class Uplata {
 		this.datum = datum;
 	}
 	
-	public Uplata(int uplatnicaBr, int uplata, Date datum, Ucenik ucenik,Kurs k) {
-		super();
-		this.uplatnicaBr = uplatnicaBr;
-		this.uplata = uplata;
-		this.datum = datum;
-		this.ucenik = ucenik;
-		this.kurs = k;
-	}
 	public Uplata(int uplatnicaBr, int uplata, Date datum, Ucenik ucenik) {
 		super();
 		this.uplatnicaBr = uplatnicaBr;
 		this.uplata = uplata;
 		this.datum = datum;
 		this.ucenik = ucenik;
-		this.kurs = ucenik.getKurs();
 	}
 
 	public Uplata(int uplata, Date datum, Ucenik ucenik) {
 		this.uplata = uplata;
 		this.datum = datum;
 		this.ucenik = ucenik;
-		this.kurs = ucenik.getKurs();
 	}
-	public Kurs getKurs() {
-		return kurs;
-	}
-
-
-	public void setKurs(Kurs kurs) {
-		this.kurs = kurs;
-	}
-
 
 	public int getUplatnicaBr() {
 		return uplatnicaBr;

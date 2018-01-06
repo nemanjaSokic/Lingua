@@ -55,7 +55,7 @@
         }
 
         function getAccount(ProfessorService, $route){
-            return ProfessorService.getOne($route.current.params.id).
+            return ProfessorService.getOne($route.current.params.id, true).
                 then(function(res){
                     return res.data;
                 },function(error){

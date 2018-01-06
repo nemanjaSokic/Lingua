@@ -20,7 +20,7 @@
       <td>{{stud.prezime}}</td>
       <td>
         <label ng-hide="stud.kurs">Assign course</label>
-        <a ng-show = "stud.kurs" ng-href="/#/admin/courses/{{stud.kurs.id}}" tooltip-placement="top" uib-tooltip="nastavnik: {{stud.kurs.nastavnik.ime}} {{stud.kurs.nastavnik.prezime}}" type="button" class="btn btn-info">{{stud.kurs.tipKursa.jezik.naziv}} : {{stud.kurs.tipKursa.nivo.nazivNivoa}} : {{stud.kurs.id}}</a></td>
+        <a ng-show = "stud.kurs" ng-href="/#/admin/course/{{stud.kurs.id}}" tooltip-placement="top" uib-tooltip="nastavnik: {{stud.kurs.nastavnik.ime}} {{stud.kurs.nastavnik.prezime}}" type="button" class="btn btn-info">{{stud.kurs.tipKursa.jezik.naziv}} : {{stud.kurs.tipKursa.nivo.nazivNivoa}} : {{stud.kurs.id}}</a></td>
       <td>{{stud.registrovan}}</td>
       <td>{{stud.status}}</td>
       <td><a ng-click=showPayments()>Show Payments</a></td>

@@ -13,7 +13,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lingua.model.Kurs;
+import com.lingua.model.Test;
+import com.lingua.model.Ucenik;
 import com.lingua.service.KursService;
+import com.lingua.service.UcenikService;
 
 @RestController
 @RequestMapping(value = "/api/courses")
@@ -21,6 +24,8 @@ public class ApiKursController {
 	
 	@Autowired
 	KursService kursServ;
+	@Autowired
+	UcenikService ucenikServ;
 	
 	//-----------------GET------------------------
 	
@@ -41,6 +46,25 @@ public class ApiKursController {
 			return new ResponseEntity<Kurs>(HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<Kurs>(k,HttpStatus.OK);
+	}
+	
+	@RequestMapping(method=RequestMethod.GET, value="/{id}/students")
+	ResponseEntity<List<Ucenik>> getAllStudentsByCourse(@PathVariable int id){
+		List<Ucenik> ucenici = new ArrayList<>();
+		ucenici = kursServ.getStudentsByCourse(id);
+		if(ucenici == null){
+			return new ResponseEntity<List<Ucenik>>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<List<Ucenik>>(ucenici,HttpStatus.OK);
+	}
+	@RequestMapping(method=RequestMethod.GET, value="/{id}/tests")
+	ResponseEntity<List<Test>> getAllTestsByCourse(@PathVariable int id){
+		List<Test> testovi = new ArrayList<>();
+		testovi = kursServ.getTestsByCourse(id);
+		if(testovi == null){
+			return new ResponseEntity<List<Test>>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<List<Test>>(testovi,HttpStatus.OK);
 	}
 	
 	@RequestMapping(method=RequestMethod.GET, value="/professors/{id}")

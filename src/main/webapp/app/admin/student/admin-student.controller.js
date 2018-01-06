@@ -5,16 +5,14 @@
         .module('linguaApp')
         .controller('AdminStudentController', AdminStudentController);
 
-    AdminStudentController.$inject = ['$rootScope', '$scope', '$uibModal', 'studentService', 'loginCheck', 'StudentService', '$log', '$location'];
+    AdminStudentController.$inject = ['$rootScope', '$scope', '$uibModal', 'studentService', 'loginCheck', 'StudentService', '$log', '$location','LoginService'];
 
-    function AdminStudentController ($rootScope, $scope, $uibModal, studentService, loginCheck, StudentService, $log, $location) {
+    function AdminStudentController ($rootScope, $scope, $uibModal, studentService, loginCheck, StudentService, $log, $location,LoginService) {
         var vm = this;
         vm.account = loginCheck.name;
         vm.isAuth = loginCheck.authenticated;
         vm.student = studentService;
-
         vm.student.registrovan_temp = vm.student.registrovan;
-        
         vm.error = {
             message: 'default message',
             show: false
@@ -64,6 +62,15 @@
                     }
                 }
             });
+        }
+        $scope.logout = function() {
+            LoginService.logOut()
+                .then(function(result){
+                    $location.path("/login");
+                },function(error){
+                    vm.isAuth = false;
+                    console.log(error.statusText);
+                });
         }
     }
     angular.module('linguaApp').controller('AssignCourseCtrl', function ($uibModalInstance, accountService, StudentService, coursePrepService, $location) {

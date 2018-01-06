@@ -6,18 +6,14 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.codehaus.jackson.map.annotate.JsonSerialize;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 
 @Entity
@@ -33,12 +29,11 @@ public class Kurs {
 	protected Nastavnik nastavnik;
 	@OneToOne
 	protected TipKursa tipKursa;
-	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="kurs",cascade=CascadeType.REMOVE)
 	@JsonIgnore
-	@JoinTable (name = "tbl_pohadjanja" , inverseJoinColumns = @JoinColumn(name = "korisnicko_ime"), joinColumns=@JoinColumn(name = "idKursa"))
 	protected List<Ucenik> ucenici = new ArrayList<Ucenik>();
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinTable (name = "tbl_testiranje" , inverseJoinColumns = @JoinColumn(name = "testId"), joinColumns=@JoinColumn(name = "idKursa"))
+	@OneToMany(mappedBy="kurs",cascade=CascadeType.REMOVE)
+	@JsonIgnore
 	protected List<Test>testovi = new ArrayList<>();
 	
 	public Kurs(){}
@@ -61,6 +56,13 @@ public class Kurs {
 		this.getUcenici().add(ucenik);
 		if(ucenik.getKurs()!=this){
 			ucenik.setKurs(this);
+		}
+	}
+	
+	public void addTest(Test test){
+		this.getTestovi().add(test);
+		if(test.getKurs()!=this){
+			test.setKurs(this);
 		}
 	}
 	

@@ -25,7 +25,7 @@ public class JpaKorisnikService implements KorisnikService{
 	}
 	
 	public Korisnik save(Korisnik newKor){
-		Korisnik presistentKor = korisnikRepo.saveAndFlush(newKor);
+		Korisnik presistentKor = korisnikRepo.save(newKor);
 		if(presistentKor == null){
 			return null;
 		}

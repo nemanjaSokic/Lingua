@@ -1,5 +1,6 @@
 package com.lingua.web.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.lingua.model.Korisnik;
 import com.lingua.model.Kurs;
+import com.lingua.model.Ocena;
 import com.lingua.model.Ucenik;
+import com.lingua.model.Uplata;
 import com.lingua.service.KorisnikService;
 import com.lingua.service.KursService;
 import com.lingua.service.UcenikService;
@@ -40,16 +43,6 @@ public class ApiUcenikController {
 		}
 		return new ResponseEntity<List<Ucenik>>(ucenici,HttpStatus.OK);
 	}
-	
-	
-	/*@RequestMapping(method=RequestMethod.GET)
-	ResponseEntity<List<Ucenik>> getAll(@PathVariable int courseId){
-		List<Ucenik>ucenici = ucenikServ.findByCourseId(courseId);
-		if(ucenici == null || ucenici.isEmpty()){
-			return new ResponseEntity<List<Ucenik>>(HttpStatus.NOT_FOUND);
-		}
-		return new ResponseEntity<List<Ucenik>>(ucenici,HttpStatus.OK);
-	}*/
 
 	@RequestMapping(method=RequestMethod.GET,value="/{index}")
 	ResponseEntity<Ucenik> getOne(@PathVariable String index){
@@ -59,6 +52,26 @@ public class ApiUcenikController {
 		}
 		return new ResponseEntity<Ucenik>(u,HttpStatus.OK);
 	}
+	
+	@RequestMapping(method=RequestMethod.GET,value="/{index}/marks")
+	ResponseEntity<List<Ocena>> getAllMarksByStudent(@PathVariable String index){
+		List<Ocena> ocene = new ArrayList<>();
+		ocene = ucenikServ.getMarks(index);
+		if(ocene == null){
+			return new ResponseEntity<List<Ocena>>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<List<Ocena>>(ocene,HttpStatus.OK);
+	}
+	@RequestMapping(method=RequestMethod.GET,value="/{index}/payments")
+	ResponseEntity<List<Uplata>> getAllPaymentsByStudent(@PathVariable String index){
+		List<Uplata> uplate = new ArrayList<>();
+		uplate = ucenikServ.getPayments(index);
+		if(uplate == null){
+			return new ResponseEntity<List<Uplata>>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<List<Uplata>>(uplate,HttpStatus.OK);
+	}
+	
 	
 	//---------------------POST-------------------
 	

@@ -12,8 +12,4 @@ public interface UplataService {
 
 	Uplata save(Uplata newUplata);
 
-	List<Uplata> findByCourseAndStudent(int courseId, String index);
-
-	Uplata findByCourseAndStudentAndPayment(int courseId, String index, int br);
-
 }

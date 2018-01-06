@@ -8,12 +8,15 @@ import javax.persistence.InheritanceType;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 /**
  * @author nemanja
  *
  */
 @Entity
 @Table(name="tblNastavnici")
+@JsonSerialize
 public class Nastavnik extends Korisnik {
 	
 	@Column(name="id_nastavnika")

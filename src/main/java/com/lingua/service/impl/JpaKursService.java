@@ -8,7 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lingua.model.Kurs;
-import com.lingua.model.Nastavnik;
+import com.lingua.model.Test;
+import com.lingua.model.Ucenik;
 import com.lingua.repository.KursRepository;
 import com.lingua.repository.NastavnikRepository;
 import com.lingua.repository.UcenikRepository;
@@ -57,6 +58,26 @@ public class JpaKursService implements KursService{
 	@Override
 	public List<Kurs> getAllByProfessor(int id) {
 		return kursRepo.findByNastavnikId(id);
+	}
+
+	@Override
+	public List<Ucenik> getStudentsByCourse(int id) {
+		Kurs k = kursRepo.findOne(id);
+		if(k==null){
+			return null;
+		}
+		List<Ucenik> ucenici = k.getUcenici();
+		return ucenici;
+	}
+
+	@Override
+	public List<Test> getTestsByCourse(int id) {
+		Kurs k = kursRepo.findOne(id);
+		if(k==null){
+			return null;
+		}
+		List<Test> testovi = k.getTestovi();
+		return testovi;
 	}
 	
 	

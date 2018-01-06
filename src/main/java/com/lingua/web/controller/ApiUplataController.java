@@ -18,7 +18,7 @@ import com.lingua.service.UcenikService;
 import com.lingua.service.UplataService;
 
 @RestController
-@RequestMapping(value = "/api/courses/{courseId}/students/{index}/payments")
+@RequestMapping(value = "/api/payments")
 public class ApiUplataController {
 	
 	@Autowired
@@ -32,7 +32,7 @@ public class ApiUplataController {
 	
 	@RequestMapping(method=RequestMethod.GET)
 	ResponseEntity<List<Uplata>> getAll(@PathVariable int courseId, @PathVariable String index){
-		List<Uplata> uplate = uplataServ.findByCourseAndStudent(courseId,index);
+		List<Uplata> uplate = uplataServ.findAll();
 		if(uplate==null || uplate.isEmpty()){
 			return new ResponseEntity<List<Uplata>>(HttpStatus.NOT_FOUND);
 		}
@@ -41,10 +41,8 @@ public class ApiUplataController {
 	
 	@RequestMapping(method=RequestMethod.GET,value="/{br}")
 	ResponseEntity<Uplata> getOne(
-			@PathVariable int courseId,
-			@PathVariable String index,
 			@PathVariable int br){
-		Uplata u = uplataServ.findByCourseAndStudentAndPayment(courseId,index,br);
+		Uplata u = uplataServ.findOne(br);
 		if(u==null){
 			return new ResponseEntity<Uplata>(HttpStatus.BAD_REQUEST);
 		}

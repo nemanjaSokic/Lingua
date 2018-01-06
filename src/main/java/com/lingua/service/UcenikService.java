@@ -3,7 +3,9 @@ package com.lingua.service;
 import java.util.List;
 
 import com.lingua.model.Kurs;
+import com.lingua.model.Ocena;
 import com.lingua.model.Ucenik;
+import com.lingua.model.Uplata;
 
 public interface UcenikService {
 
@@ -22,6 +24,11 @@ public interface UcenikService {
 	void delete(Ucenik u);
 
 	Ucenik findByIndeks(String index);
+
+	List<Ocena> getMarks(String index);
+
+	List<Uplata> getPayments(String index);
+
 
 
 }

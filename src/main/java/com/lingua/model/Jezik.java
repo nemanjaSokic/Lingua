@@ -8,8 +8,11 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 @Entity
 @Table(name="tblJezici")
+@JsonSerialize
 public class Jezik {
 
 	@Id

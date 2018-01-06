@@ -36,17 +36,6 @@ public class JpaUplataService implements UplataService{
 		//Uplata oldUplata = uplataRepo.findOne(newUplata.getUplatnicaBr());
 		return uplataRepo.save(newUplata);
 	}
-
-	@Override
-	public List<Uplata> findByCourseAndStudent(int courseId, String index) {		
-		List<Uplata> uplate = uplataRepo.findByKursIdKursaAndUcenikIndeks(courseId,index);
-		return uplate;
-	}
-
-	@Override
-	public Uplata findByCourseAndStudentAndPayment(int courseId, String index,int br) {
-		return uplataRepo.findByKursIdKursaAndUcenikIndeksAndUplatnicaBr(courseId,index,br);
-	}
 	
 	
 	

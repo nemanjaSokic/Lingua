@@ -30,7 +30,7 @@ public class TipKursa {
 	@Id
 	@Column(name="id_tipa")
 	@GeneratedValue
-	protected int id;
+	protected int id_tipa;
 	@Column(name="cena")
 	protected int cena;
 	@OneToOne
@@ -51,10 +51,10 @@ public class TipKursa {
 	}
 	
 	public int getIdKursa() {
-		return id;
+		return id_tipa;
 	}
 	public void setIdKursa(int idKursa) {
-		this.id = idKursa;
+		this.id_tipa = idKursa;
 	}
 	public int getCena() {
 		return cena;

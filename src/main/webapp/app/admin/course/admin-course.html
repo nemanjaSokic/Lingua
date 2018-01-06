@@ -1,1 +1,50 @@
-<div>profile</div>
+<div ng-include="'/app/layouts/navbar/admin/navbar.html'"></div>
+<br><br>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Course {{vm.course.id}} informations:</th>
+                <th><a ng-href="#/admin/professor/{{vm.course.nastavnik.id}}">{{vm.course.nastavnik.ime}} {{vm.course.nastavnik.prezime}}</a></th>
+                <th>{{vm.course.tipKursa.jezik.naziv}} - {{vm.course.tipKursa.nivo.nazivNivoa}} : {{vm.course.tipKursa.cena}}€</th>
+            </tr>
+        </thead>
+    </table>
+        <table class="table table-hover">
+                <thead>
+                    <tr><th>Students list</th></tr>
+                    <tr>
+                        <th scope="col">Index</th>
+                        <th scope="col">Name and Surname</th>
+                        <th scope="col">Username</th>
+                        <th colspan="2">Contact</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="s in vm.students">
+                        <th scope="row"><a ng-href="#/admin/student/{{s.indeks}}">{{s.indeks}}</a></th>
+                        <th scope="row">{{s.ime}} {{s.prezime}}</th>
+                        <td>{{s.korisnickoIme}}</td>
+                        <td>{{s.email}}</td>
+                        <td>    {{s.telefonKorisnika}}</td>
+                    </tr>
+                </tbody>
+        </table>
+        <table class="table table-hover">
+                <thead>
+                    <tr><th>Course tests</th></tr>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Subject</th>
+                        <th scope="col">Dcument link</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="t in vm.tests">
+                        <th scope="row">{{t.testId}}</th>
+                        <td>{{t.datum}}</td>
+                        <td>{{t.naslov}}</td>
+                        <td><a ng-href="{{t.link}}">View document</a></td>
+                    </tr>
+                </tbody>
+            </table>

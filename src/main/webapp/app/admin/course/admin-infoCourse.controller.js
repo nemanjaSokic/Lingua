@@ -3,16 +3,17 @@
 
     angular
         .module('linguaApp')
-        .controller('AdminCourseController', AdminCourseController);
+        .controller('AdmiInfoCourseController', AdmiInfoCourseController);
 
-    AdminCourseController.$inject = ['$rootScope', '$scope','courseServ','loginCheck', '$log', '$location','LoginService'];
-
-    function AdminCourseController ($rootScope, $scope,courseServ,loginCheck, $log, $location,LoginService) {
+        AdmiInfoCourseController.$inject = ['$scope' ,'loginCheck','courseServ','courseStudent','courseTest','LoginService'];
+    function AdmiInfoCourseController($scope ,loginCheck,courseServ,courseStudent,courseTest,LoginService) {
         var vm = this;
-        vm.account = loginCheck.name;
+         vm.account = loginCheck.name;
         vm.isAuth = loginCheck.authenticated;
         vm.course = courseServ;
-        
+        vm.students = courseStudent;
+        vm.tests = courseTest; 
+
         $scope.logout = function() {
             LoginService.logOut()
                 .then(function(result){

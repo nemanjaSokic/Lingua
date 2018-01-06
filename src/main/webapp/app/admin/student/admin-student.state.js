@@ -20,12 +20,26 @@
                 })
                 .when("/admin/student/:index", {
                     templateUrl : 'app/admin/student/admin-student.html',
-                    controller : 'AdminStudentController',
+                    controller : 'AdminInfoStudentController',
                     controllerAs: 'vm',
                     resolve: {
                         loginCheck: loginCheck,
-                        studentService: getAccount
+                        studentService: getAccount,
+                        marks: getMarks,
+                        payments: getPayments
                     }
+                });
+        }
+        function getMarks(StudentService,$route){
+            return StudentService.getMarks($route.current.params.index)
+                .then(function(res){
+                    return res.data;
+                });
+        }
+        function getPayments(StudentService,$route){
+            return StudentService.getPayments($route.current.params.index)
+                .then(function(res){
+                    return res.data;
                 });
         }
         function getStudents(StudentService){

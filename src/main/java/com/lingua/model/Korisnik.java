@@ -7,9 +7,12 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 @Entity
 @Table(name="tblKorisnici")
 @Inheritance(strategy = InheritanceType.JOINED)
+@JsonSerialize
 public class Korisnik extends Osoba{
 
 	@Column(name="tip")

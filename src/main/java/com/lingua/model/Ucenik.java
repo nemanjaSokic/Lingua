@@ -7,31 +7,31 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.lingua.support.UcenikIdGenerator;
 
 @Entity
 @Table(name="tblUcenici")
+@JsonSerialize
 public class Ucenik extends Korisnik {
 	
 	@Column
 	protected String indeks;
 	@Column
 	protected Boolean status;
-	@ManyToOne(targetEntity=Kurs.class, fetch=FetchType.EAGER,cascade=CascadeType.REMOVE)
+	@ManyToOne(fetch=FetchType.EAGER)
+	//@JsonBackReference
 	protected Kurs kurs;
-	@OneToMany(cascade={CascadeType.ALL,CascadeType.REMOVE})
+	@OneToMany(mappedBy="ucenik",cascade=CascadeType.REMOVE)
 	@JsonIgnore
-	@JoinTable (name = "tbl_uplatnice" , joinColumns = @JoinColumn(name = "indeks"),inverseJoinColumns=@JoinColumn(name = "broj_uplatnice"))
 	protected List<Uplata> uplate;
-	@OneToMany(cascade={CascadeType.ALL,CascadeType.REMOVE})
-	@JoinTable (name = "tbl_dnevnik" , inverseJoinColumns = @JoinColumn(name = "idOcene"), joinColumns=@JoinColumn(name = "broj_uplatnice"))
+	@OneToMany(mappedBy="ucenik",cascade=CascadeType.REMOVE)
+	@JsonIgnore
 	protected List<Ocena> ocene;
 	
 	
@@ -72,6 +72,9 @@ public class Ucenik extends Korisnik {
 	
 	public void addOcena(Ocena ocena){
 		this.ocene.add(ocena);
+		if(ocena.getUcenik() != this){
+			ocena.setUcenik(this);
+		}
 	}
 
 	public List<Ocena> getOcene() {

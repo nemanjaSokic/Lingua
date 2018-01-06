@@ -20,6 +20,12 @@
             },
             delete: function(index){
                 return $http.delete('/api/students/'+index);
+            },
+            getMarks: function(index){
+                return $http.get('/api/students/'+index+'/marks');
+            },
+            getPayments: function(index){
+                return $http.get('/api/students/'+index+'/payments');
             }
         }
     }

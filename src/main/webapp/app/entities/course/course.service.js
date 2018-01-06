@@ -12,8 +12,17 @@
             getAllCourse : function(){
                 return $http.get('/api/courses');
             },
+            getOne: function(id, students){
+                return $http.get('/api/courses/'+id);
+            },
             getAllCoursesByProfessor: function(id){
                 return $http.get('/api/courses/professors/' + id);
+            },
+            getCourseStudent: function(id){
+                return $http.get('/api/courses/'+id+'/students');
+            },
+            getCourseTests: function(id){
+                return $http.get('/api/courses/'+id+'/tests');
             }
         }
     }

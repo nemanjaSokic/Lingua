@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lingua.model.Kurs;
+import com.lingua.model.Ocena;
 import com.lingua.model.Ucenik;
+import com.lingua.model.Uplata;
 import com.lingua.repository.UcenikRepository;
 import com.lingua.service.UcenikService;
 
@@ -61,6 +63,28 @@ public class JpaUcenikService implements UcenikService{
 	public Ucenik findByIndeks(String index) {
 		return ucenikRepo.findByIndeks(index);
 	}
+
+	@Override
+	public List<Ocena> getMarks(String index) {
+		Ucenik u = findOne(index);
+		List<Ocena> ocene = u.getOcene();
+		if(ocene == null){
+			return null;
+		}
+		return ocene;
+	}
+
+	@Override
+	public List<Uplata> getPayments(String index) {
+		Ucenik u = findOne(index);
+		List<Uplata> uplate = u.getUplate();
+		if(uplate == null){
+			return null;
+		}
+		return uplate;
+	}
+
+	
 
 	
 	
