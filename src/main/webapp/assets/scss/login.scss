@@ -1,0 +1,5 @@
+@import "mixins";
+.loginDiv {
+    background: url("/assets/img/3.jpg") center center;
+    @include mainDiv;
+}

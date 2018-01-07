@@ -1,25 +1,26 @@
-<div>
-    <!-- When user isn't logged in -->
-    <div class="FirstLogedIn" ng-show="!vm.isAuth">
-        <nav class="mainNav">
-            <ul>
-                <li><a href="#">about us</a></li>
-                <li><a href="#">about teachers</a></li>
-                <li><a href="#">gallery</a></li>
-                <li><a href="#">contact us</a></li>
-            </ul>
-        </nav>
-        <div class="buttonLogIn">
-            <div class="ButtonBorder">
-                <a ng-show="!vm.isAuth" href="#/login">log in</a>
+<div class="homeDiv">
+    <div class="opacityDiv">
+        <!-- When user isn't logged in -->
+        <div class="FirstLogedIn" ng-show="!vm.isAuth">
+            <nav class="mainNav">
+                <ul>
+                    <li><a href="#">about us</a></li>
+                    <li><a href="#">about teachers</a></li>
+                    <li><a href="#">gallery</a></li>
+                    <li><a href="#">contact us</a></li>
+                </ul>
+            </nav>
+            <div class="buttonLogIn">
+                <div class="ButtonBorder">
+                    <a ng-show="!vm.isAuth" href="#/login">log in</a>
+                </div>
+            </div>
+            <div class="buttonLogIn">
+                <div class="ButtonBorder">
+                    <a ng-show="!vm.isAuth" href="#/signup">sign up</a>
+                </div>
             </div>
         </div>
-        <div class="buttonLogIn">
-            <div class="ButtonBorder">
-                <a ng-show="!vm.isAuth" href="#/signup">sign up</a>
-            </div>
-        </div>
-
         <!-- When user is  logged in -->
         <div ng-show="vm.isAuth">
             <button class="buttonLogOut"><a href="" ng-click="logout()">logout</a></button>

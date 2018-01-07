@@ -1,0 +1,19 @@
+.loginDiv {
+  background: url("/assets/img/3.jpg") center center;
+  font-family: 'Libre Franklin', sans-serif;
+  background-repeat: no-repeat;
+  height: 100%;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover; }
+  .loginDiv .opacityDiv {
+    background-image: linear-gradient(to bottom right, white 0%, #ffffcc 100%);
+    opacity: 0.3;
+    height: 85vh;
+    margin: 35px 35px;
+    -moz-box-shadow: inset 0 0 70px #000000;
+    -webkit-box-shadow: inset 0 0 70px #000000;
+    box-shadow: inset 0 0 70px #000000; }
+
+/*# sourceMappingURL=login.css.map */

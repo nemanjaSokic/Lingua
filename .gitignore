@@ -67,6 +67,7 @@ local.properties
 
 *.class
 
+
 ######################
 # Maven Wrapper
 ######################
@@ -75,3 +76,5 @@ local.properties
 /src/main/webapp/bower_components
 /src/main/resources/META-INF
 .idea
+.sass-cache/
+*.css.map
