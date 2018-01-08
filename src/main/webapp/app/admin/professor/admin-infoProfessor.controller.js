@@ -3,10 +3,10 @@
 
     angular
         .module('linguaApp')
-        .controller('AdminInfoStudentController', AdminInfoStudentController);
+        .controller('AdminInfoProfessorController', AdminInfoProfessorController);
 
-    AdminInfoStudentController.$inject = ['$scope','loginCheck','studentService','marks','payments','LoginService','StudentService','$location', '$uibModal'];
-    function AdminInfoStudentController($scope,loginCheck,studentService,marks,payments,LoginService,StudentService,$location, $uibModal) {
+    AdminInfoProfessorController.$inject = ['$scope','loginCheck','LoginService','ProfessorService','$location', '$uibModal'];
+    function AdminInfoProfessorController($scope,loginCheck,LoginService,ProfessorService,$location, $uibModal) {
         var vm = this;
         vm.account = loginCheck.name;
         vm.isAuth = loginCheck.authenticated;

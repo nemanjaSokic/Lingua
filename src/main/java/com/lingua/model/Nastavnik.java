@@ -23,7 +23,7 @@ public class Nastavnik extends Korisnik {
 	protected int id;
 	@OneToOne
 	protected Jezik predaje;
-	protected static int count = 0;
+	public static int count = 0;
 	
 	public Nastavnik(){}
 	

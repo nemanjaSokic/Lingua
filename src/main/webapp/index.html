@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="linguaApp">
+<html>
 
 <head>
     <title>Lingua School</title>
@@ -22,8 +22,8 @@
     <link href="https://fonts.googleapis.com/css?family=Libre+Franklin" rel="stylesheet">
 </head>
 
-<body ng-view ng-class="bodyClass">
-
+<body ng-app="linguaApp" ng-class="bodyClass">
+    <div ng-view></div>
 
     <!-- library js -->
     <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>

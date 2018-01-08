@@ -10,7 +10,7 @@
     function RegistrationService($http) {
         return {
             isUsernameExisted : function(username){
-                return $http.get('/api/users/'+username);
+                return $http.get('/api/users/is/'+username);
             },
             getAllCourseTypes : function(){
                 return $http.get('/api/courseTypes');

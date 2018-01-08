@@ -106,7 +106,7 @@ public class ApiKorisnikController {
 		return user;
 	}
 	
-	@RequestMapping(value="/{username}", method=RequestMethod.GET)
+	@RequestMapping(value="/is/{username}", method=RequestMethod.GET)
 	public ResponseEntity<Boolean> isUsernameExist(@PathVariable(value="username") String un){
 		boolean is = false;
 		String username = korisnikServ.getUsername(un);
@@ -132,9 +132,10 @@ public class ApiKorisnikController {
 	@RequestMapping(value="/prof", method = RequestMethod.POST, consumes = {"application/json"})
 	public ResponseEntity<Korisnik>  save(@RequestBody Nastavnik nastavnik) throws Exception{
 		if(nastavnik != null){
+			nastavnik.setId(Nastavnik.count);
 			korisnikServ.save(nastavnik);
-			email.sendNotifyToAdmin();
-			email.sendSimpleMessage(nastavnik.getEmail(), template.getSubject(),"Dear Professor " + nastavnik.getIme() +","+ template.getText());
+			//email.sendNotifyToAdmin();
+			//email.sendSimpleMessage(nastavnik.getEmail(), template.getSubject(),"Dear Professor " + nastavnik.getIme() +","+ template.getText());
 		}else{
 			return new ResponseEntity<Korisnik>(HttpStatus.BAD_REQUEST);
 		}
@@ -147,8 +148,8 @@ public class ApiKorisnikController {
 		if(ucenik != null){
 			ucenik.setIndeks(UcenikIdGenerator.generate(ucenik.getIme(), ucenik.getPrezime()));
 			korisnikServ.save(ucenik);
-			email.sendNotifyToAdmin();
-			email.sendSimpleMessage(ucenik.getEmail(), template.getSubject(), "Dear " + ucenik.getIme() +","+ template.getText());
+			//email.sendNotifyToAdmin();
+			//email.sendSimpleMessage(ucenik.getEmail(), template.getSubject(), "Dear " + ucenik.getIme() +","+ template.getText());
 		}else{
 			return new ResponseEntity<Korisnik>(HttpStatus.BAD_REQUEST);
 		}
