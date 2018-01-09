@@ -12,7 +12,7 @@
         vm.account = loginCheck.name;
         vm.isAuth = loginCheck.authenticated;
 
-        $scope.bodyClass = 'homeDiv';
+        $rootScope.bodyClass = 'homeDiv';
 
         $scope.logout = function() {
             LoginService.logOut()

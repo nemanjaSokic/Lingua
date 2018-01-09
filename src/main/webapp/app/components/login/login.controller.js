@@ -9,7 +9,7 @@
 
     function LoginController($rootScope, $scope, $http, $q, $location, LoginService) {
 
-        $scope.bodClass = 'loginDiv';
+        $rootScope.bodyClass = 'loginDiv';
 
         $scope.credentials = {};
         $scope.login = function() {

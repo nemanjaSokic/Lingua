@@ -134,8 +134,8 @@ public class ApiKorisnikController {
 		if(nastavnik != null){
 			nastavnik.setId(Nastavnik.count);
 			korisnikServ.save(nastavnik);
-			//email.sendNotifyToAdmin();
-			//email.sendSimpleMessage(nastavnik.getEmail(), template.getSubject(),"Dear Professor " + nastavnik.getIme() +","+ template.getText());
+			email.sendNotifyToAdmin();
+			email.sendSimpleMessage(nastavnik.getEmail(), template.getSubject(),"Dear Professor " + nastavnik.getIme() +","+ template.getText());
 		}else{
 			return new ResponseEntity<Korisnik>(HttpStatus.BAD_REQUEST);
 		}
@@ -148,8 +148,8 @@ public class ApiKorisnikController {
 		if(ucenik != null){
 			ucenik.setIndeks(UcenikIdGenerator.generate(ucenik.getIme(), ucenik.getPrezime()));
 			korisnikServ.save(ucenik);
-			//email.sendNotifyToAdmin();
-			//email.sendSimpleMessage(ucenik.getEmail(), template.getSubject(), "Dear " + ucenik.getIme() +","+ template.getText());
+			email.sendNotifyToAdmin();
+			email.sendSimpleMessage(ucenik.getEmail(), template.getSubject(), "Dear " + ucenik.getIme() +","+ template.getText());
 		}else{
 			return new ResponseEntity<Korisnik>(HttpStatus.BAD_REQUEST);
 		}
