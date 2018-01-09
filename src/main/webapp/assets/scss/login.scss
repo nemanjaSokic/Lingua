@@ -1,5 +1,72 @@
 @import "mixins";
 .loginDiv {
-    background: url("/assets/img/2.jpg") center center;
-    @include mainDiv;
+    background-color: rgba(0, 0, 0, .9);
+}
+
+.opacityDiv {
+    // background: url("/assets/img/1.jpg") center center;
+    @include opacytyHomeDiv;
+}
+
+.backButton {
+    margin: 10%;
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    font-size: 2em;
+    text-transform: uppercase;
+}
+
+.log {
+    float: right;
+    margin-right: 22%;
+    width: 35%;
+    ul {
+        list-style-type: none;
+        text-transform: uppercase;
+        color: rgb(0, 0, 0);
+        margin-top: 20%;
+        li {
+            text-decoration: none;
+            list-style-type: none;
+            a {
+                text-decoration: none;
+                color: rgb(0, 0, 0);
+            }
+            &:nth-child(3) {
+                padding-top: 20%;
+                a {
+                    font-size: 2em;
+                    font-weight: bold;
+                }
+            }
+        }
+        div {
+            padding-bottom: 10%;
+            font-size: 1em;
+            display: flex;
+            flex-direction: column;
+            label {
+                font-weight: bold;
+            }
+            input {
+                padding-bottom: 10%;
+                border-radius: 10px;
+                &::placeholder {
+                    font-size: 1.5em;
+                    text-align: center;
+                }
+            }
+        }
+        form {
+            div {}
+            button {
+                padding: 5%;
+                padding-bottom: 4%;
+                border-radius: 10px;
+                background: rgb(255, 255, 255);
+                font-size: 1em;
+                font-weight: bold;
+            }
+        }
+    }
 }

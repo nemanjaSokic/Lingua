@@ -1,19 +1,60 @@
 .loginDiv {
-  background: url("/assets/img/3.jpg") center center;
-  font-family: 'Libre Franklin', sans-serif;
-  background-repeat: no-repeat;
-  height: 100%;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover; }
-  .loginDiv .opacityDiv {
-    background-image: linear-gradient(to bottom right, white 0%, #ffffcc 100%);
-    opacity: 0.3;
-    height: 85vh;
-    margin: 35px 35px;
-    -moz-box-shadow: inset 0 0 70px #000000;
-    -webkit-box-shadow: inset 0 0 70px #000000;
-    box-shadow: inset 0 0 70px #000000; }
+  background-color: rgba(0, 0, 0, 0.9); }
+
+.opacityDiv {
+  background-image: linear-gradient(to bottom right, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 204, 0.5) 100%);
+  height: 89vh;
+  margin: 35px;
+  -moz-box-shadow: inset 0 0 70px #000000;
+  -webkit-box-shadow: inset 0 0 70px #000000;
+  box-shadow: inset 0 0 70px #000000; }
+
+.backButton {
+  margin: 10%;
+  text-decoration: none;
+  color: black;
+  font-size: 2em;
+  text-transform: uppercase; }
+
+.log {
+  float: right;
+  margin-right: 22%;
+  width: 35%; }
+  .log ul {
+    list-style-type: none;
+    text-transform: uppercase;
+    color: black;
+    margin-top: 20%; }
+    .log ul li {
+      text-decoration: none;
+      list-style-type: none; }
+      .log ul li a {
+        text-decoration: none;
+        color: black; }
+      .log ul li:nth-child(3) {
+        padding-top: 20%; }
+        .log ul li:nth-child(3) a {
+          font-size: 2em;
+          font-weight: bold; }
+    .log ul div {
+      padding-bottom: 10%;
+      font-size: 1em;
+      display: flex;
+      flex-direction: column; }
+      .log ul div label {
+        font-weight: bold; }
+      .log ul div input {
+        padding-bottom: 10%;
+        border-radius: 10px; }
+        .log ul div input::placeholder {
+          font-size: 1.5em;
+          text-align: center; }
+    .log ul form button {
+      padding: 5%;
+      padding-bottom: 4%;
+      border-radius: 10px;
+      background: white;
+      font-size: 1em;
+      font-weight: bold; }
 
 /*# sourceMappingURL=login.css.map */
