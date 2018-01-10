@@ -1,8 +1,8 @@
 .loginDiv {
-  background-color: rgba(0, 0, 0, 0.9); }
+  background-color: rgba(95, 8, 8, 0.6); }
 
 .opacityDiv {
-  background-image: linear-gradient(to bottom right, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 204, 0.5) 100%);
+  background-image: linear-gradient(to bottom right, rgba(211, 14, 14, 0.2) 0%, #464141 100%);
   height: 89vh;
   margin: 35px;
   -moz-box-shadow: inset 0 0 70px #000000;
@@ -10,10 +10,12 @@
   box-shadow: inset 0 0 70px #000000; }
 
 .backButton {
-  margin: 10%;
+  position: relative;
+  left: 6%;
+  top: 4%;
   text-decoration: none;
   color: black;
-  font-size: 2em;
+  font-size: 1em;
   text-transform: uppercase; }
 
 .log {
@@ -34,27 +36,26 @@
       .log ul li:nth-child(3) {
         padding-top: 20%; }
         .log ul li:nth-child(3) a {
-          font-size: 2em;
-          font-weight: bold; }
+          font-size: 1.5em; }
     .log ul div {
       padding-bottom: 10%;
       font-size: 1em;
       display: flex;
       flex-direction: column; }
-      .log ul div label {
-        font-weight: bold; }
       .log ul div input {
         padding-bottom: 10%;
         border-radius: 10px; }
         .log ul div input::placeholder {
           font-size: 1.5em;
-          text-align: center; }
+          text-align: center;
+          color: #f6ddbc;
+          position: relative;
+          top: 25px; }
     .log ul form button {
       padding: 5%;
       padding-bottom: 4%;
       border-radius: 10px;
       background: white;
-      font-size: 1em;
-      font-weight: bold; }
+      font-size: 1em; }
 
 /*# sourceMappingURL=login.css.map */

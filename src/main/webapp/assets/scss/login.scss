@@ -1,6 +1,6 @@
 @import "mixins";
 .loginDiv {
-    background-color: rgba(0, 0, 0, .9);
+    background-color: rgba(95, 8, 8, .6);
 }
 
 .opacityDiv {
@@ -9,10 +9,12 @@
 }
 
 .backButton {
-    margin: 10%;
+    position: relative;
+    left: 6%;
+    top: 4%;
     text-decoration: none;
-    color: rgb(0, 0, 0);
-    font-size: 2em;
+    color: black;
+    font-size: 1em;
     text-transform: uppercase;
 }
 
@@ -35,8 +37,7 @@
             &:nth-child(3) {
                 padding-top: 20%;
                 a {
-                    font-size: 2em;
-                    font-weight: bold;
+                    font-size: 1.5em;
                 }
             }
         }
@@ -45,15 +46,16 @@
             font-size: 1em;
             display: flex;
             flex-direction: column;
-            label {
-                font-weight: bold;
-            }
+            label {}
             input {
                 padding-bottom: 10%;
                 border-radius: 10px;
                 &::placeholder {
                     font-size: 1.5em;
                     text-align: center;
+                    color: rgb(246, 221, 188);
+                    position: relative;
+                    top: 25px;
                 }
             }
         }
@@ -65,7 +67,6 @@
                 border-radius: 10px;
                 background: rgb(255, 255, 255);
                 font-size: 1em;
-                font-weight: bold;
             }
         }
     }
