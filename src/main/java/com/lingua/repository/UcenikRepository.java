@@ -18,4 +18,6 @@ public interface UcenikRepository extends JpaRepository<Ucenik, String> {
 
 	Ucenik findByIndeks(String index);
 
+	List<Ucenik> findByKursNotNull();
+
 }

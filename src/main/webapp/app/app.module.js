@@ -7,6 +7,7 @@
             'ui.bootstrap',
             'ngRoute',
             'ngSanitize',
-            'mwl.confirm'
+            'mwl.confirm',
+            'checklist-model'
         ])
 })();

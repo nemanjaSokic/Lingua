@@ -10,7 +10,7 @@
     function StudentService($http, $routeParams) {
         return {
             getAll : function (registrated) {
-                return $http.get('/api/students/', {params: {'register':registrated}});
+                return $http.get('/api/students/'/* , {params: {'register':registrated}} */);
             },
             getOne: function(index){
                 return $http.get('/api/students/'+index);
@@ -26,6 +26,9 @@
             },
             getPayments: function(index){
                 return $http.get('/api/students/'+index+'/payments');
+            },
+            getCourseAssignedStudents: function(assigned){
+                return $http.get('/api/students/', {params: {'assigned_course':assigned}});
             }
         }
     }

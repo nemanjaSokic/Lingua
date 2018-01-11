@@ -98,7 +98,7 @@ public class TestData {
 		k2.addTest(test3);
 		k2.addTest(test4);
 		
-		Ucenik u1 = new Ucenik("Nemanja", "Sokic",TipKorisnika.UCENIK, "stud1", "123",164572183L,"nemskc@gmail.com",false,"napomena",false,k1);
+		Ucenik u1 = new Ucenik("Nemanja", "Sokic",TipKorisnika.UCENIK, "stud1", "123",164572183L,"nemskc@gmail.com",false,"napomena",false,null);
 		Ucenik u2 = new Ucenik("Pero","Antić", TipKorisnika.UCENIK, "stud2", "123", 381644894972L, "stud2@example.com", true, "", false, k1);
 		Ucenik u3 = new Ucenik("Nikola","Jokić",TipKorisnika.UCENIK, "stud3", "123", 381644894977L, "stud3@example.com", true, "", true, k2);
 		Ucenik u4 = new Ucenik("Miloš","Teodosić", TipKorisnika.UCENIK, "stud4", "123", 381644894973L, "stud4@example.com", true, "", true, k2);
@@ -121,7 +121,7 @@ public class TestData {
 		u4.addOcena(o23);
 		u4.addOcena(o24);
 		
-		k1.addUcenik(u1);
+		//k1.addUcenik(u1);
 		k1.addUcenik(u2);
 		k2.addUcenik(u3);
 		k2.addUcenik(u4);

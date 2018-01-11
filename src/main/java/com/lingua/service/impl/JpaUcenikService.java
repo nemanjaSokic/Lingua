@@ -84,6 +84,11 @@ public class JpaUcenikService implements UcenikService{
 		return uplate;
 	}
 
+	@Override
+	public List<Ucenik> findWithAssignedCourse() {
+		return ucenikRepo.findByKursNotNull();
+	}
+
 	
 
 	

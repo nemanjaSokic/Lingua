@@ -39,7 +39,7 @@ public class JpaKursService implements KursService{
 	}
 
 	@Override
-	public Kurs save(Kurs newKurs) {		
+	public Kurs save(Kurs newKurs) {
 		Kurs kurs = kursRepo.saveAndFlush(newKurs);
 		return kurs;
 	}

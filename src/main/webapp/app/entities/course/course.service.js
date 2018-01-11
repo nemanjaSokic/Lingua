@@ -23,6 +23,9 @@
             },
             getCourseTests: function(id){
                 return $http.get('/api/courses/'+id+'/tests');
+            },
+            addNewCourse: function(course){
+                return $http.post('/api/courses/', course);
             }
         }
     }

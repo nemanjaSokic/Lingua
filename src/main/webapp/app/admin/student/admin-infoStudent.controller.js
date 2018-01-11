@@ -90,7 +90,7 @@
         };
 
         vm.cancel = function () {
-            $uibModalInstance.dismiss('cancel');
+            $uibModalInstance.close();
         };
     });
 })();

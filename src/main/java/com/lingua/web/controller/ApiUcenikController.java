@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lingua.model.Korisnik;
@@ -36,8 +37,16 @@ public class ApiUcenikController {
 	//----------------------GET--------------------
 	
 	@RequestMapping(method=RequestMethod.GET)
-	ResponseEntity<List<Ucenik>> getAllActive(){
-		List<Ucenik> ucenici = ucenikServ.findAll();
+	ResponseEntity<List<Ucenik>> getAllActive(
+			@RequestParam(value="assigned_course",required = false) Boolean assign){
+		List<Ucenik> ucenici = new ArrayList<>();
+		if(assign != null && assign == false){
+			ucenici = ucenikServ.findByCourse(null);
+		}else if(assign !=null && assign==true){
+			ucenici = ucenikServ.findWithAssignedCourse();
+		}else{
+			ucenici = ucenikServ.findAll();
+		}
 		if(ucenici == null || ucenici.isEmpty()){
 			return new ResponseEntity<List<Ucenik>>(HttpStatus.NOT_FOUND);
 		}

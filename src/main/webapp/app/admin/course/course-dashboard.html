@@ -1,8 +1,11 @@
 <div ng-include="'/app/layouts/navbar/admin/navbar.html'"></div>
-</br></br>
+</br></br></br>
 <table class="table table-hover">
   <thead>
     <tr><th>Active courses</th></tr>
+    <tr>
+      <button ng-click="vm.open('lg')" class="btn btn-info">Create new course</button>
+    </tr>
     <tr>
       <th scope="col">Id</th>
       <th scope="col">Professor</th>
@@ -17,4 +20,39 @@
     </tr>
   </tbody>
 </table>
-<div ng-show="error" class="alert alert-danger fade in"><strong>{{errorMessage}}!</strong></div>
+<div ng-show="vm.error.is" class="alert alert-danger fade in"><strong>{{vm.error.text}}</strong></div>
+<script type="text/ng-template" id="new_course-dialg.html">
+  <div class="modal-header">
+      <h3 class="modal-title" id="modal-title">Create new course</h3>
+  </div>
+  <div class="modal-body" id="modal-body">
+      <div>Active course types
+          <select required class="form-control" ng-model = "vm.course.tipKursa" ng-click="vm.selectProf(vm.course.tipKursa)">
+              <option ng-option value={{type}} ng-repeat="type in vm.types">{{type.jezik.naziv}} - {{type.nivo.nazivNivoa}} : {{type.cena}}€</option>
+          </select>
+      </div>
+      <div>Professor
+        <select required class="form-control" ng-model = "vm.course.nastavnik">
+            <option ng-option value={{prof}} ng-repeat="prof in vm.profs | filter: vm.filtered.jezik.idJezika : prof.predaje.idJezika">Professor {{prof.ime}} {{prof.prezime}} - {{prof.predaje.naziv}}</option>
+        </select>
+      </div>
+      <div>Student (with an unassigned course) list:</br>
+        <pre>
+          <label ng-repeat="stud in vm.studList">
+            <input type="checkbox" data-checklist-model="vm.course.ucenici" data-checklist-value="stud"> {{stud.ime}}
+          </label>
+        </pre>
+      </div>
+  </div>
+  <div class="modal-footer"><button class="btn btn-primary" type="button" ng-click="vm.confirm()">Add student</button>
+      <button class="btn btn-warning" type="button" ng-click="vm.cancel()">Cancel</button>
+  </div>
+</script>
+<script type="text/ng-template" id="stackedModal.html">
+  <div class="modal-header">
+      <h3 class="modal-title" id="modal-title-{{name}}">The {{name}} modal!</h3>
+  </div>
+  <div class="modal-body" id="modal-body-{{name}}">
+      Having multiple modals open at once is probably bad UX but it's technically possible.
+  </div>
+</script>

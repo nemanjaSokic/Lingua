@@ -12,6 +12,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.lingua.support.UcenikIdGenerator;
 
@@ -28,10 +30,10 @@ public class Ucenik extends Korisnik {
 	//@JsonBackReference
 	protected Kurs kurs;
 	@OneToMany(mappedBy="ucenik",cascade=CascadeType.REMOVE)
-	@JsonIgnore
+	@JsonProperty(access=Access.WRITE_ONLY)
 	protected List<Uplata> uplate;
 	@OneToMany(mappedBy="ucenik",cascade=CascadeType.REMOVE)
-	@JsonIgnore
+	
 	protected List<Ocena> ocene;
 	
 	
@@ -76,7 +78,7 @@ public class Ucenik extends Korisnik {
 			ocena.setUcenik(this);
 		}
 	}
-
+	@JsonIgnore
 	public List<Ocena> getOcene() {
 		return ocene;
 	}
@@ -110,7 +112,7 @@ public class Ucenik extends Korisnik {
 			kurs.getUcenici().add(this);
 		}
 	}
-
+	@JsonIgnore
 	public List<Uplata> getUplate() {
 		return uplate;
 	}

@@ -29,6 +29,8 @@ public interface UcenikService {
 
 	List<Uplata> getPayments(String index);
 
+	List<Ucenik> findWithAssignedCourse();
+
 
 
 }

@@ -12,7 +12,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.apache.tomcat.util.net.AbstractEndpoint.Acceptor.AcceptorState;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 
@@ -30,13 +34,16 @@ public class Kurs {
 	@OneToOne
 	protected TipKursa tipKursa;
 	@OneToMany(mappedBy="kurs",cascade=CascadeType.REMOVE)
-	@JsonIgnore
+	@JsonProperty(access=Access.WRITE_ONLY)
 	protected List<Ucenik> ucenici = new ArrayList<Ucenik>();
 	@OneToMany(mappedBy="kurs",cascade=CascadeType.REMOVE)
-	@JsonIgnore
+	@JsonProperty(access=Access.WRITE_ONLY)
 	protected List<Test>testovi = new ArrayList<>();
 	
-	public Kurs(){}
+	public Kurs(){
+		testovi = new ArrayList<>();
+		ucenici = new ArrayList<>();
+	}
 	
 	public Kurs(Nastavnik nastavnik, TipKursa tip) {
 		this.tipKursa = tip;
@@ -79,7 +86,7 @@ public class Kurs {
 	public void setIdKursa(int idKursa) {
 		this.idKursa = idKursa;
 	}
-
+	@JsonIgnore
 	public List<Test> getTestovi() {
 		return testovi;
 	}
@@ -95,7 +102,7 @@ public class Kurs {
 	public void setId(int id) {
 		this.idKursa = id;
 	}
-
+	@JsonIgnore
 	public List<Ucenik> getUcenici() {
 		return ucenici;
 	}
