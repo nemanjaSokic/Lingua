@@ -4,16 +4,16 @@
         display: inline;
         ul {
             display: flex;
-            padding-left: 8%;
+            margin-right: 4%;
             li {
-                padding-left: 9%;
+                margin: 0 auto;
                 text-transform: uppercase;
                 font-weight: bold;
                 list-style-type: none;
                 a {
                     text-decoration: none;
                     font-size: 1.3em;
-                    color: rgb(0, 0, 0);
+                    color: rgb(255, 255, 255);
                 }
             }
         }

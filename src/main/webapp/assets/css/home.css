@@ -4,16 +4,16 @@
     display: inline; }
     .FirstLogedIn .mainNav ul {
       display: flex;
-      padding-left: 8%; }
+      margin-right: 4%; }
       .FirstLogedIn .mainNav ul li {
-        padding-left: 9%;
+        margin: 0 auto;
         text-transform: uppercase;
         font-weight: bold;
         list-style-type: none; }
         .FirstLogedIn .mainNav ul li a {
           text-decoration: none;
           font-size: 1.3em;
-          color: black; }
+          color: white; }
 
 .homeDiv {
   background: url("/assets/img/1.jpg") center center;
