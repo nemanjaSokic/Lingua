@@ -87,7 +87,9 @@ public class ApiUcenikController {
 	@RequestMapping(method=RequestMethod.POST,consumes="application/json")
 	ResponseEntity<Ucenik> add(@RequestBody Ucenik newUcenik){
 		Kurs k = newUcenik.getKurs();
-		k.addUcenik(newUcenik);
+		if(k != null){
+			k.addUcenik(newUcenik);
+		}
 		Ucenik presisted = ucenikServ.save(newUcenik);
 		if(presisted == null){
 			return new ResponseEntity<Ucenik>(HttpStatus.BAD_REQUEST);

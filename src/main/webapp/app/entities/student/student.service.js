@@ -16,7 +16,7 @@
                 return $http.get('/api/students/'+index);
             },
             edit: function(student){
-                return $http.put('/api/students/'+ $routeParams.index, student);
+                return $http.put('/api/students/'+ student.indeks, student);
             },
             delete: function(index){
                 return $http.delete('/api/students/'+index);

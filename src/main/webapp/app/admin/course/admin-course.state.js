@@ -26,7 +26,7 @@
                          loginCheck: loginCheck,
                         courseServ: getCourse,
                         courseStudent: courseStudent,
-                        courseTest: courseTest 
+                        courseTest: courseTest
                     }
                 });
         }
