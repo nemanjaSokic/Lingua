@@ -1,5 +1,6 @@
 .FirstLogedIn {
-  padding-top: 9%; }
+  padding-top: 9%;
+  width: 100%; }
   .FirstLogedIn .mainNav {
     display: inline; }
     .FirstLogedIn .mainNav ul {
@@ -36,7 +37,7 @@
   display: flex;
   flex-direction: column-reverse;
   text-align: center;
-  padding: 31px;
+  padding: 2%;
   font-size: 2em;
   list-style-type: none; }
   .buttonLogIn .ButtonBorder {
@@ -51,5 +52,20 @@
     -webkit-text-stroke: 0.5px black;
     color: white;
     text-shadow: 3px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000; }
+
+@media screen and (max-width: 640px) {
+  .homeDiv {
+    background: none;
+    background-color: white; }
+    .homeDiv .FirstLogedIn {
+      padding-top: 10%; }
+      .homeDiv .FirstLogedIn .mainNav ul {
+        display: block; }
+        .homeDiv .FirstLogedIn .mainNav ul li {
+          padding-top: 10%; }
+          .homeDiv .FirstLogedIn .mainNav ul li a {
+            font-size: 2em; }
+            .homeDiv .FirstLogedIn .mainNav ul li a:hover {
+              color: black; } }
 
 /*# sourceMappingURL=home.css.map */

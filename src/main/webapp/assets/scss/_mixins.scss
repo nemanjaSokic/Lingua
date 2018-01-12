@@ -20,6 +20,7 @@
     }
 }
 
+// backround for background img
 @mixin mainDiv {
     font-family: 'Libre Franklin', sans-serif;
     background-repeat: no-repeat;
@@ -29,6 +30,7 @@
     background-size: cover;
 }
 
+// Opacyty background
 @mixin opacytyHomeDiv {
     background-image: linear-gradient(to bottom right, rgba(211, 14, 14, 0.2) 0%, rgba(70, 65, 65, 2) 100%);
     height: 89vh;
@@ -38,12 +40,13 @@
     box-shadow: inset 0 0 70px #000000;
 }
 
+// button in login.html
 @mixin button {
     .buttonLogIn {
         display: flex;
         flex-direction: column-reverse;
         text-align: center;
-        padding: 31px;
+        padding: 2%;
         font-size: 2em;
         list-style-type: none;
         .ButtonBorder {
