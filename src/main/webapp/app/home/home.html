@@ -22,13 +22,16 @@
                     </div>
                 </div>
             </div>
-            <!-- When user is  logged in -->
-            <div ng-show="vm.isAuth">
-                <button class="buttonLogOut"><a href="" ng-click="logout()">logout</a></button>
-                <div>
-                    <p>The ID is {{vm.account}}</p>
-                    <p>The content is {{vm.isAuth}}</p>
-                </div>
+        </div>
+        <!-- When user is  logged in -->
+        <div class="buttons">
+            <div class="buttonLogIn">
+                <div class="ButtonBorder"><a ng-show="vm.isAuth" href="" ng-click="logout()">logout</a></div>
+            </div>
+            <div>
+                <p>The ID is {{vm.account}}</p>
+                <p>The content is {{vm.isAuth}}</p>
             </div>
         </div>
+
     </div>
