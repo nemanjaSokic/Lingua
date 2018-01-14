@@ -5,8 +5,8 @@
         .module('linguaApp')
         .controller('AdminInfoStudentController', AdminInfoStudentController);
 
-    AdminInfoStudentController.$inject = ['$scope','loginCheck','studentService','marks','payments','LoginService','StudentService','$location', '$uibModal'];
-    function AdminInfoStudentController($scope,loginCheck,studentService,marks,payments,LoginService,StudentService,$location, $uibModal) {
+    AdminInfoStudentController.$inject = ['$scope','$route','loginCheck','studentService','marks','payments','LoginService','StudentService','$location', '$uibModal','UserService'];
+    function AdminInfoStudentController($scope,$route,loginCheck,studentService,marks,payments,LoginService,StudentService,$location, $uibModal,UserService) {
         var vm = this;
         vm.account = loginCheck.name;
         vm.isAuth = loginCheck.authenticated;
@@ -18,6 +18,14 @@
         }
         vm.marks = marks;
         vm.payments = payments;
+        vm.email = {};
+
+        vm.sendEmail = function(){
+            vm.email.to = vm.student.email;
+            return UserService.sendEmail(vm.email).then(function(result){
+                vm.email = {};
+            });
+        }
         
         vm.confirmChanges= function () {
             vm.student.registrovan = vm.student.registrovan_temp;
@@ -76,16 +84,15 @@
                 });
         }
     }
-    angular.module('linguaApp').controller('AssignCourseCtrl', function ($uibModalInstance, accountService, StudentService, coursePrepService, $location) {
+    angular.module('linguaApp').controller('AssignCourseCtrl', function ($uibModalInstance, accountService, StudentService, coursePrepService, $location,$route) {
         var vm = this;
         vm.allCourses = coursePrepService;
         vm.student = accountService;
 
-        vm.addToCourse = function (course) {
-            var courseObj = JSON.parse(course);
-            vm.student.kurs = courseObj;
+        vm.addToCourse = function() {
             return StudentService.edit(vm.student).then(function(result){
                 vm.cancel();
+                $route.reload();
             });
         };
 

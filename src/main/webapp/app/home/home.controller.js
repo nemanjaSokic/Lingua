@@ -11,7 +11,6 @@
         var vm = this;
         vm.account = loginCheck.name;
         vm.isAuth = loginCheck.authenticated;
-
         $rootScope.bodyClass = 'homeDiv';
 
         $scope.logout = function() {

@@ -15,7 +15,7 @@ public interface NastavnikService {
 
 	List<Nastavnik> delete(List<Nastavnik> nastavnici);
 
-	List<Nastavnik> findByJezik(Jezik j);
+	List<Nastavnik> findByJezik(String id);
 	
 	Nastavnik delete(int id);
 

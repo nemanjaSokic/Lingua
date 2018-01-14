@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.hibernate.validator.constraints.Email;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +30,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.lingua.exception.UserException;
 import com.lingua.model.ErrorResponse;
 import com.lingua.model.Korisnik;
-import com.lingua.model.Kurs;
+import com.lingua.model.Mail;
 import com.lingua.model.Nastavnik;
 import com.lingua.model.Ucenik;
 import com.lingua.service.AuthenticationService;
@@ -128,6 +129,14 @@ public class ApiKorisnikController {
 	}
 	
 	//------------------------POST---------------------------
+	
+	@Transactional
+	@RequestMapping(value="/sendEmail", method=RequestMethod.POST, consumes={"application/json"})
+	public ResponseEntity<Mail> sendEmail(@RequestBody Mail emailToUser){
+		email.sendSimpleMessage(emailToUser.getTo(), emailToUser.getSubject(), emailToUser.getContent());
+		return new ResponseEntity<Mail>(HttpStatus.RESET_CONTENT);
+	}
+	
 	@Transactional
 	@RequestMapping(value="/prof", method = RequestMethod.POST, consumes = {"application/json"})
 	public ResponseEntity<Korisnik>  save(@RequestBody Nastavnik nastavnik) throws Exception{

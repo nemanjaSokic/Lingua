@@ -4,7 +4,16 @@
         <thead>
             <tr>
                 <th>Course {{vm.course.id}} informations:</th>
-                <th><a ng-href="#/admin/professor/{{vm.course.nastavnik.id}}">{{vm.course.nastavnik.ime}} {{vm.course.nastavnik.prezime}}</a></th>
+                <th><a ng-href="#/admin/professor/{{vm.course.nastavnik.id}}">{{vm.course.nastavnik.ime}} {{vm.course.nastavnik.prezime}}</a>
+                    <button ng-show="!vm.course.nastavnik" ng-click="vm.getList(vm.course.tipKursa.jezik.idJezika);vm.course.nastavnik = !vm.course.nastavnik">Show Professor List</button>
+                    <div class="form-group" ng-show="vm.showProfList">
+                        <label for="role"><span class="req">* </span> Select Professor: </label>
+                       <select required class="form-control" ng-model="vm.course.nastavnik">
+                            <option ng-option ng-value={{x}} ng-repeat="x in vm.professors">{{x.ime}} {{x.prezime}}</option>
+                        </select>
+                        <button ng-show="vm.showProfList" ng-click="vm.saveCourse()">save</button>
+                    </div>
+                </th>
                 <th>{{vm.course.tipKursa.jezik.naziv}} - {{vm.course.tipKursa.nivo.nazivNivoa}} : {{vm.course.tipKursa.cena}}€</th>
             </tr>
         </thead>

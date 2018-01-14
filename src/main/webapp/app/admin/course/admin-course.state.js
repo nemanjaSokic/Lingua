@@ -23,7 +23,7 @@
                     controller : 'AdmiInfoCourseController',
                     controllerAs: 'vm',
                     resolve: {
-                         loginCheck: loginCheck,
+                        loginCheck: loginCheck,
                         courseServ: getCourse,
                         courseStudent: courseStudent,
                         courseTest: courseTest

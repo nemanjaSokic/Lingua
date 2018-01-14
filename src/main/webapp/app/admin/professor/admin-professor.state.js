@@ -21,14 +21,20 @@
                 })
                 .when("/admin/professor/:id", {
                     templateUrl : 'app/admin/professor/admin-professor.html',
-                    controller : 'AdminProfessorController',
+                    controller : 'AdminInfoProfessorController',
                     controllerAs: 'vm',
                     resolve: {
                         loginCheck: loginCheck,
                         profService: getAccount,
-                        courses: profesorsCourse
+                        courses: profesorsCourse,
+                        languages: getLanguages
                     }
                 });
+        }
+        function getLanguages(LanguageService){
+            return LanguageService.getAll().then(function(res){
+                return res.data;
+            })
         }
         function allProfCourses(ProfessorService, CourseService){
             return CourseService.getAllCourse().

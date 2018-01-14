@@ -7,7 +7,6 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.lingua.model.Jezik;
 import com.lingua.model.Kurs;
 import com.lingua.model.Nastavnik;
 import com.lingua.repository.KursRepository;
@@ -44,7 +43,7 @@ public class JpaNastavnikService implements NastavnikService{
 		List<Kurs>kursevi=kursRepo.findAll();
 		for(Kurs k : kursevi){
 			Nastavnik proof = k.getNastavnik();
-			if(proof.getId()==nastavnikId){
+			if(proof != null && proof.getId()==nastavnikId){
 				k.setNastavnik(null);
 				kursRepo.save(k);
 			}
@@ -57,8 +56,8 @@ public class JpaNastavnikService implements NastavnikService{
 	}
 
 	@Override
-	public List<Nastavnik> findByJezik(Jezik j) {
-		return nastavnikRepo.findByPredaje(j);
+	public List<Nastavnik> findByJezik(String id) {
+		return nastavnikRepo.findByPredajeIdJezika(id);
 	}
 
 	@Override

@@ -26,6 +26,9 @@
             },
             addNewCourse: function(course){
                 return $http.post('/api/courses/', course);
+            },
+            save: function(course){
+                return $http.put('/api/courses/'+course.id,course);
             }
         }
     }
