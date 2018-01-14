@@ -60,7 +60,7 @@ public class ApiJezikController {
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	ResponseEntity<Jezik> delete(@PathVariable String id){
 		Jezik jez = jezikService.findOne(id);
-		List<Nastavnik> nastavnici = nastavnikService.findByJezik(jez);
+		List<Nastavnik> nastavnici = nastavnikService.findByJezik(jez.getIdJezika());
 		Jezik j = jezikService.delete(id);
 		nastavnikService.delete(nastavnici);
 		return new ResponseEntity<Jezik>(j,HttpStatus.OK);

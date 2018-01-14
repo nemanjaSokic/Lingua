@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.lingua.model.Jezik;
 import com.lingua.model.Nastavnik;
+import com.lingua.service.JezikService;
 import com.lingua.service.NastavnikService;
 
 @RestController
@@ -20,6 +22,8 @@ public class ApiNastavnikController {
 
 	@Autowired
 	NastavnikService nastavnikServ;
+	@Autowired
+	JezikService jezikServ;
 	
 	
 	//-------------------------GET--------------------------
@@ -40,6 +44,11 @@ public class ApiNastavnikController {
 			return new ResponseEntity<Nastavnik>(HttpStatus.BAD_REQUEST);
 		}
 		return new ResponseEntity<Nastavnik>(n,HttpStatus.OK);
+	}
+	@RequestMapping(value="/languages/{id}",method=RequestMethod.GET)
+	ResponseEntity<List<Nastavnik>> getAllProfessorByLang(@PathVariable String id){
+		List<Nastavnik> nastavnici = nastavnikServ.findByJezik(id);
+		return new ResponseEntity<List<Nastavnik>>(nastavnici,HttpStatus.OK);
 	}
 	
 	//--------------------POST----------------------------

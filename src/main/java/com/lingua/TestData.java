@@ -77,7 +77,7 @@ public class TestData {
 		
 		Nastavnik nast1 = new Nastavnik("Milos","Crnjanski", TipKorisnika.NASTAVNIK,"nast1","123",164572183L,"sasas@dfdfd.com",true,"napomena", jEng);
 		Nastavnik nast2 = new Nastavnik("Dositej","Obradovic",TipKorisnika.NASTAVNIK, "nast2", "123", 381644894979L, "nast2@example.com",true, "", jIta);
-		Nastavnik nast3 = new Nastavnik("Rastko","Nemanjic", TipKorisnika.NASTAVNIK, "nast3", "123", 381644894974L, "nast3@example.com",true,"ludak", jNor);
+		Nastavnik nast3 = new Nastavnik("Rastko","Nemanjic", TipKorisnika.NASTAVNIK, "nast3", "123", 381644894974L, "hutu.power@gmail.com",false,"ludak", null);
 		
 		TipKursa tip1 = new TipKursa(200,jEng,n12);
 		TipKursa tip2 = new TipKursa(200,jNor,n24);

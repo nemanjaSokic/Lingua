@@ -20,6 +20,9 @@
             },
             delete: function(id){
                 return $http.delete('/api/professors/'+id);
+            },
+            getListByLanguage: function(id){
+                return $http.get('/api/professors/languages/'+id);
             }
         }
     }

@@ -5,65 +5,45 @@
         .module('linguaApp')
         .controller('AdminInfoProfessorController', AdminInfoProfessorController);
 
-    AdminInfoProfessorController.$inject = ['$scope','loginCheck','LoginService','ProfessorService','$location', '$uibModal'];
-    function AdminInfoProfessorController($scope,loginCheck,LoginService,ProfessorService,$location, $uibModal) {
+    AdminInfoProfessorController.$inject = ['$rootScope', '$scope', '$uibModal', 'courses', 'profService', 'loginCheck', 'languages', 'ProfessorService', '$log', '$location','LoginService','UserService'];
+    function AdminInfoProfessorController($rootScope, $scope, $uibModal, courses, profService, loginCheck,languages,ProfessorService, $log, $location,LoginService,UserService) {
         var vm = this;
         vm.account = loginCheck.name;
         vm.isAuth = loginCheck.authenticated;
-        vm.student = studentService;
-        vm.student.registrovan_temp = vm.student.registrovan;
+        vm.prof = profService;
+        
+        vm.prof.courses = courses;
+        vm.languages = languages;
+        vm.prof.registrovan_temp = vm.prof.registrovan;
         vm.error = {
             message: 'default message',
             show: false
         }
-        vm.marks = marks;
-        vm.payments = payments;
+        vm.email = {};
+        $scope.showLanguages = false;
+        vm.sendEmail = function(){
+            vm.email.to = vm.prof.email;
+            return UserService.sendEmail(vm.email).then(function(result){
+                vm.email = {};
+            }); 
+        }
         
         vm.confirmChanges= function () {
-            vm.student.registrovan = vm.student.registrovan_temp;
-            return StudentService.edit(vm.student).then(function(result){
-                $location.path("/admin/student/dashboard");
+            vm.prof.registrovan = vm.prof.registrovan_temp;
+            return ProfessorService.edit(vm.prof).then(function(result){
+                $location.path("/admin/professor/dashboard");
             }, function(error){
                 vm.error.message = 'There is some problem';
                 vm.error.show = true;
-            });
+            }); 
         }
         vm.delete = function(){
-            return StudentService.delete(vm.student.indeks).then(function(result){
-                $location.path("/admin/student/dashboard");
+            return ProfessorService.delete(vm.prof.id).then(function(result){
+                $location.path("/admin/professor/dashboard");
             },function(error){
                 vm.error.message = 'There is some problem';
                 vm.error.show = true;
             })
-        }
-        vm.open = function (size, parentSelector) {
-            var modalInstance = $uibModal.open({
-                animation: true,
-                ariaLabelledBy: 'modal-title',
-                ariaDescribedBy: 'modal-body',
-                templateUrl: 'assign_course-dialg.html',
-                controller: 'AssignCourseCtrl',
-                controllerAs: 'vm',
-                size: size,
-                resolve: {
-                    coursePrepService: function (CourseService){
-                        return CourseService.getAllCourse().then(function(res){
-                            return res.data;
-                        });
-                    },
-                    accountService: function (StudentService, $route){
-                        return StudentService.getOne($route.current.params.index).
-                            then(function(res){
-                                return res.data;
-                            },function(error){
-                                return {
-                                    error: true,
-                                    errorMessage: error.data.message
-                                }
-                            });
-                    }
-                }
-            });
         }
         
         $scope.logout = function() {
@@ -76,21 +56,4 @@
                 });
         }
     }
-    angular.module('linguaApp').controller('AssignCourseCtrl', function ($uibModalInstance, accountService, StudentService, coursePrepService, $location) {
-        var vm = this;
-        vm.allCourses = coursePrepService;
-        vm.student = accountService;
-
-        vm.addToCourse = function (course) {
-            var courseObj = JSON.parse(course);
-            vm.student.kurs = courseObj;
-            return StudentService.edit(vm.student).then(function(result){
-                vm.cancel();
-            });
-        };
-
-        vm.cancel = function () {
-            $uibModalInstance.dismiss('cancel');
-        };
-    });
 })();

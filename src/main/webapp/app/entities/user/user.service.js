@@ -11,6 +11,9 @@
         return {
             getAll : function (registrated) {
                 return $http.get('/api/users/', {params: {'register':registrated}});
+            },
+            sendEmail: function(email){
+                return $http.post('/api/users/sendEmail',email);
             }
         }
     }

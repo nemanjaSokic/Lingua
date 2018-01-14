@@ -9,7 +9,7 @@ import com.lingua.model.Nastavnik;
 
 public interface NastavnikRepository extends JpaRepository<Nastavnik, String> {
 
-	List<Nastavnik> findByPredaje(Jezik j);
+	List<Nastavnik> findByPredajeIdJezika(String id);
 
 	Nastavnik findById(int id);
 	Nastavnik deleteNastavnikById(int id);
