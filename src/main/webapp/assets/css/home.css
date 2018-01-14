@@ -26,46 +26,45 @@
   background-size: cover; }
 
 .opacityDiv {
-  background-image: linear-gradient(to bottom right, rgba(211, 14, 14, 0.2) 0%, #464141 100%);
+  background-image: linear-gradient(to bottom right, rgba(138, 229, 139, 0.3) 0%, #76dd60 100%);
   height: 89vh;
   margin: 35px;
   -moz-box-shadow: inset 0 0 70px #000000;
   -webkit-box-shadow: inset 0 0 70px #000000;
   box-shadow: inset 0 0 70px #000000; }
 
-.buttonLogIn {
-  display: flex;
-  flex-direction: column-reverse;
-  text-align: center;
-  padding: 2%;
-  font-size: 2em;
-  list-style-type: none; }
-  .buttonLogIn .ButtonBorder {
-    border: 2.5px solid rgba(0, 0, 0, 0.3);
-    background-color: rgba(95, 8, 8, 0.8);
-    width: 70%;
-    margin: 0 auto; }
-  .buttonLogIn a {
-    font-size: 1.5em;
-    text-decoration: none;
-    text-transform: uppercase;
-    -webkit-text-stroke: 0.5px black;
-    color: white;
-    text-shadow: 3px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000; }
+.buttons {
+  padding-top: 15%; }
+  .buttons .buttonLogIn {
+    display: flex;
+    flex-direction: column-reverse;
+    text-align: center;
+    padding: 2%;
+    font-size: 2em;
+    list-style-type: none; }
+    .buttons .buttonLogIn .ButtonBorder {
+      border: 2.5px solid rgba(0, 0, 0, 0.3);
+      background-color: rgba(17, 95, 8, 0.8);
+      width: 70%;
+      margin: 0 auto; }
+    .buttons .buttonLogIn a {
+      font-size: 1.5em;
+      text-decoration: none;
+      text-transform: uppercase;
+      -webkit-text-stroke: 0.5px black;
+      color: white;
+      text-shadow: 3px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000; }
 
 @media screen and (max-width: 640px) {
-  .homeDiv {
-    background: none;
-    background-color: white; }
-    .homeDiv .FirstLogedIn {
-      padding-top: 10%; }
-      .homeDiv .FirstLogedIn .mainNav ul {
-        display: block; }
-        .homeDiv .FirstLogedIn .mainNav ul li {
-          padding-top: 10%; }
-          .homeDiv .FirstLogedIn .mainNav ul li a {
-            font-size: 2em; }
-            .homeDiv .FirstLogedIn .mainNav ul li a:hover {
-              color: black; } }
+  .homeDiv .FirstLogedIn {
+    padding-top: 10%; }
+    .homeDiv .FirstLogedIn .mainNav ul {
+      display: block; }
+      .homeDiv .FirstLogedIn .mainNav ul li {
+        padding-top: 10%; }
+        .homeDiv .FirstLogedIn .mainNav ul li a {
+          font-size: 2em; }
+          .homeDiv .FirstLogedIn .mainNav ul li a:hover {
+            color: black; } }
 
 /*# sourceMappingURL=home.css.map */

@@ -10,24 +10,25 @@
                     <li><a href="#">contact us</a></li>
                 </ul>
             </nav>
-            <div class="buttonLogIn">
-                <div class="ButtonBorder">
-                    <a ng-show="!vm.isAuth" href="#/login">log in</a>
+            <div class="buttons">
+                <div class="buttonLogIn">
+                    <div class="ButtonBorder">
+                        <a ng-show="!vm.isAuth" href="#/login">log in</a>
+                    </div>
+                </div>
+                <div class="buttonLogIn">
+                    <div class="ButtonBorder">
+                        <a ng-show="!vm.isAuth" href="#/signup">sign up</a>
+                    </div>
                 </div>
             </div>
-            <div class="buttonLogIn">
-                <div class="ButtonBorder">
-                    <a ng-show="!vm.isAuth" href="#/signup">sign up</a>
+            <!-- When user is  logged in -->
+            <div ng-show="vm.isAuth">
+                <button class="buttonLogOut"><a href="" ng-click="logout()">logout</a></button>
+                <div>
+                    <p>The ID is {{vm.account}}</p>
+                    <p>The content is {{vm.isAuth}}</p>
                 </div>
-            </div>
-        </div>
-        <!-- When user is  logged in -->
-        <div ng-show="vm.isAuth">
-            <button class="buttonLogOut"><a href="" ng-click="logout()">logout</a></button>
-            <div>
-                <p>The ID is {{vm.account}}</p>
-                <p>The content is {{vm.isAuth}}</p>
             </div>
         </div>
     </div>
-</div>

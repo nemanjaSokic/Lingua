@@ -5,6 +5,7 @@
     @include mainNav;
 }
 
+// background page
 .homeDiv {
     background: url("/assets/img/1.jpg") center center;
     @include mainDiv;
@@ -15,10 +16,9 @@
 }
 
 @include button;
+// mobile version
 @media screen and(max-width:640px) {
     .homeDiv {
-        background: none;
-        background-color: rgb(255, 255, 255);
         .FirstLogedIn {
             padding-top: 10%;
             .mainNav {
