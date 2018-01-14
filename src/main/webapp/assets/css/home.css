@@ -34,7 +34,7 @@
   box-shadow: inset 0 0 70px #000000; }
 
 .buttons {
-  padding-top: 15%; }
+  padding-top: 7%; }
   .buttons .buttonLogIn {
     display: flex;
     flex-direction: column-reverse;
