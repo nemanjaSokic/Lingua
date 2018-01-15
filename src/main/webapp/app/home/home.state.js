@@ -13,25 +13,7 @@
                     templateUrl : 'app/home/home.html',
                     controller : 'HomeController',
                     controllerAs: 'vm',
-                    resolve: {
-                        loginCheck: loginCheck
-                    }
+                    resolve: {}
                 });
-        }
-        function loginCheck(LoginService, $rootScope){
-            return LoginService.check()
-                .then(function(result){
-                    var res = result.data;
-                    if(res !== ''){
-                        return res;
-                    }else{
-                        return {name: 'anonymus',
-                                authenticated: false
-                                };
-                    }
-                },function(error){
-                    console.log(error.statusText);
-                }
-            );
         }
 })();

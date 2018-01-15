@@ -24,6 +24,6 @@
             getAll : function(){
                 return $http.get('/api/users');
             }
-        }
+        };
     }
 })();

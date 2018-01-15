@@ -19,8 +19,11 @@
                     if (res !== '') {
                         if (res.tipKorisnika === 'ADMIN') {
                             $location.path("/admin");
-                        } else if (res.registrovan && res.tipKorisnika === 'NASTAVNIK' || res.tipKorisnika === 'UCENIK') {
-                            $location.path("/");
+                        } else if (res.registrovan && res.tipKorisnika === 'NASTAVNIK') {
+                            $location.path("/professor/dashboard");
+                            $scope.error = false;
+                        }else if(res.registrovan && res.tipKorisnika === 'UCENIK'){
+                            $location.path("/student/dashboard");
                             $scope.error = false;
                         } else {
                             $location.path("/login");

@@ -14,7 +14,6 @@
                     controller : 'AdminStudentController',
                     controllerAs: 'vm',
                     resolve: {
-                        loginCheck: loginCheck,
                         studentService: getStudents
                     }
                 })
@@ -23,7 +22,6 @@
                     controller : 'AdminInfoStudentController',
                     controllerAs: 'vm',
                     resolve: {
-                        loginCheck: loginCheck,
                         studentService: getAccount,
                         marks: getMarks,
                         payments: getPayments
@@ -63,19 +61,5 @@
                         errorMessage: error.data.message
                     }
                 });
-        }
-        function loginCheck(LoginService, $location){
-            return LoginService.check()
-                .then(function(result){
-                    var res = result.data;
-                    if(res !== '' && res.authenticated == true && res.name === 'admin'){
-                        return res;
-                    }else{
-                        $location.path("/login");
-                    }
-                },function(error){
-                    console.log(error.statusText);
-                }
-            );
         }
 })();

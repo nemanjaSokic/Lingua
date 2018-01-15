@@ -13,6 +13,6 @@
                     templateUrl : 'app/entities/professor/dashboard.html',
                     controller : 'ProfessorController',
                     controllerAs: 'vm'
-                })
+                });
         }
 })();

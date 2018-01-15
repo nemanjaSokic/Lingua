@@ -14,7 +14,6 @@
                     controller : 'AdminCourseController',
                     controllerAs: 'vm',
                     resolve: {
-                        loginCheck: loginCheck,
                         courseServ: getAllCourse
                     }
                 })
@@ -23,7 +22,6 @@
                     controller : 'AdmiInfoCourseController',
                     controllerAs: 'vm',
                     resolve: {
-                        loginCheck: loginCheck,
                         courseServ: getCourse,
                         courseStudent: courseStudent,
                         courseTest: courseTest
@@ -53,19 +51,5 @@
                 .then(function(res){
                     return res.data;
                 })
-        }
-        function loginCheck(LoginService, $location){
-            return LoginService.check()
-                .then(function(result){
-                    var res = result.data;
-                    if(res !== '' && res.authenticated == true && res.name === 'admin'){
-                        return res;
-                    }else{
-                        $location.path("/login");
-                    }
-                },function(error){
-                    console.log(error.statusText);
-                }
-            );
         }
 })();

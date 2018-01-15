@@ -1,7 +1,7 @@
 <div class="homeDiv">
     <div class="opacityDiv">
         <!-- When user isn't logged in -->
-        <div class="FirstLogedIn" ng-show="!vm.isAuth">
+        <div class="FirstLogedIn">
             <nav class="mainNav">
                 <ul>
                     <li><a href="#">about us</a></li>
@@ -11,27 +11,21 @@
                 </ul>
             </nav>
             <div class="buttons">
-                <div class="buttonLogIn">
+                <div ng-show="!isAuth" class="buttonLogIn">
                     <div class="ButtonBorder">
-                        <a ng-show="!vm.isAuth" href="#/login">log in</a>
+                        <a href="#/login">log in</a>
+                    </div>
+                </div>
+                <div ng-show="isAuth" class="buttonLogIn">
+                    <div class="ButtonBorder">
+                        <a href="" ng-click="logout()">log out</a>
                     </div>
                 </div>
                 <div class="buttonLogIn">
                     <div class="ButtonBorder">
-                        <a ng-show="!vm.isAuth" href="#/signup">sign up</a>
+                        <a href="#/signup">sign up</a>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- When user is  logged in -->
-        <div class="buttons">
-            <div class="buttonLogIn">
-                <div class="ButtonBorder"><a ng-show="vm.isAuth" href="" ng-click="logout()">logout</a></div>
-            </div>
-            <div>
-                <p>The ID is {{vm.account}}</p>
-                <p>The content is {{vm.isAuth}}</p>
-            </div>
-        </div>
-
     </div>

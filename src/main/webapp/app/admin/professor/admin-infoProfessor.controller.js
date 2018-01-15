@@ -5,11 +5,9 @@
         .module('linguaApp')
         .controller('AdminInfoProfessorController', AdminInfoProfessorController);
 
-    AdminInfoProfessorController.$inject = ['$rootScope', '$scope', '$uibModal', 'courses', 'profService', 'loginCheck', 'languages', 'ProfessorService', '$log', '$location','LoginService','UserService'];
-    function AdminInfoProfessorController($rootScope, $scope, $uibModal, courses, profService, loginCheck,languages,ProfessorService, $log, $location,LoginService,UserService) {
+    AdminInfoProfessorController.$inject = ['$rootScope', '$scope', '$uibModal', 'courses', 'profService', 'languages', 'ProfessorService', '$log', '$location','UserService'];
+    function AdminInfoProfessorController($rootScope, $scope, $uibModal, courses, profService,languages,ProfessorService, $log, $location,UserService) {
         var vm = this;
-        vm.account = loginCheck.name;
-        vm.isAuth = loginCheck.authenticated;
         vm.prof = profService;
         
         vm.prof.courses = courses;
@@ -44,16 +42,6 @@
                 vm.error.message = 'There is some problem';
                 vm.error.show = true;
             })
-        }
-        
-        $scope.logout = function() {
-            LoginService.logOut()
-                .then(function(result){
-                    $location.path("/login");
-                },function(error){
-                    vm.isAuth = false;
-                    console.log(error.statusText);
-                });
-        }
+        };
     }
 })();

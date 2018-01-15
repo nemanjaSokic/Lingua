@@ -5,11 +5,9 @@
         .module('linguaApp')
         .controller('AdmiInfoCourseController', AdmiInfoCourseController);
 
-        AdmiInfoCourseController.$inject = ['$scope','CourseService','StudentService','ProfessorService','loginCheck','courseServ','courseStudent','courseTest','LoginService','$location'];
-    function AdmiInfoCourseController($scope,CourseService,StudentService,ProfessorService,loginCheck,courseServ,courseStudent,courseTest,LoginService,$location) {
+        AdmiInfoCourseController.$inject = ['$scope','CourseService','StudentService','ProfessorService','courseServ','courseStudent','courseTest','$location'];
+    function AdmiInfoCourseController($scope,CourseService,StudentService,ProfessorService,courseServ,courseStudent,courseTest,$location) {
         var vm = this;
-        vm.account = loginCheck.name;
-        vm.isAuth = loginCheck.authenticated;
         vm.course = courseServ;
         vm.students = courseStudent;
         vm.tests = courseTest; 
@@ -53,15 +51,5 @@
                 
             });
         };
-        
-        $scope.logout = function() {
-            LoginService.logOut()
-                .then(function(result){
-                    $location.path("/login");
-                },function(error){
-                    vm.isAuth = false;
-                    console.log(error.statusText);
-                });
-        }
     }
 })();

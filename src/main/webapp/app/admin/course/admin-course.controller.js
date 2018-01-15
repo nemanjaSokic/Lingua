@@ -5,23 +5,13 @@
         .module('linguaApp')
         .controller('AdminCourseController', AdminCourseController);
 
-    AdminCourseController.$inject = ['$rootScope', '$scope','courseServ','loginCheck', '$log', '$location','LoginService','$uibModal'];
+    AdminCourseController.$inject = ['$rootScope', '$scope','courseServ', '$log', '$location','$uibModal'];
 
-    function AdminCourseController ($rootScope, $scope,courseServ,loginCheck, $log, $location,LoginService,$uibModal) {
+    function AdminCourseController ($rootScope, $scope,courseServ, $log, $location,$uibModal) {
         var vm = this;
-        vm.account = loginCheck.name;
-        vm.isAuth = loginCheck.authenticated;
         vm.course = courseServ;
         vm.error = {};
-        $scope.logout = function() {
-            LoginService.logOut()
-                .then(function(result){
-                    $location.path("/login");
-                },function(error){
-                    vm.isAuth = false;
-                    console.log(error.statusText);
-                });
-        }
+
         vm.open = function (size) {
             var modalInstance = $uibModal.open({
                 animation: true,
