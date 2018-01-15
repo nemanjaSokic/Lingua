@@ -91,11 +91,12 @@
             }
             
             .divPreLogin {
-                pre {
-                    position: relative;
-                    margin-top: 7.5%;
-                    right: 2%;
+                width: 23.5%;
+                margin-top: 10%;
+                margin-left: 6%;
+                p {
                     font-size: 1.2em;
+                    font-weight: bold;
                 }
             }
             
@@ -121,13 +122,15 @@
                             }
                         }
                     }
+                    form {
+                        button {
+                            margin-left: 12%;
+                        }
+                    }
                 }
                 .divPreLogin {
-                    pre {
-                        font-size: 1em;
-                        margin-top: 13%;
-                        right: 22%;
-                    }
+                    width: 90%;
+                    margin: 0 auto;
                 }
                 .backButton {
                     a {
