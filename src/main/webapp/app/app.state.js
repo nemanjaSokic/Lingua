@@ -19,7 +19,7 @@
                     });
             };
         })
-        .factory('validateCookie', function($rootScope,LoginService,$location){
+        .factory('validateCookie', function($rootScope,LoginService){
             return function(){
                 return LoginService.check()
                     .then(function(result){
@@ -29,7 +29,9 @@
                         if(res !== ''){
                             return res;
                         }else{
-                            $location.path('/');
+                            return {name: 'anonymus',
+                                    authenticated: false
+                                    };
                         }
                     },function(error){
                         console.log(error.statusText);
