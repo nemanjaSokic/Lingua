@@ -5,10 +5,11 @@
         .module('linguaApp')
         .controller('HomeController', HomeController);
 
-    HomeController.$inject = ['$rootScope', '$scope', '$location'];
+    HomeController.$inject = ['$rootScope', '$scope', '$location', "bodyClass"];
 
-    function HomeController($rootScope, $scope, $location) {
+    function HomeController($rootScope, $scope, $location, bodyClass) {
         var vm = this;
-        $rootScope.bodyClass = 'homeDiv';
+        $rootScope.bodyClass = bodyClass;
+        console.log(bodyClass);
     }
 })();

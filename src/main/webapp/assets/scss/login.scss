@@ -4,13 +4,12 @@
             }
             
             .opacityDiv {
-                // background: url("/assets/img/1.jpg") center center;
                 @include opacytyHomeDiv;
             }
             
             .backButton {
                 position: relative;
-                left: 6%;
+                left: 2%;
                 top: 4%;
                 a {
                     text-decoration: none;
