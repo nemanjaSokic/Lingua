@@ -12,7 +12,8 @@
                 .when("/login", {
                     templateUrl : 'app/components/login/login.html',
                     controller : 'LoginController',
-                    controllerAs: 'vm'
-                })
+                    controllerAs: 'vm',
+                    publicAccess: true
+                });
         }
 })();

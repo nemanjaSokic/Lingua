@@ -9,9 +9,6 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.web.csrf.CsrfFilter;
-import org.springframework.security.web.csrf.CsrfTokenRepository;
-import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 import org.springframework.stereotype.Component;
 
 import com.lingua.service.AuthenticationService;
@@ -26,27 +23,27 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
 	AuthenticationService service;
 	
 	
+	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable();
 		http.
 			authorizeRequests().
 				antMatchers("/**").permitAll().
-				antMatchers("/#/admin").hasRole("ADMIN").
 				anyRequest().authenticated().
-		and().
+		/*and().
 			formLogin().
-			loginPage("/#/login").
-			permitAll().
+			successHandler(successHandler).
+			permitAll().*/
 		and().
         	logout().
             deleteCookies("JSESSIONID").
             invalidateHttpSession(true).
         and().
         	httpBasic().
-			authenticationEntryPoint(authEntryPoint).
+			authenticationEntryPoint(authEntryPoint)/*.
 		and().
-			addFilterAfter(new CsrfHeaderFilter(), CsrfFilter.class);
+			addFilterAfter(new CsrfHeaderFilter(), CsrfFilter.class)*/;
 				
 	}
 	
@@ -54,7 +51,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		
 			auth.userDetailsService(service);
-		
+			
 	}
 	@Bean
 	public DataSource getDataSource() {

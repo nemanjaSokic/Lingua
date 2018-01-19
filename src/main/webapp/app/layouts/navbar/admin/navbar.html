@@ -10,9 +10,9 @@
             <li><a href="#/admin/professor/dashboard">Professors</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="#"><span class="glyphicon glyphicon-user"></span> {{vm.account}}</a></li>
+            <li><a href="#"><span class="glyphicon glyphicon-user"></span> {{user.name}}</a></li>
             <li><a href="#/login"><span class="glyphicon glyphicon-log-in"></span> Change account</a></li>
-            <li><a href="" ng-click="logout()" ng-show="isAuth"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+            <li><a href="" ng-click="logout()" ng-show="user.isAuth"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
         </ul>
     </div>
 </nav>

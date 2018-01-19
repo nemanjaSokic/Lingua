@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum TipKorisnika {
-	NASTAVNIK(0), UCENIK(1), ADMIN(2);
+	PROFESSOR(0), STUDENT(1), ADMIN(2);
 	
 	 private int value;
 	    private static Map map = new HashMap<>();

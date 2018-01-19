@@ -15,26 +15,7 @@
         $scope.login = function() {
             LoginService.logIn($scope.credentials)
                 .then(function(response) {
-                    var res = response.data;
-                    if (res !== '') {
-                        if (res.tipKorisnika === 'ADMIN') {
-                            $location.path("/admin");
-                        } else if (res.registrovan && res.tipKorisnika === 'NASTAVNIK') {
-                            $location.path("/professor/dashboard");
-                            $scope.error = false;
-                        }else if(res.registrovan && res.tipKorisnika === 'UCENIK'){
-                            $location.path("/student/dashboard");
-                            $scope.error = false;
-                        } else {
-                            $location.path("/login");
-                            $scope.error = true;
-                            $scope.errorMessage = 'If you have just signed up, please, check your email and we will response to you soon!';
-                        }
-                    } else {
-                        /*
-                                                $rootScope.authenticated = false;*/
-                        $scope.error = true;
-                    }
+                    $location.path(response.data);
                 }, function(error) {
                     // handle errors here
                     $scope.errorMessage = error.data.message;

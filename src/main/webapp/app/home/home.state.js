@@ -13,6 +13,7 @@
                     templateUrl : 'app/home/home.html',
                     controller : 'HomeController',
                     controllerAs: 'vm',
+                    publicAccess: true,
                     resolve: {}
                 });
         }

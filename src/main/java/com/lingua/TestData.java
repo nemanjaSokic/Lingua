@@ -75,9 +75,9 @@ public class TestData {
 		Korisnik admin = new Korisnik(TipKorisnika.ADMIN, "admin", "admin");
 		admin.setRegistrovan(true);		
 		
-		Nastavnik nast1 = new Nastavnik("Milos","Crnjanski", TipKorisnika.NASTAVNIK,"nast1","123",164572183L,"sasas@dfdfd.com",true,"napomena", jEng);
-		Nastavnik nast2 = new Nastavnik("Dositej","Obradovic",TipKorisnika.NASTAVNIK, "nast2", "123", 381644894979L, "nast2@example.com",true, "", jIta);
-		Nastavnik nast3 = new Nastavnik("Rastko","Nemanjic", TipKorisnika.NASTAVNIK, "nast3", "123", 381644894974L, "hutu.power@gmail.com",false,"ludak", null);
+		Nastavnik nast1 = new Nastavnik("Milos","Crnjanski", TipKorisnika.PROFESSOR,"nast1","123",164572183L,"sasas@dfdfd.com",true,"napomena", jEng);
+		Nastavnik nast2 = new Nastavnik("Dositej","Obradovic",TipKorisnika.PROFESSOR, "nast2", "123", 381644894979L, "nast2@example.com",true, "", jIta);
+		Nastavnik nast3 = new Nastavnik("Rastko","Nemanjic", TipKorisnika.PROFESSOR, "nast3", "123", 381644894974L, "hutu.power@gmail.com",false,"ludak", null);
 		
 		TipKursa tip1 = new TipKursa(200,jEng,n12);
 		TipKursa tip2 = new TipKursa(200,jNor,n24);
@@ -98,10 +98,10 @@ public class TestData {
 		k2.addTest(test3);
 		k2.addTest(test4);
 		
-		Ucenik u1 = new Ucenik("Nemanja", "Sokic",TipKorisnika.UCENIK, "stud1", "123",164572183L,"nemskc@gmail.com",false,"napomena",false,null);
-		Ucenik u2 = new Ucenik("Pero","Antić", TipKorisnika.UCENIK, "stud2", "123", 381644894972L, "stud2@example.com", true, "", false, k1);
-		Ucenik u3 = new Ucenik("Nikola","Jokić",TipKorisnika.UCENIK, "stud3", "123", 381644894977L, "stud3@example.com", true, "", true, k2);
-		Ucenik u4 = new Ucenik("Miloš","Teodosić", TipKorisnika.UCENIK, "stud4", "123", 381644894973L, "stud4@example.com", true, "", true, k2);
+		Ucenik u1 = new Ucenik("Nemanja", "Sokic",TipKorisnika.STUDENT, "stud1", "123",164572183L,"nemskc@gmail.com",false,"napomena",false,null);
+		Ucenik u2 = new Ucenik("Pero","Antić", TipKorisnika.STUDENT, "stud2", "123", 381644894972L, "stud2@example.com", true, "", false, k1);
+		Ucenik u3 = new Ucenik("Nikola","Jokić",TipKorisnika.STUDENT, "stud3", "123", 381644894977L, "stud3@example.com", true, "", true, k2);
+		Ucenik u4 = new Ucenik("Miloš","Teodosić", TipKorisnika.STUDENT, "stud4", "123", 381644894973L, "stud4@example.com", true, "", true, k2);
 
 		Ocena o11 = new Ocena(6,test1,u1,"kom");
 		Ocena o12 = new Ocena(7,test2,u1,"kom");

@@ -37,7 +37,7 @@
         }
         $scope.register = function(){
             vm.user.registrovan = false;
-            if(vm.user.tipKorisnika === 'NASTAVNIK'){
+            if(vm.user.tipKorisnika === 'PROFESSOR'){
                 if(vm.profLang != 0){
                     var lang = JSON.parse(vm.profLang);
                     vm.user.predaje = lang;
@@ -48,7 +48,7 @@
                     var res = result.data;
                     $location.path("/signup/success");
                 });
-            }else if(vm.user.tipKorisnika === 'UCENIK'){
+            }else if(vm.user.tipKorisnika === 'STUDENT'){
                 vm.user.status = false;
                 if(vm.desiredCourse != 0){
                     var desire = JSON.parse(vm.desiredCourse);

@@ -1,5 +1,6 @@
 package com.lingua.web.controller;
 
+import java.io.IOException;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.lingua.config.security.MyUrlAuthenticationSuccessHandler;
 import com.lingua.exception.UserException;
 import com.lingua.model.ErrorResponse;
 import com.lingua.model.Korisnik;
@@ -59,33 +61,34 @@ public class ApiKorisnikController {
 	EmailService email;
 	@Autowired
 	public SimpleMailMessage template;
+	@Autowired
+	MyUrlAuthenticationSuccessHandler successHandler;
 	
 	//------------------------GET---------------------------
 
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<Korisnik>>  getAll(@RequestParam(value = "register", required = false) Boolean reg){
-		//need to implement only to admin pass
-		UserDetails userDetails =
-				 (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		if(userDetails.getUsername().equals("admin")){
 			List<Korisnik> korisnici = new ArrayList<>();
-			if(reg == false){
+			if(reg != null && reg == false){
 				korisnici = korisnikServ.getUnregistratedUsers();
 				return new ResponseEntity<List<Korisnik>>(korisnici, HttpStatus.OK);
 			}else{
 				return new ResponseEntity<List<Korisnik>> (korisnikServ.getUsers(), HttpStatus.OK);
 			}
-		}else{
-			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-		}	
 	}
 	
 	@RequestMapping(value="/u/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Korisnik>  login(@PathVariable(value = "id") String id) throws UserException{
-		Korisnik k = korisnikServ.getUsers().stream().filter(korisnik -> korisnik.getKorisnickoIme().equals(id)).findFirst().orElse(null);
+	public void  login(@PathVariable(value = "id") String id,HttpServletRequest request,HttpServletResponse response) throws UserException{
+		//Korisnik k = korisnikServ.getUsers().stream().filter(korisnik -> korisnik.getKorisnickoIme().equals(id)).findFirst().orElse(null);
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		if (!(auth instanceof AnonymousAuthenticationToken)) { //Firstly, check is the user Anonymus
+		try {
+			successHandler.onAuthenticationSuccess(request, response, auth);
+		} catch (IOException e) {
+			System.out.println("There is an error!!!!");
+			e.printStackTrace();
+		}
+		/*if (!(auth instanceof AnonymousAuthenticationToken)) { //Firstly, check is the user Anonymus
 			//If NOT
 			UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			if(userDetails.getUsername().equals("admin") || userDetails.getUsername().equals(k.getKorisnickoIme())){
@@ -97,7 +100,7 @@ public class ApiKorisnikController {
 			//If YES - this exception will never be done, because of httpBasic() which is responsible for 
 			//handling SecurtyContextHolder and exceptions if username and pass is not correct
 			throw new UserException("Invalid username requested");
-		}
+		}*/
 		
 	}
 	

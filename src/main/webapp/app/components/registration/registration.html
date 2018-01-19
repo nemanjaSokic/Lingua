@@ -42,13 +42,13 @@
             <div class="form-group">
                 <label for="role"><span class="req">* </span> Your role?: </label>
                 <div class="radio">
-                    <label><input type="radio" name="optradio" value="UCENIK" ng-model="vm.user.tipKorisnika">Student</label>
+                    <label><input type="radio" name="optradio" value="STUDENT" ng-model="vm.user.tipKorisnika">Student</label>
                 </div>
                 <div class="radio">
-                    <label><input type="radio" name="optradio" value="NASTAVNIK" ng-model="vm.user.tipKorisnika">Professor</label>
+                    <label><input type="radio" name="optradio" value="PROFESSOR" ng-model="vm.user.tipKorisnika">Professor</label>
                 </div>
             </div>
-            <div class="form-group" ng-show="vm.user.tipKorisnika == 'NASTAVNIK'"><!--Here you should add component for professor-->
+            <div class="form-group" ng-show="vm.user.tipKorisnika == 'PROFESSOR'"><!--Here you should add component for professor-->
                 <label for="role"><span class="req">* </span> Select your language: </label>
                <select required class="form-control" ng-model="vm.profLang">
                     <option ng-option value={{x}} ng-repeat="x in vm.languages">{{x.naziv}}</option>
@@ -58,7 +58,7 @@
                     <input required class="form-control" type="text" ng-model="vm.user.napomena" placeholder="If you want to create new one, let us know.">
                 </div>
             </div>
-            <div class="form-group" ng-show="vm.user.tipKorisnika == 'UCENIK'"><!--Here you should add component for professor-->
+            <div class="form-group" ng-show="vm.user.tipKorisnika == 'STUDENT'"><!--Here you should add component for professor-->
                 <label for="role"><span class="req">* </span> Select your course: </label>
                <select required class="form-control" ng-model="vm.desiredCourse">
                     <option ng-option value={{x}} ng-repeat="x in vm.courseTypes">{{x.jezik.naziv}} - {{x.nivo.nazivNivoa}} level</option>

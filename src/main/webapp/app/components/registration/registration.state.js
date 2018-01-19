@@ -13,13 +13,15 @@
                     templateUrl : 'app/components/registration/registration.html',
                     controller : 'RegistrationController',
                     controllerAs: 'vm',
+                    publicAccess: true,
                     resolve: {
                         courseTypePrepService: courseTypePrepService,
                         langPrepService: langPrepService
                     }
                 })
                 .when("/signup/success", {
-                    templateUrl : 'app/components/registration/success.html'
+                    templateUrl : 'app/components/registration/success.html',
+                    publicAccess: true
                 });
         }
         function courseTypePrepService(RegistrationService){
