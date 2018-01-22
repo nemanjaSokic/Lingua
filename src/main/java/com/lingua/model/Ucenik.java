@@ -33,7 +33,6 @@ public class Ucenik extends Korisnik {
 	@JsonProperty(access=Access.WRITE_ONLY)
 	protected List<Uplata> uplate;
 	@OneToMany(mappedBy="ucenik",cascade=CascadeType.REMOVE)
-	
 	protected List<Ocena> ocene;
 	
 	

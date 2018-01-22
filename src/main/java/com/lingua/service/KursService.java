@@ -22,4 +22,6 @@ public interface KursService {
 
 	List<Test> getTestsByCourse(int id);
 
+	List<Kurs> getAllByProfessorUsername(String id);
+
 }

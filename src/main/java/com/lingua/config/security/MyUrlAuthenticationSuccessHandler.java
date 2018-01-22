@@ -53,6 +53,7 @@ public class MyUrlAuthenticationSuccessHandler implements AuthenticationSuccessH
         boolean isUser = false;
         boolean isProfessor = false;
         boolean isAdmin = false;
+        String username = authentication.getName();
         Collection<? extends GrantedAuthority> authorities
          = authentication.getAuthorities();
         for (GrantedAuthority grantedAuthority : authorities) {
@@ -69,9 +70,9 @@ public class MyUrlAuthenticationSuccessHandler implements AuthenticationSuccessH
         }
  
         if (isUser) {
-            return "/student";
+            return "/student/"+username;
         } else if(isProfessor){
-        	return "/professor";
+        	return "/professor/"+username;
     	} else if (isAdmin) {
             return "/admin";
         } else {

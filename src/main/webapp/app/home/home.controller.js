@@ -10,6 +10,5 @@
     function HomeController($rootScope, $scope, $location, bodyClass) {
         var vm = this;
         $rootScope.bodyClass = bodyClass;
-        console.log(bodyClass);
     }
 })();

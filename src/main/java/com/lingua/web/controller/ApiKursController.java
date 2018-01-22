@@ -74,7 +74,12 @@ public class ApiKursController {
 		lista = kursServ.getAllByProfessor(id);
 		return new ResponseEntity<List<Kurs>>(lista,HttpStatus.OK);
 	}
-	
+	@RequestMapping(method=RequestMethod.GET, value="/professors/u/{username}")
+	ResponseEntity<List<Kurs>> getCoursesByProfessor(@PathVariable String username){
+		List<Kurs> lista = new ArrayList<Kurs>();
+		lista = kursServ.getAllByProfessorUsername(username);
+		return new ResponseEntity<List<Kurs>>(lista,HttpStatus.OK);
+	}
 	//-----------------------------POST--------------------
 	@Transactional
 	@RequestMapping(consumes="application/json",method=RequestMethod.POST)

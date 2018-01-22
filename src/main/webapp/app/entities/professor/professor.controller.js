@@ -9,6 +9,5 @@
 
     function ProfessorController ($rootScope, $scope, $http, $q, $location) {
         var vm = this;
-        console.log(vm);
     }
 })();

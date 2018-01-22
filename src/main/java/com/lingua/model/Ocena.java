@@ -9,7 +9,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 
@@ -24,8 +23,14 @@ public class Ocena {
 	@GeneratedValue
 	@Column(name="idOcene")
 	protected Long idOcene;
-	@Column(name="vrednost")
-	protected Integer vrednost;
+	@Column
+	protected Double gramatika;
+	@Column
+	protected Double vokabular;
+	@Column
+	protected Double govor;
+	@Column(name="ukupnaVrednost")
+	protected Double ukupnaVrednost;
 	@OneToOne
 	protected Test test;
 	@ManyToOne(fetch=FetchType.EAGER)
@@ -34,9 +39,20 @@ public class Ocena {
 	@Column(name="komnetar")
 	protected String komentar;
 	
-	public Ocena(Integer vrednost, Test test,Ucenik ucenik, String komentar) {
+	public Ocena(Double gramatika, Double vokabular, Double govor, Test test,
+			Ucenik ucenik, String komentar) {
 		super();
-		this.vrednost = vrednost;
+		this.gramatika = gramatika;
+		this.vokabular = vokabular;
+		this.govor = govor;
+		this.ukupnaVrednost = gramatika+vokabular+govor;
+		this.test = test;
+		this.ucenik = ucenik;
+		this.komentar = komentar;
+	}
+
+	public Ocena(Double ukupnaVrednost, Test test,Ucenik ucenik, String komentar) {
+		this.ukupnaVrednost = ukupnaVrednost;
 		this.test = test;
 		this.ucenik = ucenik;
 		this.komentar = komentar;
@@ -62,12 +78,36 @@ public class Ocena {
 		this.idOcene = id;
 	}
 
-	public Integer getVrednost() {
-		return vrednost;
+	public Double getGramatika() {
+		return gramatika;
 	}
 
-	public void setVrednost(Integer vrednost) {
-		this.vrednost = vrednost;
+	public void setGramatika(Double gramatika) {
+		this.gramatika = gramatika;
+	}
+
+	public Double getVokabular() {
+		return vokabular;
+	}
+
+	public void setVokabular(Double vokabular) {
+		this.vokabular = vokabular;
+	}
+
+	public Double getGovor() {
+		return govor;
+	}
+
+	public void setGovor(Double govor) {
+		this.govor = govor;
+	}
+
+	public Double getUkupnaVrednost() {
+		return ukupnaVrednost;
+	}
+
+	public void setUkupnaVrednost(Double ukupnaVrednost) {
+		this.ukupnaVrednost = ukupnaVrednost;
 	}
 
 	public Test getTest() {

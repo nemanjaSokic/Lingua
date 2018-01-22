@@ -9,10 +9,25 @@
 
         function stateConfig($routeProvider){
             $routeProvider
-                .when("/professor/dashboard", {
-                    templateUrl : 'app/entities/professor/dashboard.html',
+                .when("/professor/:username/home", {
+                    templateUrl : 'app/entities/professor/professor-home.html',
                     controller : 'ProfessorController',
-                    controllerAs: 'vm'
+                    controllerAs: 'vm',
+                    resolve:{
+                    }
+                })
+                .when("/professor/:username/courses",{
+                    templateUrl: 'app/entities/professor/course/professor-course.html',
+                    controller: 'ProfessorCourseController',
+                    controllerAs: 'vm',
+                    resolve: {
+                        courses: courses
+                    }
                 });
+        }
+        function courses($route,CourseService){
+            return CourseService.getAllCoursesByProfessorUsername($route.current.params.username).then(function(res){
+                return res.data;
+            });
         }
 })();

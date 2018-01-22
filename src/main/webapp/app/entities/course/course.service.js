@@ -18,6 +18,9 @@
             getAllCoursesByProfessor: function(id){
                 return $http.get('/api/courses/professors/' + id);
             },
+            getAllCoursesByProfessorUsername: function(username){
+                return $http.get('/api/courses/professors/u/'+username);
+            },
             getCourseStudent: function(id){
                 return $http.get('/api/courses/'+id+'/students');
             },

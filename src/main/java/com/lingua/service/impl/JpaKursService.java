@@ -79,6 +79,11 @@ public class JpaKursService implements KursService{
 		List<Test> testovi = k.getTestovi();
 		return testovi;
 	}
+
+	@Override
+	public List<Kurs> getAllByProfessorUsername(String id) {
+		return kursRepo.findByNastavnikKorisnickoIme(id);
+	}
 	
 	
 }

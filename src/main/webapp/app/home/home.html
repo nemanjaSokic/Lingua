@@ -21,7 +21,7 @@
                         <a href="" ng-click="logout()">log out</a>
                     </div>
                 </div>
-                <div class="buttonLogIn">
+                <div ng-show="!user.isAuth" class="buttonLogIn">
                     <div class="ButtonBorder">
                         <a href="#/signup">sign up</a>
                     </div>

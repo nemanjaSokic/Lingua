@@ -32,7 +32,7 @@
         function getLanguages(LanguageService){
             return LanguageService.getAll().then(function(res){
                 return res.data;
-            })
+            });
         }
         function allProfCourses(ProfessorService, CourseService){
             return CourseService.getAllCourse().
@@ -66,7 +66,7 @@
                     return {
                         error: true,
                         errorMessage: error.data.message
-                    }
+                    };
                 });
         }
 })();

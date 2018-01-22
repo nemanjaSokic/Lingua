@@ -10,5 +10,8 @@ public interface KursRepository extends JpaRepository<Kurs, Integer> {
 
 	List<Kurs> findByNastavnikId(int id);
 
+	List<Kurs> findByNastavnikKorisnickoIme(String id);
+
+
 
 }
