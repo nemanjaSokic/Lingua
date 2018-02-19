@@ -20,4 +20,6 @@ public interface UcenikRepository extends JpaRepository<Ucenik, String> {
 
 	List<Ucenik> findByKursNotNull();
 
+	List<Ucenik> findByKursNastavnikKorisnickoIme(String prof);
+
 }

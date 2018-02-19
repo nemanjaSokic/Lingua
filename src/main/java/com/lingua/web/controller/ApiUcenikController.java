@@ -38,12 +38,15 @@ public class ApiUcenikController {
 	
 	@RequestMapping(method=RequestMethod.GET)
 	ResponseEntity<List<Ucenik>> getAllActive(
-			@RequestParam(value="assigned_course",required = false) Boolean assign){
+			@RequestParam(value="assigned_course",required = false) Boolean assign,
+			@RequestParam(value="professorId",required = false) String prof){
 		List<Ucenik> ucenici = new ArrayList<>();
 		if(assign != null && assign == false){
 			ucenici = ucenikServ.findByCourse(null);
 		}else if(assign !=null && assign==true){
 			ucenici = ucenikServ.findWithAssignedCourse();
+		}else if(prof != null){
+			ucenici = ucenikServ.findByProfessor(prof);
 		}else{
 			ucenici = ucenikServ.findAll();
 		}

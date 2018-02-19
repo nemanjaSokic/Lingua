@@ -31,6 +31,8 @@ public interface UcenikService {
 
 	List<Ucenik> findWithAssignedCourse();
 
+	List<Ucenik> findByProfessor(String prof);
+
 
 
 }

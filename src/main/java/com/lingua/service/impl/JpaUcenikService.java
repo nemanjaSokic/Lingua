@@ -89,6 +89,11 @@ public class JpaUcenikService implements UcenikService{
 		return ucenikRepo.findByKursNotNull();
 	}
 
+	@Override
+	public List<Ucenik> findByProfessor(String prof) {
+		return ucenikRepo.findByKursNastavnikKorisnickoIme(prof);
+	}
+
 	
 
 	

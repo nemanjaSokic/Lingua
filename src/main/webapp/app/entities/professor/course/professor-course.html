@@ -1,3 +1,19 @@
  <div ng-include="'/app/layouts/navbar/professor/vertical-navbar.html'"></div>
-<div ng-repeat="c in vm.courses" ng-bind="{{c}}"></div>
-<div>hello course</div>
+ <div class="tab-content col-md-6" ng-show="vm.courses" ng-repeat="course in vm.courses">
+    <div data-toggle="tab">
+        <span class="glyphicon glyphicon-tasks"> {{course.tipKursa.jezik.naziv}} {{course.nivo.nazivNivoa}}</span>
+    </div>
+    <div data-toggle="tab">
+        <span class="glyphicon glyphicon-euro"> {{course.tipKursa.cena}}</span>
+    </div>
+    <div data-toggle="tab">
+        <span class="glyphicon glyphicon-tag"> Course id: {{course.id}}</span>
+    </div>
+    <div data-toggle="tab">
+        <a href="/#/professor/{{user.name}}/courses/{{course.id}}"><span class="glyphicon glyphicon-tag"> View this course</span></a>
+    </div>
+    <hr style="border: 1px solid black">
+</div>
+<div class="tab-content col-md-6" ng-hide="vm.courses.length != 0">
+    <h2>The course is not assigned</h2>
+</div>

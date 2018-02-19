@@ -18,7 +18,7 @@ public class DashboardController {
         return new ResponseEntity<>("/professor/"+ username +"/home",HttpStatus.OK);
     }
 	@RequestMapping(value="/admin",produces="text/plain")
-    public ResponseEntity<String> admin(@PathVariable String username) {
+    public ResponseEntity<String> admin() {
         return new ResponseEntity<>("/admin",HttpStatus.OK);
     }
 }

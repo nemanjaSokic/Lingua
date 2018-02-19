@@ -53,12 +53,12 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
 			auth.userDetailsService(service);
 			
 	}
-	@Bean
+	/*@Bean
 	public DataSource getDataSource() {
 	    BasicDataSource dataSource = new BasicDataSource();
 	    dataSource.setUrl("jdbc:mysql://localhost:3306/lingua_database");
 	    dataSource.setUsername("root");
 	    dataSource.setPassword("root");
 	    return dataSource;
-	}
+	}*/
 }

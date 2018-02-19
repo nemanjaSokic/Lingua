@@ -9,7 +9,7 @@
 
     function StudentService($http, $routeParams) {
         return {
-            getAll : function (registrated) {
+            getAll : function (/* registrated */) {
                 return $http.get('/api/students/'/* , {params: {'register':registrated}} */);
             },
             getOne: function(index){
@@ -29,6 +29,9 @@
             },
             getCourseAssignedStudents: function(assigned){
                 return $http.get('/api/students/', {params: {'assigned_course':assigned}});
+            },
+            getAllByProfessor: function(id){
+                return $http.get('/api/students/', {params: {'professorId':id}})
             }
         }
     }

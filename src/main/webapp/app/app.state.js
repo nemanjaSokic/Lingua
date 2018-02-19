@@ -12,10 +12,13 @@
                     route.publicAccess && (routesOpenToPublic.push(path));
                 });
                 validateUser().then(function(result){
+                    var b = "as";
                     var closedToPublic = (-1 === routesOpenToPublic.indexOf($location.path()));
                     if(closedToPublic && !$rootScope.user.isAuth) {
                         $location.path('/login');
                     }else if(closedToPublic && !($location.path().startsWith('/'+$rootScope.user.role.toLowerCase()))){
+                        $location.path('/');
+                    }else if(closedToPublic && $rootScope.user.name!=$route.current.params.username && $rootScope.user.name !== 'admin'){
                         $location.path('/');
                     }
                 });

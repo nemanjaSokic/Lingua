@@ -12,17 +12,18 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.lingua.model.Korisnik;
-import com.lingua.support.dao.KorisnikDAO;
+import com.lingua.repository.AuthRepository;
+import com.lingua.repository.KorisnikRepository;
 
 @Service
 public class AuthenticationService implements UserDetailsService {
 	@Autowired
-	private KorisnikService korisnikServ;
+	private AuthRepository authRepo;
 	//private KorisnikDAO korDAO;
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		Korisnik userInfo = korisnikServ.getOne(username);
+		Korisnik userInfo = authRepo.findOne(username);
 		System.out.println(userInfo);
 		GrantedAuthority authority = new SimpleGrantedAuthority(userInfo.toString());
 		UserDetails userDetails = (UserDetails)new User(userInfo.getKorisnickoIme(), 
